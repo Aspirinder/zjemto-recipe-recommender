@@ -25,13 +25,22 @@ Dzięki temu rozwiązuje powszechny problem braku pomysłów na posiłek i frust
 
 ## 5. Technologia SI
 
+**a) Dlaczego zwykły algorytm nie wystarczy.**:
+
+- [X] nie umiemy zapisać reguły krok po kroku
+- [ ] przepis istnieje, ale jest obliczeniowo za drogi
+- [ ] reguł jest za dużo i zmieniają się w czasie
+
+Gust kulinarny jest wysoce subiektywny i zależy od wielu nieoczywistych czynników, których nie da się opisać sztywnymi instrukcjami warunkowymi. Ponadto system musi w sposób ciągły uczyć się i adaptować do indywidualnych preferencji na podstawie historii wyborów (reakcji na proponowane przepisy), czego nie da się osiągnąć statycznym kodem.
+
+**b) Technologia SI:**
+
 - [ ] sieć neuronowa
 - [ ] system ekspertowy / wnioskowanie regułowe
 - [ ] algorytm genetyczny
 - [X] klasyczne uczenie maszynowe
 
-Algorytmy klasycznego uczenia maszynowego są branżowym standardem dla prostych i wydajnych systemów rekomendacyjnych. 
-Pozwalają one na skuteczne znajdowanie podobieństw między preferencjami użytkowników a cechami przepisów.
+Algorytmy klasycznego uczenia maszynowego są branżowym standardem dla prostych i wydajnych systemów rekomendacyjnych. Pozwalają one na skuteczne znajdowanie podobieństw między preferencjami użytkowników a cechami przepisów.
 
 ## 6. Dane
 
