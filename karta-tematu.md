@@ -1,9 +1,5 @@
 # Karta zgłoszenia tematu projektu
 
-**Grupa:** L2 · **Zespół:** Z2 · **Data:** ..........
-Sztuczna inteligencja — laboratorium · Collegium Da Vinci · rok akad. 2026/2027
-Oddajecie mailem do **22.10, 16:45**, temat `SI L2 · Z2 · karta`.
-
 ## 1. Skład zespołu
 
 | Imię i nazwisko | Nr albumu | Rola (wstępna) |
