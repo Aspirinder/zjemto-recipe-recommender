@@ -50,7 +50,7 @@ Algorytmy klasycznego uczenia maszynowego są branżowym standardem dla prostych
 
 ## 7. Stos technologiczny
 
-Python, pandas, numpy, seaburn, scikit-learn, React, Typescript, Figma 
+Python, pandas, numpy, seaborn, scikit-learn, React, Typescript, Figma 
 
 ## 8. Kryterium sukcesu
 
