@@ -1,0 +1,28 @@
+=== Sprint 5.11 ===
+
+Zobowiązanie z poprzednich zajęć:
+1. Stworzenie i wdrożenie produkcyjnego API. - zrobione
+2. Przygotowanie działającego backendu z silnikiem ML. - zrobione
+
+Anton Talmacou
+
+Zrobiłem: Wyczyszczono i zmigrowano pełny zbiór 522 517 przepisów do Azure PostgreSQL z zachowaniem ścisłej spójności indeksów 1:1 z rzadką macierzą TF-IDF. Wdrożono produkcyjne FastAPI na Azure App Service (gunicorn), 
+skonfigurowano zmienne środowiskowe, zoptymalizowano zapytania SQL oraz obsłużono walidację i błędy (404/422).
+
+Na następne zajęcia zrobię: Pomoc przy kompleksowym testowaniu całego pipeline'u rekomendacyjnego oraz bieżąca obsługa i naprawa pojawiających się błędów.
+
+
+
+[Imię Nazwisko]
+
+Zrobiłem/zrobiłam: ...
+
+Na następne zajęcia zrobię: ...
+
+
+
+Blokuje nas: nic
+
+Zobowiązanie zespołu na następne zajęcia: Połączenie głównego serwisu API z algorytmem rekomendacji na backendzie oraz przeprowadzenie pełnego testu całego pipeline'u działania aplikacji: 
+od rejestracji i kalibracji po spersonalizowane rekomendacje.
+
