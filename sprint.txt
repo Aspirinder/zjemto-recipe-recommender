@@ -11,7 +11,11 @@ skonfigurowano zmienne środowiskowe, zoptymalizowano zapytania SQL oraz obsłu�
 
 Na następne zajęcia zrobię: Pomoc przy kompleksowym testowaniu całego pipeline'u rekomendacyjnego oraz bieżąca obsługa i naprawa pojawiających się błędów.
 
+Yahor Koval 
 
+Zrobiłem: W tym tygodniu skupiłem się na wdrożeniu klasteryzacji oraz testowaniu działania modelu bezpośrednio w notatniku. Podłączyłem Sentence-BERT i zastosowałem klasteryzację aglomeracyjną, aby automatycznie odnajdować synonimy składników i grupować podobne produkty. Dużą część czasu poświęciłem na eksperymenty: napisałem funkcje testowe do weryfikacji rekomendacji dla pojedynczych przepisów oraz dla profilu użytkownika na podstawie jego polubień, sprawdzając jak w praktyce zachowuje się podobieństwo kosinusowe. Funkcje te służą obecnie w notatniku do testowania hipotez i oceny jakości wyników, a nie jako ostateczny kod produkcyjny.
+
+Na następne zajęcia zrobię: Planuję spakować artefakty modelu i przenieść kod z notatnika Jupyter do skryptów produkcyjnych w celu wdrożenia na chmurze Azure. Zaimplementuję serwis API na infrastrukturze Azure (np. Azure App Service / Container Instances), skonfiguruję ładowanie artefaktów oraz przygotuję endpointy do generowania rekomendacji na podstawie polubień użytkownika.
 
 [Imię Nazwisko]
 
