@@ -7,24 +7,93 @@ from typing import Literal
 import json
 import os
 import random
+import redis
 
+app = FastAPI(title = "ZjemTo API", version = "3.3")
+
+# Azure PostgreSQL connection settings
 DB_HOST = "zjemto-db-server-norway.postgres.database.azure.com"
 DB_USER = "zjemtoadmin"
 DB_PASS = os.getenv("DB_PASS", "local_pass")  # Use environment variable for password
 DB_NAME = "postgres"
 
-app = FastAPI(title = "ZjemTo API", version = "2.0")
-
 def get_db_connection():
     return psycopg2.connect(host=DB_HOST, user=DB_USER, password=DB_PASS, dbname=DB_NAME, sslmode='require')
+
+
+# Redis Cloud connection settings
+REDIS_HOST = os.getenv("REDIS_HOST", "pizzas-silica-yearly-60998.db.redis.io")
+REDIS_PORT = int(os.getenv("REDIS_PORT", 10639))
+REDIS_PASSWORD = os.getenv("REDIS_PASSWORD", "local_pass")
+
+REDIS_AVAILABLE = False
+redis_client = None
+
+try:
+    redis_client = redis.Redis(
+        host=REDIS_HOST,
+        port=REDIS_PORT,
+        password=REDIS_PASSWORD,
+        ssl_cert_reqs=None,       # Skip strict certificate verification
+        decode_responses=True,
+        socket_connect_timeout=2 
+    )
+
+    redis_client.ping()
+    REDIS_AVAILABLE = True
+except Exception as e:
+    REDIS_AVAILABLE = False
+    print(f"Error connecting to Redis: {e}")
+
 
 class SwipeRequest(BaseModel):
     user_id: str
     recipe_id: int
     action: Literal["like", "dislike"]  # "like" or "dislike"
 
+
+# Function to get excluded recipe IDs based on user allergies
+def get_excluded_recipe_ids(cursor, allergies: list[str]) -> list[int]:
+
+    if not allergies:
+            return [] 
+
+    sorted_allergies = sorted(allergies)
+    cache_key = f"blacklist:{'_'.join(sorted_allergies)}"
+
+    if REDIS_AVAILABLE:
+        try:
+            cached_data = redis_client.get(cache_key)
+            if cached_data:
+                return json.loads(cached_data)
+        except Exception:
+            pass
+
+    query = """
+        SELECT r.recipe_id 
+        FROM food_recipes r
+        WHERE EXISTS (
+            SELECT 1 
+            FROM recipe_allergens ra 
+            WHERE ra.recipe_id = r.recipe_id 
+              AND ra.allergen_tag = ANY(%s)
+        );
+    """
+    cursor.execute(query, (sorted_allergies,))
+    rows = cursor.fetchall()
+    excluded_ids = [row['recipe_id'] for row in rows]
+
+    if REDIS_AVAILABLE:
+        try:
+            redis_client.set(cache_key, json.dumps(excluded_ids), ex=3600)
+        except Exception:
+            pass
+
+    return excluded_ids
+
+
 #Function to get top recommended recipes from ML API
-def get_top_recipes(user_vector, swiped_ids, allergies, limit=10) -> list[int]:
+def get_top_recipes(user_vector, swiped_ids, excluded_recipe_ids, limit=10) -> list[int]:
 
     if not user_vector:
         return []
@@ -35,7 +104,7 @@ def get_top_recipes(user_vector, swiped_ids, allergies, limit=10) -> list[int]:
         send_data = {
             "user_vector": user_vector,
             "swiped_ids": swiped_ids,
-            "allergies": allergies,
+            "excluded_recipe_ids": excluded_recipe_ids,
             "limit": limit
         }
         response = requests.post(ml_api_url, json=send_data, timeout=3.0)
@@ -64,49 +133,49 @@ def create_user():
         conn.close()
 
 
-#Cold start recommendation
+#Get calibration recipes for a user
 @app.get("/api/recipes/calibration/{user_id}")
 def get_calibration_recipes(user_id: str):
     conn = get_db_connection()
     cursor = conn.cursor(cursor_factory=RealDictCursor)
     try:
+        cursor.execute("SELECT allergies FROM users WHERE user_id = %s;", (user_id,))
+        user_res = cursor.fetchone()
+        allergies = user_res['allergies'] if user_res and user_res.get('allergies') else []
+
+        excluded_ids = get_excluded_recipe_ids(cursor, allergies)
+
         cursor.execute('SELECT MIN(recipe_id) AS min_id, MAX(recipe_id) AS max_id FROM food_recipes;')
         bounds = cursor.fetchone()
 
-        if not bounds or bounds['min_id'] is None:
+        if not bounds or bounds['min_id'] is None or bounds['max_id'] is None:
             return {"recipes": []}
 
-        min_id = bounds['min_id']
-        max_id = bounds['max_id']
-
-        sample_size = min(35, max_id - min_id + 1)
+        min_id, max_id = bounds['min_id'], bounds['max_id'] 
 
         recipes = []
         fetched_ids = set()
-        max_attempts = 10
+        max_attempts = 15
         attempts = 0
 
         while len(recipes) < 20 and attempts < max_attempts:
             attempts += 1
 
-            random_ids = random.sample(range(min_id, max_id + 1), sample_size)
-            new_ids = [rid for rid in random_ids if rid not in fetched_ids]
+            random_ids = random.sample(range(min_id, max_id + 1), min(50, max_id - min_id + 1))
+            valid_ids = [rid for rid in random_ids if rid not in excluded_ids and rid not in fetched_ids]
 
-            if not new_ids:
-                break
-
-            fetched_ids.update(new_ids)
-
-            needed = 20 - len(recipes)
-
-            cursor.execute("SELECT recipe_id, name, image_url, ingredient_parts, total_time FROM food_recipes WHERE recipe_id = ANY(%s) LIMIT %s;", 
-            (new_ids, needed))
-            buff = cursor.fetchall()
-
-            if not buff:
+            if not valid_ids:
                 continue
 
-            recipes.extend(buff)
+            fetched_ids.update(valid_ids)
+            need_count = 20 - len(recipes)
+
+            cursor.execute('''SELECT recipe_id, name, image_url, ingredient_parts,
+            total_time FROM food_recipes WHERE recipe_id = ANY(%s) LIMIT %s;''', (valid_ids, need_count))
+
+            buffor_recipes = cursor.fetchall()
+            if buffor_recipes:
+                recipes.extend(buffor_recipes)
 
         for r in recipes:
             if r['ingredient_parts']:
@@ -165,7 +234,8 @@ def record_swipe(swipe: SwipeRequest):
         cursor.close()
         conn.close()
 
-#Personalized recipe recommendation based on user profile
+
+# Personalized recipe recommendation based on user profile
 @app.get("/api/recipe/personalized/{user_id}")
 def get_personalized_recipes(user_id: str):
     conn = get_db_connection()
@@ -188,10 +258,9 @@ def get_personalized_recipes(user_id: str):
         swiped_rows = cursor.fetchall()
         swiped_ids = [row['recipe_id'] for row in swiped_rows]
 
-        if not swiped_ids:
-            swiped_ids = []
+        excluded_recipe_ids = get_excluded_recipe_ids(cursor, allergies)
 
-        recomeneded_recipes = get_top_recipes(user_vector, swiped_ids, allergies, limit=10)
+        recomeneded_recipes = get_top_recipes(user_vector, swiped_ids, excluded_recipe_ids, limit=10)
 
         if not recomeneded_recipes:
             return get_calibration_recipes(user_id)
