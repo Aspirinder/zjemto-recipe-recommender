@@ -36,6 +36,17 @@ od rejestracji i kalibracji po spersonalizowane rekomendacje.
 
 === Sprint 19.11 ===
 
+Anton Talmacou
+
+Zrobiłem: Rozbudowałem i zaktualizowałem główne API w FastAPI. Zaimplementowałem rejestrację i logowanie użytkowników z bezpiecznym haszowaniem haseł za pomocą Argon2 oraz walidacją adresów e-mail. 
+Dodałem endpointy do pobierania i aktualizacji alergii użytkownika. Połączyłem kalibrację i rekomendacje w jeden endpoint, który automatycznie przełącza tryb po 20 swipe'ach. 
+Ulepszyłem aktualizację profilu preferencji, uwzględniając polubienia, odrzucenia i stopniowe wygaszanie wag. Zoptymalizowałem obsługę połączeń z PostgreSQL przez connection pooling. 
+Przeprowadziłem testy komunikacji między głównym API a silnikiem ML na Azure, przygotowałem interaktywny panel HTML do testowania rejestracji, logowania, swipe'ów i rekomendacji oraz dokumentację API dla frontendu.
+
+Na następne zajęcia zrobię: Pomogę w integracji zaktualizowanego API z aplikacją React. Przeanalizuję również możliwości ulepszenia mechanizmu polubień i odrzuceń (like/dislike), 
+w szczególności sposobu aktualizacji profilu użytkownika, doboru wag oraz wpływu negatywnych ocen na jakość rekomendacji. 
+Zajmę się także optymalizacją wydajności usług na Azure, analizą czasu odpowiedzi silnika ML oraz naprawą błędów wykrytych podczas testów przed code freeze 26.11.
+
 Sofiya Krasouskaya (30999)
 
 Zrobiłam: Połączyłam aplikację webową (web/) z API z API.py: przy pierwszym uruchomieniu tworzony jest użytkownik
