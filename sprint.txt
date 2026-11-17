@@ -17,11 +17,14 @@ Zrobiłem: W tym tygodniu skupiłem się na wdrożeniu klasteryzacji oraz testow
 
 Na następne zajęcia zrobię: Planuję spakować artefakty modelu i przenieść kod z notatnika Jupyter do skryptów produkcyjnych w celu wdrożenia na chmurze Azure. Zaimplementuję serwis API na infrastrukturze Azure (np. Azure App Service / Container Instances), skonfiguruję ładowanie artefaktów oraz przygotuję endpointy do generowania rekomendacji na podstawie polubień użytkownika.
 
-[Imię Nazwisko]
+Sofiya Krasouskaya (30999)
 
-Zrobiłem/zrobiłam: ...
+Zrobiłam: Prototyp aplikacji webowej (React + TypeScript, gałąź ui, folder web/): talia przepisów z gestem swipe
+(w prawo — polubienie, w lewo — pominięcie, cofanie ostatniego ruchu), ekran „Lodówka” z wyborem produktów i sortowaniem
+przepisów według tego, czego brakuje, lista polubionych oraz tryb gotowania krok po kroku z minutnikami.
+Na tym etapie działało na danych testowych, bez backendu.
 
-Na następne zajęcia zrobię: ...
+Na następne zajęcia zrobię: Połączenie interfejsu z API (rejestracja użytkownika, kalibracja, swipe'y, spersonalizowane rekomendacje).
 
 
 
@@ -30,3 +33,18 @@ Blokuje nas: nic
 Zobowiązanie zespołu na następne zajęcia: Połączenie głównego serwisu API z algorytmem rekomendacji na backendzie oraz przeprowadzenie pełnego testu całego pipeline'u działania aplikacji: 
 od rejestracji i kalibracji po spersonalizowane rekomendacje.
 
+
+=== Sprint 19.11 ===
+
+Sofiya Krasouskaya (30999)
+
+Zrobiłam: Połączyłam aplikację webową (web/) z API z API.py: przy pierwszym uruchomieniu tworzony jest użytkownik
+(POST /api/users/init), talia kart pobierana jest z GET /api/recipe/personalized/{user_id} i doładowywana automatycznie,
+gdy zostaje mniej niż 5 kart, a każdy swipe zapisywany jest przez POST /api/swipe (like / dislike). Rekomendacje pobierane są
+dopiero po zapisaniu wcześniejszych swipe'ów, żeby profil użytkownika był aktualny. Dane z bazy Food.com (zdjęcie,
+czas w formacie PT1H15M, składniki) przekształcane są do modelu interfejsu, a składniki dopasowywane do produktów z „Lodówki”.
+Gdy serwer nie odpowiada, aplikacja pokazuje lokalne przepisy przykładowe. Dodałam proxy w Vite (bez potrzeby CORS
+w trybie deweloperskim) i naprawiłam zawieszanie się karty w trakcie animacji swipe. Instrukcja uruchomienia: web/README.md.
+
+Na następne zajęcia zrobię: Kroki przygotowania w trybie gotowania, gdy API zacznie je zwracać, ustawianie alergii
+z poziomu interfejsu (po dodaniu endpointu) oraz dokumentacja wyników do code freeze 26.11.
