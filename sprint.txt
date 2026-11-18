@@ -49,13 +49,16 @@ Zajmę się także optymalizacją wydajności usług na Azure, analizą czasu od
 
 Sofiya Krasouskaya (30999)
 
-Zrobiłam: Połączyłam aplikację webową (web/) z API z API.py: przy pierwszym uruchomieniu tworzony jest użytkownik
-(POST /api/users/init), talia kart pobierana jest z GET /api/recipe/personalized/{user_id} i doładowywana automatycznie,
-gdy zostaje mniej niż 5 kart, a każdy swipe zapisywany jest przez POST /api/swipe (like / dislike). Rekomendacje pobierane są
-dopiero po zapisaniu wcześniejszych swipe'ów, żeby profil użytkownika był aktualny. Dane z bazy Food.com (zdjęcie,
-czas w formacie PT1H15M, składniki) przekształcane są do modelu interfejsu, a składniki dopasowywane do produktów z „Lodówki”.
-Gdy serwer nie odpowiada, aplikacja pokazuje lokalne przepisy przykładowe. Dodałam proxy w Vite (bez potrzeby CORS
-w trybie deweloperskim) i naprawiłam zawieszanie się karty w trakcie animacji swipe. Instrukcja uruchomienia: web/README.md.
+Zrobiłam: Połączyłam aplikację webową (web/) z API w wersji 6.0. Dodałam ekran logowania i rejestracji
+(POST /api/users/signup i /api/users/signin, z komunikatami dla błędów 401, 409 i 422) oraz tryb przykładowy bez konta.
+Talia pobierana jest z GET /api/recipes/feed/{user_id}: w trybie kalibracji widać pasek postępu „x z 20”, a po 20. swipe'ie
+talia sama przełącza się na rekomendacje. Każdy swipe zapisywany jest przez POST /api/swipe (odpowiedź already_recorded
+nie zwiększa postępu), a rekomendacje pobierane są dopiero po zapisaniu wcześniejszych swipe'ów. Alergie (gluten, dairy,
+eggs, nuts, seafood) ustawia się w profilu i zapisuje przez GET/PUT /api/users/{user_id}/allergies. Dane z Food.com
+(zdjęcie, czas PT1H15M, składniki) przekształcane są do modelu interfejsu i dopasowywane do produktów z „Lodówki”.
+Aplikacja „budzi” serwer na Azure już przy ekranie logowania i informuje o dłuższym oczekiwaniu. Naprawiłam też
+zawieszanie się karty w trakcie animacji swipe. Wersja online: https://mulatkasofi.github.io/mniam/
+Instrukcja uruchomienia: web/README.md.
 
-Na następne zajęcia zrobię: Kroki przygotowania w trybie gotowania, gdy API zacznie je zwracać, ustawianie alergii
-z poziomu interfejsu (po dodaniu endpointu) oraz dokumentacja wyników do code freeze 26.11.
+Na następne zajęcia zrobię: Testy całego przepływu na API na Azure z zespołem, kroki przygotowania w trybie gotowania,
+gdy API zacznie je zwracać, oraz dokumentacja wyników do code freeze 26.11.
