@@ -1181,3 +1181,20 @@ main {
 
 .profile-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
 .profile-email { margin: 0; color: var(--muted); font-size: 14px; font-weight: 600; word-break: break-all; }
+
+/* Recipe without a photo (most of Food.com): gradient + faint plate. */
+.photo-fallback { display: grid; place-items: center; color: rgb(255 255 255 / 0.32); }
+.photo-fallback svg { width: min(34%, 120px); height: auto; }
+.swipe .photo-fallback svg, .back .photo-fallback svg { margin-bottom: 30%; }
+.mini-like .photo-fallback svg { width: 60%; }
+
+.nutrition { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px; padding: 0; }
+.nutrition span {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--line);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.nutrition b { color: var(--ink); font-weight: 800; }

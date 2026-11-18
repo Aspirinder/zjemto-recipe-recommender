@@ -47,6 +47,10 @@ export type Recipe = {
   tint: string;
   ingredients: RecipeIngredient[];
   steps: RecipeStep[];
+  /** Full description (API recipes); `tagline` is the short version for the card. */
+  description?: string;
+  /** Per serving, from the API. */
+  nutrition?: { calories: number; protein: number; fat: number; carbs: number };
 };
 
 export type Screen = 'deck' | 'catalog' | 'fridge' | 'likes' | 'profile';

@@ -10,7 +10,19 @@ import {
 } from 'react';
 import type { Diet, Meal, Recipe, Screen, SwipeAction } from './types.ts';
 import { diets, meals, recipes as localRecipes } from './data.ts';
-import { ApiError, apiIdOf, getAllergies, getFeed, putAllergies, sendSwipe, signIn, signUp } from './api.ts';
+import {
+  ApiError,
+  apiIdOf,
+  deleteLikedRecipe,
+  getAllergies,
+  getFeed,
+  getLikedRecipes,
+  isUserMissing,
+  putAllergies,
+  sendSwipe,
+  signIn,
+  signUp,
+} from './api.ts';
 
 export type ApiStatus = 'idle' | 'loading' | 'ready' | 'error';
 export type FeedMode = 'calibration' | 'personalized';
@@ -148,6 +160,8 @@ function loadStore(): Store {
 function describeError(error: unknown) {
   if (error instanceof ApiError) {
     if (error.status === 0) return 'Brak połączenia z serwerem.';
+    if (error.status === 503) return 'Serwis rekomendacji chwilowo nie działa.';
+    if (error.status === 409) return 'Serwer nie ma jeszcze profilu Twojego gustu.';
     if (error.status >= 500) return 'Serwer ma problem. Spróbuj za chwilę.';
     return error.message;
   }
@@ -180,6 +194,8 @@ type AppContextValue = {
   exhausted: boolean;
   usingLocal: boolean;
   allergyError: string;
+  /** Why the last feed request failed (shown with apiStatus === 'error'). */
+  apiErrorText: string;
   retryApi: () => void;
   getRecipe: (id: string) => Recipe | undefined;
   swipes: number;
@@ -233,6 +249,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   const [exhausted, setExhausted] = useState(false);
   const [authNotice, setAuthNotice] = useState('');
   const [allergyError, setAllergyError] = useState('');
+  const [apiErrorText, setApiErrorText] = useState('');
 
   const feedRef = useRef(feed);
   const storeRef = useRef(store);
@@ -286,7 +303,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
 
   const handleLostUser = useCallback(
     (error: unknown) => {
-      if (error instanceof ApiError && error.status === 404) {
+      if (isUserMissing(error)) {
         signOut('Nie znaleziono konta. Zaloguj się ponownie.');
         return true;
       }
@@ -325,11 +342,62 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       if (gen !== genRef.current) return;
       if (handleLostUser(error)) return;
       console.error('ZjemTo API:', error);
+      setApiErrorText(describeError(error));
       setApiStatus('error');
     } finally {
       if (gen === genRef.current) loadingRef.current = false;
     }
   }, [handleLostUser]);
+
+  /** API v7 keeps likes on the server: take its list as the truth for server recipes. */
+  const syncLikes = useCallback(async () => {
+    const userId = storeRef.current.userId;
+    if (!userId) return;
+    try {
+      // Swipes still on their way would be missing from the server's answer.
+      await swipeChain.current;
+      const recipes = await getLikedRecipes(userId);
+      if (storeRef.current.userId !== userId) return;
+      setStore((current) => {
+        const serverIds = recipes.map((recipe) => recipe.id);
+        const local = current.liked.filter((id) => apiIdOf(id) === null);
+        const liked = [...serverIds, ...local];
+        const saved = { ...pruneSaved(current.saved, local), ...Object.fromEntries(recipes.map((r) => [r.id, r])) };
+        const likedSet = new Set(serverIds);
+        return {
+          ...current,
+          liked,
+          saved,
+          passed: current.passed.filter((id) => !likedSet.has(id)),
+          history: current.history.filter((item) => item.kind !== 'like' || apiIdOf(item.id) === null || likedSet.has(item.id)),
+        };
+      });
+    } catch (error) {
+      if (handleLostUser(error)) return;
+      // Older API without /liked-recipes, or offline — keep the local list.
+      console.warn('ZjemTo API: liked recipes not loaded', error);
+    }
+  }, [handleLostUser]);
+
+  const removeLikeOnServer = useCallback((id: string) => {
+    const recipeId = apiIdOf(id);
+    const userId = storeRef.current.userId;
+    if (recipeId === null || !userId) return;
+    // After the like itself has been recorded.
+    swipeChain.current = swipeChain.current
+      .then(() => deleteLikedRecipe(userId, recipeId))
+      .catch((error: unknown) => console.warn('ZjemTo API: like not removed', error));
+  }, []);
+
+  useEffect(() => {
+    if (store.userId) void syncLikes();
+    // Once per account (sign-in or page load).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [store.userId]);
+
+  useEffect(() => {
+    if (screen === 'likes') void syncLikes();
+  }, [screen, syncLikes]);
 
   const retryApi = useCallback(() => {
     staleRef.current = 0;
@@ -509,17 +577,23 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     [syncSwipe],
   );
 
-  // Note: the backend has no "undo swipe" endpoint — unlike/undo change only the local state.
-  const unlike = useCallback((id: string) => {
-    setStore((current) => ({
-      ...current,
-      liked: current.liked.filter((item) => item !== id),
-      saved: pruneSaved(current.saved, current.liked.filter((item) => item !== id)),
-      history: current.history.filter((item) => !(item.id === id && item.kind === 'like')),
-    }));
-  }, []);
+  // The swipe itself stays on the server (no undo endpoint); only the favourite is removed.
+  const unlike = useCallback(
+    (id: string) => {
+      setStore((current) => ({
+        ...current,
+        liked: current.liked.filter((item) => item !== id),
+        saved: pruneSaved(current.saved, current.liked.filter((item) => item !== id)),
+        history: current.history.filter((item) => !(item.id === id && item.kind === 'like')),
+      }));
+      removeLikeOnServer(id);
+    },
+    [removeLikeOnServer],
+  );
 
   const undo = useCallback(() => {
+    const last = storeRef.current.history[0];
+    if (last?.kind === 'like' && storeRef.current.userId) removeLikeOnServer(last.id);
     setStore((current) => {
       const [last, ...rest] = current.history;
       if (!last) return current;
@@ -531,7 +605,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       }
       return { ...current, history: rest, passed: current.passed.filter((id) => id !== last.id) };
     });
-  }, []);
+  }, [removeLikeOnServer]);
 
   const toggleFridge = useCallback((id: string) => {
     setStore((current) => ({
@@ -628,6 +702,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       exhausted,
       usingLocal,
       allergyError,
+      apiErrorText,
       retryApi,
       getRecipe,
       swipes: visibleLiked.length + visiblePassed.length,
@@ -668,6 +743,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       exhausted,
       usingLocal,
       allergyError,
+      apiErrorText,
       retryApi,
       getRecipe,
       screen,
