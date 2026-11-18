@@ -386,6 +386,15 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   );
 
   const usingLocal = !store.userId || (apiStatus === 'error' && feed.length === 0);
+  // Signed out (demo): the account's server recipes stay stored for the next sign-in, but are not shown.
+  const visibleLiked = useMemo(
+    () => (store.userId ? store.liked : store.liked.filter((id) => apiIdOf(id) === null)),
+    [store.userId, store.liked],
+  );
+  const visiblePassed = useMemo(
+    () => (store.userId ? store.passed : store.passed.filter((id) => apiIdOf(id) === null)),
+    [store.userId, store.passed],
+  );
   const pool = usingLocal ? localRecipes : feed;
 
   const getRecipe = useCallback(
@@ -514,6 +523,8 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     setStore((current) => {
       const [last, ...rest] = current.history;
       if (!last) return current;
+      // In demo, don't touch the signed-out account's swipes.
+      if (!current.userId && apiIdOf(last.id) !== null) return current;
       if (last.kind === 'like') {
         const liked = current.liked.filter((id) => id !== last.id);
         return { ...current, history: rest, liked, saved: pruneSaved(current.saved, liked) };
@@ -596,8 +607,8 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   const value = useMemo<AppContextValue>(
     () => ({
       fridge: store.fridge,
-      liked: store.liked,
-      passed: store.passed,
+      liked: visibleLiked,
+      passed: visiblePassed,
       strict: store.strict,
       hintSeen: store.hintSeen,
       loved: store.loved,
@@ -619,8 +630,8 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       allergyError,
       retryApi,
       getRecipe,
-      swipes: store.liked.length + store.passed.length,
-      canUndo: store.history.length > 0,
+      swipes: visibleLiked.length + visiblePassed.length,
+      canUndo: store.history.length > 0 && (Boolean(store.userId) || apiIdOf(store.history[0]!.id) === null),
       screen,
       cookingId,
       setScreen,
@@ -647,6 +658,8 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     }),
     [
       store,
+      visibleLiked,
+      visiblePassed,
       authNotice,
       pool,
       apiStatus,

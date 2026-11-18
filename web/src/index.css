@@ -607,6 +607,8 @@ main {
 }
 
 .mini-like img, .mini-like .photo-fallback { width: 54px; height: 54px; flex: none; object-fit: cover; border-radius: 12px; }
+/* The generic fallback fills a positioned parent; here it is an inline thumbnail. */
+.mini-like .photo-fallback { position: static; inset: auto; }
 .mini-like strong { display: block; font-size: 15px; }
 .mini-like em { color: var(--muted); font-style: normal; font-size: 12px; font-weight: 600; }
 

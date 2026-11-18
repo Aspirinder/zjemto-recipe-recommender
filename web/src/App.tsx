@@ -20,7 +20,8 @@ function Shell() {
   const cooking = (app.cookingId && app.getRecipe(app.cookingId)) || null;
   const [panel, setPanel] = useState<'taste' | 'profile' | null>(null);
   const tasteCount = app.loved.length + app.avoided.length;
-  const initial = (app.profileName.trim() || app.email).charAt(0).toUpperCase();
+  // Without an account (demo) the remembered e-mail belongs to whoever signed out — don't show it.
+  const initial = (app.profileName.trim() || (app.userId ? app.email : '')).charAt(0).toUpperCase();
 
   useEffect(() => {
     if (!cooking) return;
