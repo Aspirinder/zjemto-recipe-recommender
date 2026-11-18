@@ -232,10 +232,15 @@ export function decodeEntities(text: string): string {
   });
 }
 
+// Food.com image URLs contain commas themselves (".../upload/w_555,h_416,c_fit,.../x.jpg"),
+// so only split on a comma that starts the next URL. Accepts: plain URL, "URL", c("URL1", "URL2").
 function parseImage(value: string | null): string {
   if (!value) return '';
-  const match = /https?:\/\/[^"'\s,)]+/.exec(value);
-  return match ? match[0] : '';
+  const text = value.trim();
+  const quoted = /"(https?:\/\/[^"]+)"/.exec(text)?.[1];
+  const bare = /https?:\/\/.+/.exec(text)?.[0].split(/,\s*(?=https?:\/\/)/)[0]?.replace(/["')\s]+$/, '');
+  const url = (quoted ?? bare ?? '').trim();
+  return url.replace(/ /g, '%20');
 }
 
 // Food.com stores times as ISO-8601 durations: "PT1H30M", "PT45M".
