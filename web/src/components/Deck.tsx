@@ -274,7 +274,7 @@ export function Deck() {
             ))}
           {feedError && top && (
             <p className="stage-note" role="status">
-              Nie udało się doładować kolejnych przepisów.{' '}
+              {app.apiErrorText || 'Nie udało się doładować kolejnych przepisów.'}{' '}
               <button className="btn tiny quiet" type="button" onClick={app.retryApi}>
                 Spróbuj ponownie
               </button>
@@ -359,7 +359,7 @@ export function Deck() {
                 <h2>{feedError ? 'Serwer nie odpowiada' : 'Na dziś tyle'}</h2>
                 <p>
                   {feedError
-                    ? 'Nie udało się pobrać kolejnych przepisów. Sprawdź internet i spróbuj ponownie.'
+                    ? `${app.apiErrorText || 'Nie udało się pobrać kolejnych przepisów.'} Spróbuj ponownie za chwilę.`
                     : hiddenByTaste
                     ? 'Filtr smaku schował to, co zostało w talii.'
                     : app.strict && app.fridge.length > 0

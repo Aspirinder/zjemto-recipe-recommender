@@ -1,4 +1,4 @@
-import type { Recipe, RecipeIngredient } from './types.ts';
+import type { Recipe, RecipeIngredient, RecipeStep } from './types.ts';
 
 // Address of the ZjemTo FastAPI backend (see .env.example). The backend allows any origin (CORS),
 // so the browser talks to it directly. Without VITE_API_URL the deployed Azure API is used.
@@ -10,12 +10,23 @@ const TIMEOUT_MS = 60_000;
 // The personalized feed additionally waits for the ML service (45 s timeout on the backend) — cold start + ML.
 const FEED_TIMEOUT_MS = 90_000;
 
+/** Lists come as JSON arrays (API v7) or as R/CSV text: c("a", "b") / "a", "b" (older versions). */
+type ApiList = string[] | string | null;
+
 export type ApiRecipe = {
   recipe_id: number;
   name: string | null;
   image_url: string | null;
-  ingredient_parts: string[] | string | null;
+  ingredient_parts: ApiList;
   total_time: string | number | null;
+  description?: string | null;
+  category?: string | null;
+  ingredient_quantities?: ApiList;
+  instructions?: ApiList;
+  calories?: number | null;
+  protein?: number | null;
+  fat?: number | null;
+  carbs?: number | null;
 };
 
 export type Feed = {
@@ -40,7 +51,7 @@ export class ApiError extends Error {
 }
 
 async function request<T>(
-  method: 'GET' | 'POST' | 'PUT',
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE',
   path: string,
   body?: unknown,
   timeoutMs = TIMEOUT_MS,
@@ -68,7 +79,8 @@ async function request<T>(
       }
       throw new ApiError(response.status, detail);
     }
-    return (await response.json()) as T;
+    const text = await response.text();
+    return (text ? JSON.parse(text) : null) as T;
   } catch (error) {
     if (error instanceof ApiError) throw error;
     // Network error, CORS or timeout — status 0 means "no answer from the server".
@@ -146,6 +158,21 @@ export async function getFeed(userId: string): Promise<Feed> {
   };
 }
 
+/** API v7: recipes liked by the user, newest first. */
+export async function getLikedRecipes(userId: string): Promise<Recipe[]> {
+  const data = await request<{ recipes: ApiRecipe[] | null }>('GET', `/api/users/${userPath(userId)}/liked-recipes`);
+  return (data.recipes ?? []).map(toRecipe);
+}
+
+export async function deleteLikedRecipe(userId: string, recipeId: number) {
+  await request<unknown>('DELETE', `/api/users/${userPath(userId)}/liked-recipes/${recipeId}`);
+}
+
+/** 404 from an endpoint that does exist means the account is gone; a missing route says "Not Found". */
+export function isUserMissing(error: unknown) {
+  return error instanceof ApiError && error.status === 404 && /user not found/i.test(error.message);
+}
+
 export async function sendSwipe(userId: string, recipeId: number, action: 'like' | 'dislike') {
   return request<SwipeResult>('POST', '/api/swipe', { user_id: userId, recipe_id: recipeId, action });
 }
@@ -206,17 +233,48 @@ function matchIngredient(name: string): string | null {
 
 // Food.com keeps lists in R syntax: c("chicken", "garlic"). API.py only strips the quotes and splits on ", ",
 // so the first item arrives as "c(chicken" and the last one as "garlic)".
-function parseList(value: ApiRecipe['ingredient_parts']): string[] {
+function parseList(value: ApiList | undefined): string[] {
   if (!value) return [];
-  const list = Array.isArray(value) ? value : value.split(',');
+  let list: string[];
+  if (Array.isArray(value)) {
+    list = value;
+  } else {
+    const text = value.trim().replace(/^c\(/, '').replace(/\)$/, '');
+    // Quoted items may contain commas ("Bake 30-35 minutes, then serve."), so read them as whole tokens.
+    list = text.includes('"')
+      ? Array.from(text.matchAll(/"((?:[^"]|"")*)"|([^,\s][^,]*)/g), (m) => (m[1] ?? m[2] ?? '').replace(/""/g, '"'))
+      : text.split(',');
+  }
   return list
     .map((item, index, all) => {
-      let name = item.replace(/"/g, '').trim();
+      let name = String(item).replace(/"/g, '').replace(/\s+/g, ' ').trim();
       if (index === 0) name = name.replace(/^c\(\s*/, '');
       if (index === all.length - 1) name = name.replace(/\s*\)$/, '');
       return decodeEntities(name.trim());
     })
     .filter((item) => item && item !== 'NA' && item !== 'character(0' && item !== 'character(0)');
+}
+
+// "Bake for 30-35 minutes", "simmer 1 hour", "cook 10 mins" -> a timer for the cooking view.
+const TIME_IN_STEP = /(\d+(?:[.,]\d+)?)(?:\s*(?:-|–|to)\s*\d+(?:[.,]\d+)?)?\s*(hours?|hrs?|minutes?|mins?)\b/i;
+
+function stepTimer(text: string): RecipeStep['timer'] {
+  const match = TIME_IN_STEP.exec(text);
+  if (!match) return undefined;
+  const value = Number(match[1]!.replace(',', '.'));
+  const seconds = Math.round(value * (/^h/i.test(match[2]!) ? 3600 : 60));
+  // Ignore "1 minute" stirs and day-long marinades.
+  if (seconds < 120 || seconds > 6 * 3600) return undefined;
+  const verb = /^[A-Za-z]+/.exec(text.trim())?.[0];
+  return { label: verb ? verb[0]!.toUpperCase() + verb.slice(1).toLowerCase() : 'Minutnik', seconds };
+}
+
+const BOILERPLATE = /^make and share this .* recipe from food\.com\.?$/i;
+
+function shorten(text: string, max = 140) {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max);
+  return `${cut.slice(0, Math.max(cut.lastIndexOf(' '), max - 20)).replace(/[\s,.;:]+$/, '')}…`;
 }
 
 const ENTITIES: Record<string, string> = { amp: '&', quot: '"', apos: "'", lt: '<', gt: '>', nbsp: ' ' };
@@ -281,25 +339,32 @@ export function toRecipe(raw: ApiRecipe): Recipe {
     .slice(0, 4)
     .map((item) => item.name)
     .join(', ');
+  const description = decodeEntities(raw.description ?? '').replace(/\s+/g, ' ').trim();
+  const usefulDescription = description && !BOILERPLATE.test(description) ? description : '';
+  const instructions = parseList(raw.instructions);
+  const steps: RecipeStep[] = instructions.length
+    ? instructions.map((text) => ({ text, timer: stepTimer(text) }))
+    : [{ text: `Przygotuj składniki: ${names.join(', ')}.` }];
+  const nutrition =
+    typeof raw.calories === 'number'
+      ? { calories: raw.calories, protein: raw.protein ?? 0, fat: raw.fat ?? 0, carbs: raw.carbs ?? 0 }
+      : undefined;
 
   return {
     id: `${API_PREFIX}${raw.recipe_id}`,
     apiId: raw.recipe_id,
     title: decodeEntities(raw.name ?? '').trim() || 'Przepis bez nazwy',
-    tagline: listed,
+    tagline: usefulDescription ? shorten(usefulDescription) : listed,
+    description: usefulDescription || undefined,
+    nutrition,
     image: parseImage(raw.image_url),
     minutes,
     difficulty: ingredients.length > 9 || minutes > 60 ? 'średnio' : 'łatwo',
     servings: 0, // unknown — hidden in the UI
-    cuisine: 'Food.com',
+    cuisine: decodeEntities(raw.category ?? '').trim() || 'Food.com',
     meal: 'obiad',
     tint: TINTS[Math.abs(raw.recipe_id) % TINTS.length] ?? TINTS[0]!,
     ingredients,
-    // The API does not return instructions yet — one summary step keeps the cooking view usable.
-    steps: [
-      {
-        text: `Przygotuj składniki: ${names.join(', ')}. Szczegółowe kroki pojawią się, gdy API zacznie zwracać instrukcje.`,
-      },
-    ],
+    steps,
   };
 }

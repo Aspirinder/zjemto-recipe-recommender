@@ -1,6 +1,6 @@
 # ZjemTo — aplikacja webowa
 
-Interfejs do przeglądania przepisów gestem swipe (React + TypeScript + Vite), połączony z ZjemTo API (`API.py`, wersja 6.0).
+Interfejs do przeglądania przepisów gestem swipe (React + TypeScript + Vite), połączony z ZjemTo API (`API.py`, wersja 7.0; działa też z 6.0).
 Autorka: Sofiya Krasouskaya (30999).
 
 **Wersja online:** https://mulatkasofi.github.io/zjemto/ (GitHub Pages; działa, gdy API na Azure jest włączone).
@@ -35,6 +35,9 @@ Backend ma włączony CORS dla wszystkich adresów, więc przeglądarka łączy 
 | Talia kart: najpierw kalibracja (pasek „Poznajemy Twój gust: x z 20”), potem rekomendacje — tryb wybiera serwer (`mode`) | `GET /api/recipes/feed/{user_id}` |
 | Swipe w prawo / w lewo; `already_recorded` nie zwiększa postępu kalibracji; po 20. swipie talia przełącza się na rekomendacje | `POST /api/swipe` |
 | Zmiana alergii w profilu — wysyłana cała lista, potem talia jest pobierana od nowa | `PUT /api/users/{user_id}/allergies` |
+| „Polubione” z serwera (te same na każdym urządzeniu) — przy logowaniu i przy wejściu w zakładkę | `GET /api/users/{user_id}/liked-recipes` |
+| Usunięcie z polubionych i „cofnij” po lajku | `DELETE /api/users/{user_id}/liked-recipes/{recipe_id}` |
+| Kroki z `instructions` w trybie gotowania; minutnik z tekstu kroku („Bake 30-35 minutes” → 30:00); opis, kategoria, kcal i makro w szczegółach | pola przepisu z `/feed` i `/liked-recipes` |
 
 Alergie to tagi z backendu: `gluten`, `dairy`, `eggs`, `nuts`, `seafood`.
 
@@ -46,12 +49,12 @@ Bez konta można obejrzeć przykładowe przepisy (`src/data.ts`); te same przepi
 - `src/state.tsx` — stan aplikacji: konto, talia z API (doładowanie, gdy zostaje < 5 kart), kolejka swipe'ów (talia pobierana jest dopiero po zapisaniu swipe'ów), alergie.
 - `src/components/Auth.tsx` — ekran logowania i rejestracji.
 
-## Ograniczenia API (stan na 18.11)
+## Ograniczenia API (stan na 18.11, v7)
 
-- brak kroków przygotowania i liczby porcji — tryb gotowania pokazuje listę składników,
-- brak cofnięcia swipe'a na serwerze — „cofnij” działa tylko lokalnie,
-- brak tokenów/sesji — `user_id` po zalogowaniu nie jest zabezpieczeniem (prototyp),
-- brak listy polubionych na serwerze — „Polubione” są zapisane w przeglądarce.
+- brak liczby porcji; `ingredient_quantities` nie pasują 1:1 do `ingredient_parts` (dane Food.com), więc ilości nie są pokazywane,
+- około 60–75% przepisów nie ma zdjęcia (`image_url: null`) — wtedy karta ma gradient z ikoną talerza,
+- brak cofnięcia swipe'a na serwerze — „cofnij” usuwa przepis z polubionych, ale swipe zostaje w `user_swipes`,
+- brak tokenów/sesji — `user_id` po zalogowaniu nie jest zabezpieczeniem (prototyp).
 
 ## Skrypty
 

@@ -48,7 +48,23 @@ export function Details({ recipe, fridge, onClose, onLike, onPass }: DetailsProp
             {recipe.servings > 0 && ` · ${recipe.servings} ${plural(recipe.servings, 'porcja', 'porcje', 'porcji')}`}
           </p>
           <h2 id="details-title">{recipe.title}</h2>
-          <p className="lede">{recipe.tagline}</p>
+          <p className="lede">{recipe.description ?? recipe.tagline}</p>
+          {recipe.nutrition && (
+            <p className="nutrition" aria-label="Wartości odżywcze na porcję">
+              <span>
+                <b>{Math.round(recipe.nutrition.calories)}</b> kcal
+              </span>
+              <span>
+                <b>{Math.round(recipe.nutrition.protein)} g</b> białka
+              </span>
+              <span>
+                <b>{Math.round(recipe.nutrition.fat)} g</b> tłuszczu
+              </span>
+              <span>
+                <b>{Math.round(recipe.nutrition.carbs)} g</b> węglowodanów
+              </span>
+            </p>
+          )}
           <p className="tease">
             {recipe.steps.length} {plural(recipe.steps.length, 'krok', 'kroki', 'kroków')}
             {timers > 0 ? ` i ${timers} ${plural(timers, 'minutnik', 'minutniki', 'minutników')}` : ''}. Gotowanie
