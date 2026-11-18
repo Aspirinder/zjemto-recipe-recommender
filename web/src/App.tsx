@@ -36,7 +36,7 @@ function Shell() {
       <header className="header">
         <button className="brand" type="button" onClick={() => app.setScreen('deck')}>
           <Mark />
-          <span>Mniam</span>
+          <span>ZjemTo</span>
         </button>
         <nav className="header-nav" aria-label="Sekcje">
           {tabs.map(({ id, label }) => (

@@ -57,7 +57,7 @@ nie zwiększa postępu), a rekomendacje pobierane są dopiero po zapisaniu wcze�
 eggs, nuts, seafood) ustawia się w profilu i zapisuje przez GET/PUT /api/users/{user_id}/allergies. Dane z Food.com
 (zdjęcie, czas PT1H15M, składniki) przekształcane są do modelu interfejsu i dopasowywane do produktów z „Lodówki”.
 Aplikacja „budzi” serwer na Azure już przy ekranie logowania i informuje o dłuższym oczekiwaniu. Naprawiłam też
-zawieszanie się karty w trakcie animacji swipe. Wersja online: https://mulatkasofi.github.io/mniam/
+zawieszanie się karty w trakcie animacji swipe. Wersja online: https://mulatkasofi.github.io/zjemto/
 Instrukcja uruchomienia: web/README.md.
 
 Na następne zajęcia zrobię: Testy całego przepływu na API na Azure z zespołem, kroki przygotowania w trybie gotowania,

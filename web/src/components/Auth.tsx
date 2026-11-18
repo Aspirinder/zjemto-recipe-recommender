@@ -77,7 +77,7 @@ export function Auth() {
       <form className="auth-card" onSubmit={submit} noValidate>
         <div className="auth-brand">
           <Mark />
-          <span>Mniam</span>
+          <span>ZjemTo</span>
         </div>
         <h1>{signup ? 'Załóż konto' : 'Zaloguj się'}</h1>
         <p className="auth-lede">

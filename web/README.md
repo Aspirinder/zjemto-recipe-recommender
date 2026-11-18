@@ -3,10 +3,10 @@
 Interfejs do przeglądania przepisów gestem swipe (React + TypeScript + Vite), połączony z ZjemTo API (`API.py`, wersja 6.0).
 Autorka: Sofiya Krasouskaya (30999).
 
-**Wersja online:** https://mulatkasofi.github.io/mniam/ (GitHub Pages; działa, gdy API na Azure jest włączone).
+**Wersja online:** https://mulatkasofi.github.io/zjemto/ (GitHub Pages; działa, gdy API na Azure jest włączone).
 
-Aktualizacja wersji online: `npx vite build --base=/mniam/`, a zawartość `dist/` wypchnąć na gałąź `gh-pages`
-repozytorium `mulatkasofi/mniam`.
+Aktualizacja wersji online: `npx vite build --base=/zjemto/`, a zawartość `dist/` wypchnąć na gałąź `gh-pages`
+repozytorium `mulatkasofi/zjemto`.
 
 ## Uruchomienie
 
