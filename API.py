@@ -12,11 +12,12 @@ import random
 import redis
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
+import csv
 
 ph = PasswordHasher()
 
 
-app = FastAPI(title = "ZjemTo API", version = "6.0", description = "Add Sign In and Sign Up")
+app = FastAPI(title = "ZjemTo API", version = "7.0", description = "Fixed bugs add liked recipes")
 
 app.add_middleware(
     CORSMiddleware,
@@ -113,13 +114,16 @@ def get_top_recipes(user_vector, swiped_ids, excluded_recipe_ids, limit=10) -> l
         }
         response = requests.post(ml_api_url, json=send_data, timeout=45.0)
 
-        if response.status_code == 200:
-            data = response.json()
-            return data.get("recommended_recipe_ids", [])
-    except requests.exceptions.RequestException as e:
+        response.raise_for_status()
+
+        data = response.json()
+
+        return data.get("recommended_recipe_ids", [])
+    
+    except (requests.exceptions.RequestException, ValueError) as e:
         print(f"Error calling ML API: {e}")
 
-    return []
+        raise HTTPException(status_code=503, detail="Recommendation service unavailable")
 
 
 # Function to get excluded recipe IDs based on user allergies
@@ -198,18 +202,39 @@ def get_calibration_recipes(cursor, user_id: str, allergies: list[str] = [], swi
         fetched_ids.update(valid_ids)
         need_count = (20 - swipes_done) - len(recipes)
 
-        cursor.execute('''SELECT recipe_id, name, image_url, ingredient_parts,
-        total_time FROM food_recipes WHERE recipe_id = ANY(%s) LIMIT %s;''', (valid_ids, need_count))
+        cursor.execute('''SELECT recipe_id, name, image_url, description, category, ingredient_parts, 
+        ingredient_quantities, instructions, total_time, calories, protein, fat, carbs FROM food_recipes WHERE recipe_id = ANY(%s) LIMIT %s;''', (valid_ids, need_count))
 
         buffor_recipes = cursor.fetchall()
         if buffor_recipes:
             recipes.extend(buffor_recipes)
 
-    for r in recipes:
-        if r['ingredient_parts']:
-            r['ingredient_parts'] = r["ingredient_parts"].replace('"', '').split(", ")
+    return {"recipes": format_recipes(recipes)}
 
-    return {"recipes": recipes}
+
+def parse_recipe_list(value):
+    if not value:
+        return []
+    if isinstance(value, list):
+        return value
+
+    value = value.replace("\r\n", " ").replace("\n", " ").replace("\r", " ")
+
+    
+    return next(csv.reader([value], skipinitialspace=True), [])
+
+def format_recipes(recipes):
+    for recipe in recipes:
+        for field in (
+            "ingredient_parts",
+            "ingredient_quantities",
+            "instructions"
+        ):
+            recipe[field] = parse_recipe_list(
+                recipe.get(field)
+            )
+
+    return recipes
 
 
 @app.get("/")
@@ -330,6 +355,10 @@ def get_recipe_feed(user_id: str):
         allergies = user_data.get('allergies') or []
 
         if not is_calibrated or not user_vector:
+
+            if is_calibrated and not user_vector:
+                raise HTTPException(status_code=409, detail="User calibrated but profile vector is empty")
+            
             cursor.execute("SELECT count(*) as total_swipes FROM (SELECT 1 FROM user_swipes WHERE user_id = %s LIMIT 20) sub;", (user_id,))
             swipes_done = cursor.fetchone()['total_swipes']
 
@@ -348,24 +377,72 @@ def get_recipe_feed(user_id: str):
         excluded_recipe_ids = get_excluded_recipe_ids(cursor, allergies)
         recommended_recipe_ids = get_top_recipes(user_vector, swiped_ids, excluded_recipe_ids, limit=10)
 
-        cursor.execute("SELECT recipe_id, name, image_url, ingredient_parts, total_time FROM food_recipes WHERE recipe_id = ANY(%s);",(recommended_recipe_ids,))
+        cursor.execute('''SELECT recipe_id, name, image_url, description, category, ingredient_parts, 
+        ingredient_quantities, instructions, total_time, calories, protein, fat, carbs FROM food_recipes WHERE recipe_id = ANY(%s);''',
+                       (recommended_recipe_ids,))
 
         candidate_recipes = cursor.fetchall()
+        
         candidate_recipes.sort(key=lambda r: recommended_recipe_ids.index(r['recipe_id']))
-
-        for r in candidate_recipes:
-            if r['ingredient_parts']:
-                r['ingredient_parts'] = r["ingredient_parts"].replace('"', '').split(", ")
 
         return {
             "mode": "personalized",
             "is_calibrated": True,
-            "recipes": candidate_recipes
+            "recipes": format_recipes(candidate_recipes)
         }
     finally:
         cursor.close()
         release_db_connection(conn)
 
+
+@app.get("/api/users/{user_id}/liked-recipes")
+def get_liked_recipes(user_id: str):
+    conn = get_db_connection()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+
+    try:
+        cursor.execute("SELECT 1 FROM users WHERE user_id = %s;",(user_id,))
+
+        if not cursor.fetchone():
+            raise HTTPException(status_code=404, detail="User not found")
+
+        cursor.execute("""SELECT r.recipe_id, r.name, r.image_url, r.description, r.category, r.ingredient_parts, r.ingredient_quantities, r.instructions,
+                r.total_time, r.calories, r.protein, r.fat, r.carbs FROM user_favorites AS f JOIN food_recipes AS r ON r.recipe_id = f.recipe_id
+                    WHERE f.user_id = %s ORDER BY f.created_at DESC;""",(user_id,))
+
+        recipes = cursor.fetchall()
+
+        return {"recipes": format_recipes(recipes)}
+
+    finally:
+        cursor.close()
+        release_db_connection(conn)
+
+
+@app.delete("/api/users/{user_id}/liked-recipes/{recipe_id}")
+def delete_liked_recipes(user_id: str, recipe_id: str):
+    conn = get_db_connection()
+    cursor = conn.cursor(cursor_factory=RealDictCursor)
+
+    try:
+        cursor.execute("SELECT 1 FROM users WHERE user_id = %s;",(user_id,))
+
+        if not cursor.fetchone():
+            raise HTTPException(status_code=404, detail="User not found")
+
+        cursor.execute("DELETE FROM user_favorites WHERE user_id = %s AND recipe_id = %s RETURNING recipe_id;",(user_id, recipe_id))
+
+        if not cursor.fetchone():
+            raise HTTPException(status_code=404, detail="Recipe not found")
+        
+
+        conn.commit()
+
+        return {"status": "success"}
+
+    finally:
+        cursor.close()
+        release_db_connection(conn)
         
 
 #Swipe recording and user profile update
@@ -390,6 +467,9 @@ def record_swipe(swipe: SwipeRequest):
 
         if not inserted:
             return {"status" : "already_recorded", "is_calibrated" : is_calibrated}
+
+        if swipe.action == "like": 
+            cursor.execute("""INSERT INTO user_favorites (user_id, recipe_id) VALUES (%s, %s) ON CONFLICT DO NOTHING;""",(swipe.user_id, swipe.recipe_id))
 
 
         if not is_calibrated:
