@@ -5,8 +5,10 @@ import type { Recipe, RecipeIngredient } from './types.ts';
 const DEFAULT_API = 'https://zjemto-api.azurewebsites.net';
 const BASE = ((import.meta.env.VITE_API_URL as string | undefined) || DEFAULT_API).replace(/\/$/, '');
 
-// Personalized feed asks the ML service with a 45 s timeout on the backend, so allow a bit more here.
+// A sleeping Azure instance needs ~15–30 s to start.
 const TIMEOUT_MS = 60_000;
+// The personalized feed additionally waits for the ML service (45 s timeout on the backend) — cold start + ML.
+const FEED_TIMEOUT_MS = 90_000;
 
 export type ApiRecipe = {
   recipe_id: number;
@@ -37,9 +39,14 @@ export class ApiError extends Error {
   }
 }
 
-async function request<T>(method: 'GET' | 'POST' | 'PUT', path: string, body?: unknown): Promise<T> {
+async function request<T>(
+  method: 'GET' | 'POST' | 'PUT',
+  path: string,
+  body?: unknown,
+  timeoutMs = TIMEOUT_MS,
+): Promise<T> {
   const controller = new AbortController();
-  const timer = window.setTimeout(() => controller.abort(), TIMEOUT_MS);
+  const timer = window.setTimeout(() => controller.abort(), timeoutMs);
   try {
     const response = await fetch(`${BASE}${path}`, {
       method,
@@ -128,7 +135,7 @@ export async function getFeed(userId: string): Promise<Feed> {
     is_calibrated: boolean;
     calibration_progress?: { current_swipes: number; total_required: number };
     recipes: ApiRecipe[] | null;
-  }>('GET', `/api/recipes/feed/${userPath(userId)}`);
+  }>('GET', `/api/recipes/feed/${userPath(userId)}`, undefined, FEED_TIMEOUT_MS);
   return {
     mode: data.mode,
     isCalibrated: data.is_calibrated,
@@ -197,10 +204,32 @@ function matchIngredient(name: string): string | null {
   return null;
 }
 
+// Food.com keeps lists in R syntax: c("chicken", "garlic"). API.py only strips the quotes and splits on ", ",
+// so the first item arrives as "c(chicken" and the last one as "garlic)".
 function parseList(value: ApiRecipe['ingredient_parts']): string[] {
   if (!value) return [];
-  const list = Array.isArray(value) ? value : value.replace(/^c\(|\)$/g, '').split(',');
-  return list.map((item) => item.replace(/"/g, '').trim()).filter((item) => item && item !== 'NA');
+  const list = Array.isArray(value) ? value : value.split(',');
+  return list
+    .map((item, index, all) => {
+      let name = item.replace(/"/g, '').trim();
+      if (index === 0) name = name.replace(/^c\(\s*/, '');
+      if (index === all.length - 1) name = name.replace(/\s*\)$/, '');
+      return decodeEntities(name.trim());
+    })
+    .filter((item) => item && item !== 'NA' && item !== 'character(0' && item !== 'character(0)');
+}
+
+const ENTITIES: Record<string, string> = { amp: '&', quot: '"', apos: "'", lt: '<', gt: '>', nbsp: ' ' };
+
+/** Food.com names sometimes contain HTML entities ("Mom&#39;s Pie &amp; Crust"). */
+export function decodeEntities(text: string): string {
+  return text.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (whole, code: string) => {
+    if (code[0] === '#') {
+      const value = code[1] === 'x' || code[1] === 'X' ? parseInt(code.slice(2), 16) : Number(code.slice(1));
+      return Number.isFinite(value) && value > 0 && value < 0x110000 ? String.fromCodePoint(value) : whole;
+    }
+    return ENTITIES[code.toLowerCase()] ?? whole;
+  });
 }
 
 function parseImage(value: string | null): string {
@@ -251,7 +280,7 @@ export function toRecipe(raw: ApiRecipe): Recipe {
   return {
     id: `${API_PREFIX}${raw.recipe_id}`,
     apiId: raw.recipe_id,
-    title: raw.name?.trim() || 'Przepis bez nazwy',
+    title: decodeEntities(raw.name ?? '').trim() || 'Przepis bez nazwy',
     tagline: listed,
     image: parseImage(raw.image_url),
     minutes,

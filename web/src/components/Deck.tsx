@@ -213,6 +213,8 @@ export function Deck() {
   const bestIngredient = best ? ingredientById(best.ingredientId) : undefined;
   const { ready } = countMatches(app.pool, app.fridge);
   const loading = !top && app.apiStatus === 'loading';
+  // Signed in, some cards came from the server, but the last request failed.
+  const feedError = !app.usingLocal && app.apiStatus === 'error';
   const sideLikes = app.liked
     .map((id) => app.getRecipe(id))
     .filter((recipe): recipe is Recipe => recipe !== undefined)
@@ -270,6 +272,14 @@ export function Deck() {
                 , żeby talia uczyła się Twojego gustu.
               </p>
             ))}
+          {feedError && top && (
+            <p className="stage-note" role="status">
+              Nie udało się doładować kolejnych przepisów.{' '}
+              <button className="btn tiny quiet" type="button" onClick={app.retryApi}>
+                Spróbuj ponownie
+              </button>
+            </p>
+          )}
           {!app.usingLocal && app.feedMode === 'calibration' && app.calibration && (
             <div
               className="calibration"
@@ -346,20 +356,22 @@ export function Deck() {
             ) : (
               <div className="empty-card">
                 <p className="eyebrow">Talia</p>
-                <h2>Na dziś tyle</h2>
+                <h2>{feedError ? 'Serwer nie odpowiada' : 'Na dziś tyle'}</h2>
                 <p>
-                  {hiddenByTaste
+                  {feedError
+                    ? 'Nie udało się pobrać kolejnych przepisów. Sprawdź internet i spróbuj ponownie.'
+                    : hiddenByTaste
                     ? 'Filtr smaku schował to, co zostało w talii.'
                     : app.strict && app.fridge.length > 0
                       ? 'Z tej lodówki przepisy się skończyły.'
                       : !app.usingLocal && app.exhausted
                         ? 'Serwer nie ma teraz nowych rekomendacji.'
-                        : 'Przejrzałeś wszystko, co było w talii.'}
+                        : 'W talii nic już nie zostało.'}
                 </p>
                 <div className="empty-actions">
-                  {!app.usingLocal && app.exhausted && (
+                  {(feedError || (!app.usingLocal && app.exhausted)) && (
                     <button className="btn solid" type="button" onClick={app.retryApi}>
-                      Szukaj ponownie
+                      {feedError ? 'Spróbuj ponownie' : 'Szukaj ponownie'}
                     </button>
                   )}
                   {hiddenByTaste && (

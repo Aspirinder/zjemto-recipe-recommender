@@ -242,6 +242,10 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   const staleRef = useRef(0);
   /** Bumped whenever the feed is thrown away; answers to older requests are then ignored. */
   const genRef = useRef(0);
+  const allergyChain = useRef<Promise<unknown>>(Promise.resolve());
+  const allergySeq = useRef(0);
+  /** Last allergy list the server confirmed — what we fall back to when saving fails. */
+  const confirmedAllergies = useRef(store.allergies);
   useEffect(() => {
     feedRef.current = feed;
     storeRef.current = store;
@@ -400,6 +404,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
         // Not critical — keep the local selection; the next change is sent with PUT anyway.
         console.warn('ZjemTo API: could not load allergies', error);
       }
+      confirmedAllergies.current = allergies;
       resetFeed(false);
       setAuthNotice('');
       setAllergyError('');
@@ -431,23 +436,36 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     (id: string) => {
       const previous = storeRef.current.allergies;
       const next = previous.includes(id) ? previous.filter((item) => item !== id) : [...previous, id];
+      // Update the ref right away so a second quick click builds on this one, not on the last render.
+      storeRef.current = { ...storeRef.current, allergies: next };
       setAllergyError('');
       setStore((current) => ({ ...current, allergies: next }));
       const userId = storeRef.current.userId;
       if (!userId) return;
-      putAllergies(userId, next)
-        .then((saved) => {
+      // PUTs go one at a time and only the newest list is sent: otherwise a slow older request
+      // can finish last and overwrite the newer list on the server.
+      const seq = ++allergySeq.current;
+      const isCurrent = () => seq === allergySeq.current && storeRef.current.userId === userId;
+      allergyChain.current = allergyChain.current.then(async () => {
+        if (!isCurrent()) return;
+        try {
+          const saved = await putAllergies(userId, next);
+          if (storeRef.current.userId === userId) confirmedAllergies.current = saved;
+          if (!isCurrent()) return;
           setStore((current) => ({ ...current, allergies: saved }));
           // Cards already in the queue were picked with the old allergies.
           resetFeed(true);
           setApiStatus('loading');
           void loadMore();
-        })
-        .catch((error: unknown) => {
+        } catch (error) {
+          if (!isCurrent()) return;
           if (handleLostUser(error)) return;
-          setStore((current) => ({ ...current, allergies: previous }));
+          const confirmed = confirmedAllergies.current;
+          storeRef.current = { ...storeRef.current, allergies: confirmed };
+          setStore((current) => ({ ...current, allergies: confirmed }));
           setAllergyError(`Nie udało się zapisać alergii. ${describeError(error)}`);
-        });
+        }
+      });
     },
     [handleLostUser, loadMore, resetFeed],
   );
