@@ -62,6 +62,13 @@ Instrukcja uruchomienia: web/README.md.
 Na następne zajęcia zrobię: Testy całego przepływu na API na Azure z zespołem, kroki przygotowania w trybie gotowania,
 gdy API zacznie je zwracać, oraz dokumentacja wyników do code freeze 26.11.
 
+Yahor Koval
+
+Zrobiłem: Zoptymalizowałem algorytm rekomendacji, zastępując NearestNeighbors bezpośrednim mnożeniem macierzy TF-IDF przez znormalizowany wektor użytkownika, co pozwoliło uprościć obliczanie podobieństwa kosinusowego. Zaktualizowałem API silnika ML, dodając zwracanie wartości podobieństwa kosinusowego dla rekomendowanych przepisów.
+Przygotowałem środowisko testowe w Jupyter Notebook do porównania algorytmów rekomendacyjnych. Zaimplementowałem dwa algorytmy bazowe: Most Popular oraz Binary Jaccard Similarity. Przeanalizowałem różne metody ewaluacji systemów rekomendacyjnych i wybrałem metryki techniczne: Intra-List Diversity, Catalog Coverage, Novelty, Mean Cosine Similarity oraz Latency. Przygotowałem również testowe profile użytkowników na podstawie danych Food.com i zweryfikowałem poprawność powiązania identyfikatorów przepisów z macierzą TF-IDF.
+
+Na następne zajęcia zrobię: Przeprowadzę końcowe porównanie trzech algorytmów rekomendacyjnych, przeanalizuję wyniki uzyskanych metryk i przygotuję wnioski dotyczące ich wydajności oraz różnorodności rekomendacji. Przeprowadzę dodatkowe testy wydajności silnika ML na Azure oraz uzupełnię dokumentację techniczną i opis metodologii ewaluacji systemu rekomendacyjnego.
+
 Blokuje nas: nic
 
 Zobowiązanie zespołu na następne zajęcia: Wdrożenie i przetestowanie mechanizmu dopasowywania przepisów do zawartości lodówki użytkownika, uzupełnienie dokumentacji projektu oraz poprawa błędów wykrytych podczas testów integracyjnych przed code freeze 26.11.
