@@ -8,8 +8,8 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import type { Diet, Meal, Recipe, Screen, SwipeAction } from './types.ts';
-import { diets, meals, recipes as localRecipes } from './data.ts';
+import type { Diet, Recipe, Screen, SwipeAction } from './types.ts';
+import { diets, recipes as localRecipes } from './data.ts';
 import {
   ApiError,
   apiIdOf,
@@ -44,13 +44,10 @@ type Store = {
   history: SwipeAction[];
   strict: boolean;
   hintSeen: boolean;
-  loved: string[];
-  avoided: string[];
   profileName: string;
   diet: Diet;
   /** Backend allergen tags (users.allergies). */
   allergies: string[];
-  mealFilter: Meal[];
   /** user_id from /api/users/signin or /signup; null = signed out. */
   userId: string | null;
   email: string;
@@ -69,12 +66,9 @@ const emptyStore: Store = {
   history: [],
   strict: false,
   hintSeen: false,
-  loved: [],
-  avoided: [],
   profileName: '',
   diet: 'wszystko',
   allergies: [],
-  mealFilter: [],
   userId: null,
   email: '',
   ownerId: null,
@@ -139,12 +133,9 @@ function loadStore(): Store {
       history: asHistory(data.history),
       strict: Boolean(data.strict),
       hintSeen: Boolean(data.hintSeen),
-      loved: asStrings(data.loved),
-      avoided: asStrings(data.avoided),
       profileName: typeof data.profileName === 'string' ? data.profileName.slice(0, 32) : '',
       diet: asDiet(data.diet),
       allergies: asStrings(data.allergies),
-      mealFilter: asStrings(data.mealFilter).filter((id): id is Meal => meals.some((item) => item.id === id)),
       userId,
       email: typeof data.email === 'string' ? data.email : '',
       // Stores from before sign-in existed: the lists belong to whoever was using the app.
@@ -174,12 +165,9 @@ type AppContextValue = {
   passed: string[];
   strict: boolean;
   hintSeen: boolean;
-  loved: string[];
-  avoided: string[];
   profileName: string;
   diet: Diet;
   allergies: string[];
-  mealFilter: Meal[];
   userId: string | null;
   email: string;
   demo: boolean;
@@ -214,14 +202,12 @@ type AppContextValue = {
   unlike: (id: string) => void;
   undo: () => void;
   restorePassed: () => void;
-  setTaste: (id: string, taste: 'love' | 'avoid' | 'off') => void;
-  clearTaste: () => void;
   setProfileName: (name: string) => void;
   setDiet: (diet: Diet) => void;
   toggleAllergy: (id: string) => void;
-  toggleMeal: (meal: Meal) => void;
   /** Throws ApiError (401 wrong password, 409 email taken, 422 invalid email, 0 no connection). */
-  authenticate: (kind: AuthKind, email: string, password: string) => Promise<void>;
+  /** `allergies` (sign-up only) are saved before the first feed, so calibration already skips them. */
+  authenticate: (kind: AuthKind, email: string, password: string, allergies?: string[]) => Promise<void>;
   signOut: () => void;
   enterDemo: () => void;
 };
@@ -471,20 +457,28 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   );
 
   const authenticate = useCallback(
-    async (kind: AuthKind, rawEmail: string, password: string) => {
+    async (kind: AuthKind, rawEmail: string, password: string, chosen?: string[]) => {
       const email = rawEmail.trim().toLowerCase();
       const userId = kind === 'signup' ? await signUp(email, password) : await signIn(email, password);
       let allergies = storeRef.current.allergies;
+      let allergyProblem = '';
       try {
-        allergies = await getAllergies(userId);
+        allergies =
+          kind === 'signup' && chosen && chosen.length > 0
+            ? await putAllergies(userId, chosen)
+            : await getAllergies(userId);
       } catch (error) {
-        // Not critical — keep the local selection; the next change is sent with PUT anyway.
-        console.warn('ZjemTo API: could not load allergies', error);
+        // The account exists already — don't fail the sign-up; tell the user to check the profile.
+        console.warn('ZjemTo API: allergies not synced', error);
+        if (kind === 'signup' && chosen?.length) {
+          allergies = [];
+          allergyProblem = 'Nie udało się zapisać alergii przy rejestracji — zaznacz je ponownie w profilu.';
+        }
       }
       confirmedAllergies.current = allergies;
       resetFeed(false);
       setAuthNotice('');
-      setAllergyError('');
+      setAllergyError(allergyProblem);
       setApiStatus('loading');
       setStore((current) => {
         const sameOwner = current.ownerId === userId;
@@ -636,36 +630,12 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     }));
   }, []);
 
-  const setTaste = useCallback((id: string, taste: 'love' | 'avoid' | 'off') => {
-    setStore((current) => ({
-      ...current,
-      loved: taste === 'love' ? [...current.loved.filter((item) => item !== id), id] : current.loved.filter((item) => item !== id),
-      avoided:
-        taste === 'avoid'
-          ? [...current.avoided.filter((item) => item !== id), id]
-          : current.avoided.filter((item) => item !== id),
-    }));
-  }, []);
-
-  const clearTaste = useCallback(() => {
-    setStore((current) => ({ ...current, loved: [], avoided: [], mealFilter: [] }));
-  }, []);
-
   const setProfileName = useCallback((name: string) => {
     setStore((current) => ({ ...current, profileName: name.slice(0, 32) }));
   }, []);
 
   const setDiet = useCallback((diet: Diet) => {
     setStore((current) => ({ ...current, diet }));
-  }, []);
-
-  const toggleMeal = useCallback((meal: Meal) => {
-    setStore((current) => ({
-      ...current,
-      mealFilter: current.mealFilter.includes(meal)
-        ? current.mealFilter.filter((item) => item !== meal)
-        : [...current.mealFilter, meal],
-    }));
   }, []);
 
   const openCook = useCallback((id: string) => {
@@ -685,12 +655,9 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       passed: visiblePassed,
       strict: store.strict,
       hintSeen: store.hintSeen,
-      loved: store.loved,
-      avoided: store.avoided,
       profileName: store.profileName,
       diet: store.diet,
       allergies: store.allergies,
-      mealFilter: store.mealFilter,
       userId: store.userId,
       email: store.email,
       demo: store.demo,
@@ -721,12 +688,9 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       unlike,
       undo,
       restorePassed,
-      setTaste,
-      clearTaste,
       setProfileName,
       setDiet,
       toggleAllergy,
-      toggleMeal,
       authenticate,
       signOut: signOutPlain,
       enterDemo,
@@ -759,12 +723,9 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
       unlike,
       undo,
       restorePassed,
-      setTaste,
-      clearTaste,
       setProfileName,
       setDiet,
       toggleAllergy,
-      toggleMeal,
       authenticate,
       signOutPlain,
       enterDemo,

@@ -28,8 +28,8 @@ export function Deck() {
     app.liked,
     app.passed,
     app.strict,
-    app.loved,
-    app.avoided,
+    [],
+    [],
     [],
     'wszystko',
     localAllergies,
@@ -206,9 +206,7 @@ export function Deck() {
   else if (app.strict && app.fridge.length > 0) note = 'Tylko to, co da się zrobić teraz';
   else if (app.fridge.length > 0) note = 'Najpierw przepisy bliższe lodówce';
 
-  const remaining = visibleDeck(app.pool, app.fridge, app.liked, app.passed, false, app.loved, app.avoided);
-  const withoutTaste = visibleDeck(app.pool, app.fridge, app.liked, app.passed, app.strict, [], [], [], 'wszystko', localAllergies);
-  const hiddenByTaste = queue.length === 0 && withoutTaste.length > 0;
+  const remaining = visibleDeck(app.pool, app.fridge, app.liked, app.passed, false, [], [], [], 'wszystko', localAllergies);
   const best = unlockSuggestions(remaining, app.fridge)[0];
   const bestIngredient = best ? ingredientById(best.ingredientId) : undefined;
   const { ready } = countMatches(app.pool, app.fridge);
@@ -360,8 +358,6 @@ export function Deck() {
                 <p>
                   {feedError
                     ? `${app.apiErrorText || 'Nie udało się pobrać kolejnych przepisów.'} Spróbuj ponownie za chwilę.`
-                    : hiddenByTaste
-                    ? 'Filtr smaku schował to, co zostało w talii.'
                     : app.strict && app.fridge.length > 0
                       ? 'Z tej lodówki przepisy się skończyły.'
                       : !app.usingLocal && app.exhausted
@@ -372,11 +368,6 @@ export function Deck() {
                   {(feedError || (!app.usingLocal && app.exhausted)) && (
                     <button className="btn solid" type="button" onClick={app.retryApi}>
                       {feedError ? 'Spróbuj ponownie' : 'Szukaj ponownie'}
-                    </button>
-                  )}
-                  {hiddenByTaste && (
-                    <button className="btn solid" type="button" onClick={app.clearTaste}>
-                      Wyczyść filtr smaku
                     </button>
                   )}
                   {app.strict && best && bestIngredient && (

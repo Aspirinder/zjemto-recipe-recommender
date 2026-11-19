@@ -1198,3 +1198,8 @@ main {
   color: var(--muted);
 }
 .nutrition b { color: var(--ink); font-weight: 800; }
+
+.auth-allergies { margin: 4px 0 0; padding: 0; border: 0; min-width: 0; }
+.auth-allergies legend { padding: 0; margin-bottom: 8px; font-size: 13px; font-weight: 700; color: var(--muted); }
+.auth-allergies .taste-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.auth-hint { margin: 8px 0 0; font-size: 12px; color: var(--muted); line-height: 1.4; }

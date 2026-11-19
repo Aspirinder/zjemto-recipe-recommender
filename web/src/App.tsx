@@ -6,8 +6,8 @@ import { Fridge } from './components/Fridge.tsx';
 import { Likes } from './components/Likes.tsx';
 import { Cook } from './components/Cook.tsx';
 import { Auth } from './components/Auth.tsx';
-import { ProfileSheet, TasteSheet } from './components/HeaderPanels.tsx';
-import { IconDeck, IconFilter, IconFridge, IconHeart, IconUser, Mark } from './components/icons.tsx';
+import { ProfileSheet } from './components/HeaderPanels.tsx';
+import { IconDeck, IconFridge, IconHeart, IconUser, Mark } from './components/icons.tsx';
 
 const tabs: { id: Screen; label: string; Icon: typeof IconDeck }[] = [
   { id: 'deck', label: 'Odkrywaj', Icon: IconDeck },
@@ -18,8 +18,7 @@ const tabs: { id: Screen; label: string; Icon: typeof IconDeck }[] = [
 function Shell() {
   const app = useApp();
   const cooking = (app.cookingId && app.getRecipe(app.cookingId)) || null;
-  const [panel, setPanel] = useState<'taste' | 'profile' | null>(null);
-  const tasteCount = app.loved.length + app.avoided.length;
+  const [panel, setPanel] = useState<'profile' | null>(null);
   // Without an account (demo) the remembered e-mail belongs to whoever signed out — don't show it.
   const initial = (app.profileName.trim() || (app.userId ? app.email : '')).charAt(0).toUpperCase();
 
@@ -48,16 +47,6 @@ function Shell() {
           ))}
         </nav>
         <div className="header-tools">
-          <button
-            className="tool"
-            type="button"
-            aria-label="Filtr smaku"
-            aria-expanded={panel === 'taste'}
-            onClick={() => setPanel('taste')}
-          >
-            <IconFilter />
-            {tasteCount > 0 && <em>{tasteCount}</em>}
-          </button>
           <button className="avatar" type="button" aria-label="Profil" onClick={() => setPanel('profile')}>
             {initial ? initial : <IconUser size={18} />}
           </button>
@@ -84,7 +73,6 @@ function Shell() {
       </nav>
 
       {cooking && <Cook recipe={cooking} onClose={app.closeCook} />}
-      {panel === 'taste' && <TasteSheet onClose={() => setPanel(null)} />}
       {panel === 'profile' && <ProfileSheet onClose={() => setPanel(null)} />}
     </div>
   );

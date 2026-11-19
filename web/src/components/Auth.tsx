@@ -1,5 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { ApiError, wakeServer, whenSlow } from '../api.ts';
+import { allergens } from '../data.ts';
 import { useApp, type AuthKind } from '../state.tsx';
 import { Mark } from './icons.tsx';
 
@@ -32,6 +33,7 @@ export function Auth() {
   const [error, setError] = useState('');
   const [conflict, setConflict] = useState(false);
   const [slow, setSlow] = useState(false);
+  const [allergies, setAllergies] = useState<string[]>([]);
 
   // Wake the (possibly sleeping) server while the user is still typing.
   useEffect(() => {
@@ -51,7 +53,7 @@ export function Auth() {
     setError('');
     setConflict(false);
     setSlow(false);
-    const attempt = app.authenticate(kind, email, password);
+    const attempt = app.authenticate(kind, email, password, signup ? allergies : undefined);
     const cancelSlow = whenSlow(attempt, 4000, () => setSlow(true));
     try {
       await attempt;
@@ -111,6 +113,32 @@ export function Auth() {
             onChange={(event) => setPassword(event.target.value)}
           />
         </label>
+
+        {signup && (
+          <fieldset className="auth-allergies">
+            <legend>Alergie (opcjonalnie)</legend>
+            <div className="taste-chips">
+              {allergens.map((item) => {
+                const on = allergies.includes(item.id);
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    className={on ? 'taste-chip avoid' : 'taste-chip'}
+                    aria-pressed={on}
+                    onClick={() =>
+                      setAllergies((current) => (on ? current.filter((id) => id !== item.id) : [...current, item.id]))
+                    }
+                  >
+                    {item.label}
+                    {on ? ' · bez' : ''}
+                  </button>
+                );
+              })}
+            </div>
+            <p className="auth-hint">Przepisy z tymi składnikami nie trafią do talii. Zmienisz to później w profilu.</p>
+          </fieldset>
+        )}
 
         {busy && slow && (
           <p className="auth-notice" role="status">
