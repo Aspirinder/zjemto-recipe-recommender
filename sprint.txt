@@ -43,9 +43,8 @@ Dodałem endpointy do pobierania i aktualizacji alergii użytkownika. Połączy�
 Ulepszyłem aktualizację profilu preferencji, uwzględniając polubienia, odrzucenia i stopniowe wygaszanie wag. Zoptymalizowałem obsługę połączeń z PostgreSQL przez connection pooling. 
 Przeprowadziłem testy komunikacji między głównym API a silnikiem ML na Azure, przygotowałem interaktywny panel HTML do testowania rejestracji, logowania, swipe'ów i rekomendacji oraz dokumentację API dla frontendu.
 
-Na następne zajęcia zrobię: Pomogę w integracji zaktualizowanego API z aplikacją React. Przeanalizuję również możliwości ulepszenia mechanizmu polubień i odrzuceń (like/dislike), 
-w szczególności sposobu aktualizacji profilu użytkownika, doboru wag oraz wpływu negatywnych ocen na jakość rekomendacji. 
-Zajmę się także optymalizacją wydajności usług na Azure, analizą czasu odpowiedzi silnika ML oraz naprawą błędów wykrytych podczas testów przed code freeze 26.11.
+Na następne zajęcia zrobię: Zaimplementuję w API logikę sortowania i filtrowania przepisów na podstawie składników dostępnych w lodówce użytkownika, 
+uwzględniając liczbę brakujących produktów. Uzupełnię dokumentację techniczną API oraz przeprowadzę testy integracyjne z aplikacją webową. Zajmę się również identyfikacją i naprawą błędów wykrytych podczas testowania systemu.
 
 Sofiya Krasouskaya (30999)
 
@@ -62,3 +61,7 @@ Instrukcja uruchomienia: web/README.md.
 
 Na następne zajęcia zrobię: Testy całego przepływu na API na Azure z zespołem, kroki przygotowania w trybie gotowania,
 gdy API zacznie je zwracać, oraz dokumentacja wyników do code freeze 26.11.
+
+Blokuje nas: nic
+
+Zobowiązanie zespołu na następne zajęcia: Wdrożenie i przetestowanie mechanizmu dopasowywania przepisów do zawartości lodówki użytkownika, uzupełnienie dokumentacji projektu oraz poprawa błędów wykrytych podczas testów integracyjnych przed code freeze 26.11.
