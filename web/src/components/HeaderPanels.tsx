@@ -1,13 +1,15 @@
 import { useEffect, useRef } from 'react';
 import { allergens } from '../data.ts';
-import { plural } from '../logic.ts';
+import { pantryProducts, plural } from '../logic.ts';
 import { useApp } from '../state.tsx';
 import { IconClose } from './icons.tsx';
 
 function useDismiss(onClose: () => void) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const onCloseRef = useRef(onClose);
-  onCloseRef.current = onClose;
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  });
   useEffect(() => {
     closeRef.current?.focus();
     const previous = document.body.style.overflow;
@@ -27,7 +29,7 @@ function useDismiss(onClose: () => void) {
 export function ProfileSheet({ onClose }: { onClose: () => void }) {
   const app = useApp();
   // Signed in, several groups can map onto one catalog product — count what the user actually selected.
-  const fridgeCount = app.userId ? app.pantry.length : app.fridge.length;
+  const fridgeCount = app.userId ? pantryProducts(app.pantry).length : app.fridge.length;
   const closeRef = useDismiss(onClose);
   const name = app.profileName.trim();
 

@@ -1,15 +1,22 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { getIngredientGroups, localIngredientId, type IngredientGroup, type MissingIngredient } from '../api.ts';
-import { fridgeKey, ingredientById, plural, recipeKicker } from '../logic.ts';
-import { useApp } from '../state.tsx';
+import { ingredientPl } from '../ingredientsPl.ts';
+import { fridgeKey, ingredientById, pantryProducts, plural, productKey, recipeKicker } from '../logic.ts';
+import { FRIDGE_MAX, FRIDGE_PAGE, useApp } from '../state.tsx';
 import { Details } from './Details.tsx';
 import { IconClose } from './icons.tsx';
 import { Photo } from './Photo.tsx';
 
-type Option = IngredientGroup & {
-  /** Polish name and emoji from the local catalog, when the group maps onto it. */
-  label?: string;
+/** One product in the picker; `members` are its spelling variants in the backend ("walnut", "walnuts"). */
+type Option = {
+  id: number;
+  /** English canonical name (shown small). */
+  name: string;
+  pl: string;
+  /** Product of the small local catalog it maps onto — gives the emoji and the quick picks. */
+  local?: string;
   emoji?: string;
+  members: IngredientGroup[];
   haystack: string;
 };
 
@@ -20,24 +27,28 @@ function normalize(text: string) {
   return text.toLowerCase().replace(/ł/g, 'l').normalize('NFD').replace(/[̀-ͯ]/g, '').trim();
 }
 
-function toOption(group: IngredientGroup): Option {
-  const local = localIngredientId(group.name);
-  const meta = local ? ingredientById(local) : undefined;
-  return {
-    ...group,
-    label: meta?.name,
-    emoji: meta?.emoji,
-    haystack: normalize(`${group.name} ${meta?.name ?? ''}`),
-  };
+function toOptions(list: IngredientGroup[]): Option[] {
+  return pantryProducts(list).map((members) => {
+    const main = [...members].sort((a, b) => a.name.length - b.name.length)[0]!;
+    const local = localIngredientId(main.name) ?? undefined;
+    return {
+      id: main.id,
+      name: main.name,
+      pl: ingredientPl(main.name),
+      local,
+      emoji: local ? ingredientById(local)?.emoji : undefined,
+      members,
+      haystack: normalize(members.map((group) => `${group.name} ${ingredientPl(group.name)}`).join(' ')),
+    };
+  });
 }
 
 function rank(option: Option, query: string) {
-  const name = normalize(option.name);
-  if (name === query) return 0;
-  if (name.startsWith(query)) return 1;
-  if (name.split(/[\s-]+/).some((word) => word.startsWith(query))) return 2;
-  if (option.label && normalize(option.label).startsWith(query)) return 3;
-  return 4;
+  const names = [normalize(option.pl), normalize(option.name)];
+  if (names.includes(query)) return 0;
+  if (names.some((name) => name.startsWith(query))) return 1;
+  if (names.some((name) => name.split(/[\s-]+/).some((word) => word.startsWith(query)))) return 2;
+  return 3;
 }
 
 const MISSING_LABEL: Record<number, string> = { 0: 'Nic', 1: 'Do 1', 2: 'Do 2' };
@@ -48,37 +59,51 @@ export function ServerFridge() {
   const [groups, setGroups] = useState<Option[] | null>(null);
   const [groupsError, setGroupsError] = useState(false);
   const [attempt, setAttempt] = useState(0);
+  const [groupsSlow, setGroupsSlow] = useState(false);
   const [query, setQuery] = useState('');
   const [openId, setOpenId] = useState<string | null>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let alive = true;
+    // A sleeping Azure instance needs ~15–30 s; say so instead of looking stuck.
+    const slow = window.setTimeout(() => alive && setGroupsSlow(true), 4000);
     getIngredientGroups().then(
       (list) => {
+        window.clearTimeout(slow);
         if (!alive) return;
         setGroupsError(false);
-        setGroups(list.map(toOption));
+        setGroups(toOptions(list));
       },
       (error: unknown) => {
+        window.clearTimeout(slow);
         console.error('ZjemTo API: ingredient groups', error);
         if (alive) setGroupsError(true);
       },
     );
     return () => {
       alive = false;
+      window.clearTimeout(slow);
     };
   }, [attempt]);
 
   // Saved ids the backend no longer has (database rebuilt) would make the whole request fail with 422.
   const { prunePantry } = app;
   useEffect(() => {
-    if (groups) prunePantry(new Set(groups.map((group) => group.id)));
+    if (groups) prunePantry(new Set(groups.flatMap((option) => option.members.map((group) => group.id))));
   }, [groups, prunePantry]);
 
   const selected = useMemo(() => new Set(pantry.map((group) => group.id)), [pantry]);
-  const byId = useMemo(() => new Map((groups ?? []).map((group) => [group.id, group])), [groups]);
-  const byName = useMemo(() => new Map((groups ?? []).map((group) => [group.name.toLowerCase(), group])), [groups]);
+  const byId = useMemo(
+    () => new Map((groups ?? []).flatMap((option) => option.members.map((group) => [group.id, option] as const))),
+    [groups],
+  );
+  const byKey = useMemo(
+    () => new Map((groups ?? []).flatMap((option) => option.members.map((group) => [productKey(group.name, true), option] as const))),
+    [groups],
+  );
+  const products = useMemo(() => pantryProducts(pantry), [pantry]);
+  const isSelected = (option: Option) => option.members.some((group) => selected.has(group.id));
 
   const needle = normalize(query);
   const options = useMemo(() => {
@@ -86,7 +111,7 @@ export function ServerFridge() {
     return groups
       .filter((option) => option.haystack.includes(needle))
       .map((option) => ({ option, score: rank(option, needle) }))
-      .sort((a, b) => a.score - b.score || a.option.name.length - b.option.name.length)
+      .sort((a, b) => a.score - b.score || a.option.pl.length - b.option.pl.length)
       .slice(0, MAX_OPTIONS)
       .map((item) => item.option);
   }, [groups, needle]);
@@ -95,14 +120,16 @@ export function ServerFridge() {
   const quickPicks = useMemo(() => {
     const best = new Map<string, Option>();
     for (const option of groups ?? []) {
-      if (!option.label) continue;
-      const current = best.get(option.label);
-      if (!current || option.name.length < current.name.length) best.set(option.label, option);
+      if (!option.local) continue;
+      const current = best.get(option.local);
+      if (!current || option.name.length < current.name.length) best.set(option.local, option);
     }
     return [...best.values()];
   }, [groups]);
 
-  const loading = fridgeSearch.status === 'loading';
+  // A longer list for the same fridge keeps the current results on screen instead of the full loader.
+  const loadingMore = fridgeSearch.status === 'loading' && fridgeSearch.more;
+  const loading = fridgeSearch.status === 'loading' && !fridgeSearch.more;
   // The backend ranks fridge recipes by taste, so it answers 409 until calibration (20 swipes) is done.
   const calibrating = app.feedMode === 'calibration';
   const currentKey = fridgeKey(pantry, maxMissing);
@@ -110,7 +137,8 @@ export function ServerFridge() {
   const passed = new Set(app.passed);
   const liked = new Set(app.liked);
   const matches = fridgeSearch.matches.filter((match) => !passed.has(match.recipe.id));
-  const open = openId ? fridgeSearch.matches.find((match) => match.recipe.id === openId)?.recipe : undefined;
+  const openMatch = openId ? fridgeSearch.matches.find((match) => match.recipe.id === openId) : undefined;
+  const open = openMatch?.recipe;
 
   // Bring the loader into view once it has rendered (on a phone the button sits mid-page).
   useEffect(() => {
@@ -118,25 +146,27 @@ export function ServerFridge() {
   }, [loading]);
 
   const search = () => app.searchFridge();
+  const canLoadMore =
+    !outdated && fridgeSearch.matches.length >= fridgeSearch.limit && fridgeSearch.limit < FRIDGE_MAX;
 
-  const add = (option: IngredientGroup) => {
-    if (!selected.has(option.id)) app.togglePantry({ id: option.id, name: option.name });
+  const add = (option: Option) => {
+    if (!isSelected(option)) app.togglePantry(option.members);
   };
 
   const chip = (option: Option) => {
-    const pressed = selected.has(option.id);
+    const pressed = isSelected(option);
     return (
       <button
         key={option.id}
         type="button"
         className="ing"
         aria-pressed={pressed}
-        onClick={() => app.togglePantry({ id: option.id, name: option.name })}
+        onClick={() => app.togglePantry(option.members)}
       >
         {option.emoji && <span className="ing-emoji">{option.emoji}</span>}
         <span className={option.emoji ? undefined : 'ing-plain'}>
-          {option.name}
-          {option.label && <small> · {option.label.toLowerCase()}</small>}
+          {option.pl}
+          {option.pl.toLowerCase() !== option.name.toLowerCase() && <small> · {option.name}</small>}
         </span>
       </button>
     );
@@ -155,7 +185,7 @@ export function ServerFridge() {
           <input
             type="search"
             value={query}
-            placeholder={groups ? `Szukaj wśród ${groups.length} produktów, np. tomato, czosnek…` : 'Wczytuję produkty…'}
+            placeholder={groups ? 'Szukaj produktu, np. pomidor…' : 'Wczytuję produkty…'}
             aria-label="Szukaj produktu"
             disabled={!groups}
             onChange={(event) => setQuery(event.target.value)}
@@ -182,7 +212,11 @@ export function ServerFridge() {
             </button>
           </p>
         )}
-        {!groups && !groupsError && <p className="match-line muted">Wczytuję listę produktów…</p>}
+        {!groups && !groupsError && (
+          <p className="match-line muted">
+            {groupsSlow ? 'Serwer się budzi — to może potrwać do pół minuty…' : 'Wczytuję listę produktów…'}
+          </p>
+        )}
 
         {groups && needle && (
           <div className="group-grid pantry-options pantry-scroll">
@@ -199,7 +233,7 @@ export function ServerFridge() {
         <section className="panel pantry-panel">
           <div className="panel-head">
             <h2>
-              W lodówce <span className="count">{pantry.length}</span>
+              W lodówce <span className="count">{products.length}</span>
             </h2>
             <button type="button" onClick={app.clearPantry} disabled={pantry.length === 0}>
               Wyczyść
@@ -209,12 +243,15 @@ export function ServerFridge() {
             <p>Pusto — dodaj co najmniej jeden produkt.</p>
           ) : (
             <div className="pantry-chips">
-              {pantry.map((group) => (
-                <button key={group.id} type="button" onClick={() => app.togglePantry(group)} aria-label={`Usuń ${group.name}`}>
-                  {group.name}
-                  <IconClose size={12} />
-                </button>
-              ))}
+              {products.map((members) => {
+                const pl = ingredientPl(members[0]!.name);
+                return (
+                  <button key={members[0]!.id} type="button" onClick={() => app.togglePantry(members)} aria-label={`Usuń ${pl}`}>
+                    {pl}
+                    <IconClose size={12} />
+                  </button>
+                );
+              })}
             </div>
           )}
 
@@ -264,7 +301,7 @@ export function ServerFridge() {
           )}
 
           {/* After a failed refresh the old list would look like the answer — show only the error. */}
-          {fridgeSearch.status === 'ready' && fridgeSearch.key !== '' && (
+          {(fridgeSearch.status === 'ready' || loadingMore) && fridgeSearch.key !== '' && (
             <>
               {outdated && (
                 <p className="match-line muted">Lodówka się zmieniła — odśwież, żeby zobaczyć nowe przepisy.</p>
@@ -297,14 +334,24 @@ export function ServerFridge() {
                           count={missingCount}
                           total={total}
                           find={(item) =>
-                            (item.groupId !== undefined ? byId.get(item.groupId) : undefined) ?? byName.get(item.name.toLowerCase())
+                            (item.groupId !== undefined ? byId.get(item.groupId) : undefined) ?? byKey.get(productKey(item.name, true))
                           }
-                          selected={selected}
+                          isSelected={isSelected}
                           onAdd={add}
                         />
                       </li>
                     ))}
                   </ul>
+                  {(canLoadMore || loadingMore) && (
+                    <button
+                      className="btn quiet fridge-more"
+                      type="button"
+                      disabled={loadingMore}
+                      onClick={() => app.searchFridge(fridgeSearch.limit + FRIDGE_PAGE)}
+                    >
+                      {loadingMore ? 'Szukam kolejnych…' : 'Pokaż więcej'}
+                    </button>
+                  )}
                 </>
               )}
             </>
@@ -315,7 +362,8 @@ export function ServerFridge() {
       {open && (
         <Details
           recipe={open}
-          fridge={app.fridge}
+          // The server knows best: if nothing is missing, don't let the rougher name matching say otherwise.
+          fridge={openMatch?.missingCount === 0 ? open.ingredients.map((item) => item.id) : app.fridge}
           onClose={() => setOpenId(null)}
           onLike={() => {
             app.like(open.id);
@@ -335,12 +383,12 @@ type MissingLineProps = {
   missing: MissingIngredient[] | null;
   count: number | null;
   total: number | null;
-  find: (item: MissingIngredient) => IngredientGroup | undefined;
-  selected: ReadonlySet<number>;
-  onAdd: (group: IngredientGroup) => void;
+  find: (item: MissingIngredient) => Option | undefined;
+  isSelected: (option: Option) => boolean;
+  onAdd: (option: Option) => void;
 };
 
-function MissingLine({ missing, count, total, find, selected, onAdd }: MissingLineProps) {
+function MissingLine({ missing, count, total, find, isSelected, onAdd }: MissingLineProps) {
   if (count === 0 || (missing && missing.length === 0)) return <p className="fridge-missing ok">Masz wszystko</p>;
   if (!missing) {
     if (count === null) return null;
@@ -356,10 +404,10 @@ function MissingLine({ missing, count, total, find, selected, onAdd }: MissingLi
     <p className="fridge-missing">
       Brakuje:{' '}
       {missing.map((item, index) => {
-        const { name } = item;
         const group = find(item);
+        const name = group?.pl ?? ingredientPl(item.name);
         const comma = index < missing.length - 1 ? ', ' : '';
-        if (!group || selected.has(group.id)) {
+        if (!group || isSelected(group)) {
           return (
             <span key={index}>
               {name}
@@ -369,7 +417,7 @@ function MissingLine({ missing, count, total, find, selected, onAdd }: MissingLi
         }
         return (
           <span key={index}>
-            <button type="button" onClick={() => onAdd({ id: group.id, name: group.name })} aria-label={`Dodaj ${name} do lodówki`}>
+            <button type="button" onClick={() => onAdd(group)} aria-label={`Dodaj ${name} do lodówki`}>
               + {name}
             </button>
             {comma}

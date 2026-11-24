@@ -48,10 +48,20 @@ Bez konta można obejrzeć przykładowe przepisy (`src/data.ts`); te same przepi
 ## Pliki
 
 - `src/api.ts` — klient API i mapowanie przepisu z bazy (Food.com) na model interfejsu: zdjęcie z formatu `c("...")`, czas z `PT1H15M`, składniki dopasowane do produktów z „Lodówki”.
+- `src/ingredientsPl.ts` — polskie nazwy wszystkich ~1050 produktów z `/api/ingredients/groups` (klucz: angielska `canonical_name`; brak tłumaczenia = nazwa angielska).
+- `src/components/ServerFridge.tsx` — „Lodówka” dla zalogowanych: wyszukiwanie (po polsku i angielsku), warianty pisowni („walnut”/„walnuts”) jako jeden produkt, wyniki, „Pokaż więcej” (do 50).
 - `src/state.tsx` — stan aplikacji: konto, talia z API (doładowanie, gdy zostaje < 5 kart), kolejka swipe'ów (talia pobierana jest dopiero po zapisaniu swipe'ów), alergie.
 - `src/components/Auth.tsx` — ekran logowania i rejestracji.
 
-## Ograniczenia API (stan na 18.11, v7)
+## Ograniczenia API (stan na 24.11, v8)
+
+- v8 zamiast `carbs` zwraca `sugar` — w szczegółach pokazujemy to, co przyszło (cukier albo węglowodany),
+- „Lodówka” wymaga ukończonej kalibracji (20 swipe'ów) — wcześniej serwer zwraca 409,
+- odpowiedź `/api/recipes/fridge` podaje tylko liczbę brakujących składników (`missing_count`, `total_required`), bez nazw,
+- nazwy produktów w bazie są angielskie — tłumaczenie jest po stronie aplikacji (`src/ingredientsPl.ts`),
+
+### Wcześniejsze (v7)
+
 
 - brak liczby porcji; `ingredient_quantities` nie pasują 1:1 do `ingredient_parts` (dane Food.com), więc ilości nie są pokazywane,
 - około 60–75% przepisów nie ma zdjęcia (`image_url: null`) — wtedy karta ma gradient z ikoną talerza,

@@ -195,22 +195,39 @@ export type FridgeSearch = {
   error: string;
   /** 409: the backend needs a calibrated taste profile (20 swipes) before it ranks fridge recipes. */
   needsCalibration: boolean;
+  /** How many recipes were asked for (the backend allows up to 50). */
+  limit: number;
+  /** Loading a longer list for the same fridge — keep showing the current one meanwhile. */
+  more: boolean;
 };
 
-const emptySearch: FridgeSearch = { status: 'idle', matches: [], key: '', error: '', needsCalibration: false };
+export const FRIDGE_PAGE = 20;
+export const FRIDGE_MAX = 50;
+
+const emptySearch: FridgeSearch = {
+  status: 'idle',
+  matches: [],
+  key: '',
+  error: '',
+  needsCalibration: false,
+  limit: FRIDGE_PAGE,
+  more: false,
+};
 
 type AppContextValue = {
   /** Local catalog ids — for signed-in users derived from `pantry`, so the deck can still show what's missing. */
   fridge: string[];
   pantry: IngredientGroup[];
   maxMissing: number;
-  togglePantry: (group: IngredientGroup) => void;
+  /** Several groups = spelling variants of one product ("walnut" / "walnuts"): selected or removed together. */
+  togglePantry: (groups: IngredientGroup | IngredientGroup[]) => void;
   clearPantry: () => void;
   /** Drops selected groups the backend no longer knows. */
   prunePantry: (validIds: ReadonlySet<number>) => void;
   setMaxMissing: (value: number) => void;
   fridgeSearch: FridgeSearch;
-  searchFridge: () => void;
+  /** Without `limit`: a new search (first page). With it: the same fridge, a longer list. */
+  searchFridge: (limit?: number) => void;
   liked: string[];
   passed: string[];
   strict: boolean;
@@ -682,13 +699,14 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     setStore((current) => ({ ...current, fridge: [] }));
   }, []);
 
-  const togglePantry = useCallback((group: IngredientGroup) => {
-    setStore((current) => ({
-      ...current,
-      pantry: current.pantry.some((item) => item.id === group.id)
-        ? current.pantry.filter((item) => item.id !== group.id)
-        : [...current.pantry, group],
-    }));
+  const togglePantry = useCallback((groups: IngredientGroup | IngredientGroup[]) => {
+    const list = Array.isArray(groups) ? groups : [groups];
+    const ids = new Set(list.map((group) => group.id));
+    setStore((current) => {
+      const selected = current.pantry.some((item) => ids.has(item.id));
+      const rest = current.pantry.filter((item) => !ids.has(item.id));
+      return { ...current, pantry: selected ? rest : [...rest, ...list.map(({ id, name }) => ({ id, name }))] };
+    });
   }, []);
 
   const clearPantry = useCallback(() => {
@@ -708,20 +726,23 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
   }, []);
 
   /** Takes up to ~5 s on the backend (plus a cold start) — the screen shows a loader meanwhile. */
-  const searchFridge = useCallback(() => {
+  const searchFridge = useCallback((wanted?: number) => {
     const { userId, pantry, maxMissing } = storeRef.current;
     if (!userId || pantry.length === 0) return;
     const gen = ++fridgeGen.current;
     const key = fridgeKey(pantry, maxMissing);
-    setFridgeSearch((current) => ({ ...current, status: 'loading', error: '', needsCalibration: false }));
+    const more = wanted !== undefined && fridgeSearchRef.current.key === key;
+    const limit = more ? Math.min(wanted, FRIDGE_MAX) : FRIDGE_PAGE;
+    setFridgeSearch((current) => ({ ...current, status: 'loading', error: '', needsCalibration: false, more }));
     getFridgeRecipes(
       userId,
       pantry.map((group) => group.id),
       maxMissing,
+      limit,
     ).then(
       (matches) => {
         if (gen !== fridgeGen.current) return;
-        setFridgeSearch({ status: 'ready', matches, key, error: '', needsCalibration: false });
+        setFridgeSearch({ status: 'ready', matches, key, error: '', needsCalibration: false, limit, more: false });
       },
       (error: unknown) => {
         if (gen !== fridgeGen.current) return;
@@ -735,6 +756,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
             status: 'error',
             error: 'Część produktów zniknęła z bazy — usunęliśmy je z lodówki. Spróbuj jeszcze raz.',
             needsCalibration: false,
+            more: false,
           }));
           return;
         }
@@ -745,6 +767,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
           status: 'error',
           error: needsCalibration ? '' : describeError(error),
           needsCalibration,
+          more: false,
         }));
       },
     );

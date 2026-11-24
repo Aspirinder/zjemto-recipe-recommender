@@ -16,17 +16,23 @@ type ApiList = string[] | string | null;
 export type ApiRecipe = {
   recipe_id: number;
   name: string | null;
-  image_url: string | null;
+  /** A URL, c("url", ...) text, or (v8) possibly a JSON list of URLs. */
+  image_url: string | string[] | null;
   ingredient_parts: ApiList;
   total_time: string | number | null;
+  cook_time?: string | number | null;
+  prep_time?: string | number | null;
   description?: string | null;
   category?: string | null;
   ingredient_quantities?: ApiList;
   instructions?: ApiList;
-  calories?: number | null;
-  protein?: number | null;
-  fat?: number | null;
-  carbs?: number | null;
+  calories?: number | string | null;
+  protein?: number | string | null;
+  fat?: number | string | null;
+  /** API v7 only. */
+  carbs?: number | string | null;
+  /** API v8 (replaces carbs). */
+  sugar?: number | string | null;
 };
 
 export type Feed = {
@@ -408,8 +414,15 @@ export function decodeEntities(text: string): string {
 
 // Food.com image URLs contain commas themselves (".../upload/w_555,h_416,c_fit,.../x.jpg"),
 // so only split on a comma that starts the next URL. Accepts: plain URL, "URL", c("URL1", "URL2").
-function parseImage(value: string | null): string {
-  if (!value) return '';
+function parseImage(value: unknown): string {
+  if (Array.isArray(value)) {
+    for (const item of value) {
+      const url = parseImage(item);
+      if (url) return url;
+    }
+    return '';
+  }
+  if (typeof value !== 'string' || !value) return '';
   const text = value.trim();
   const quoted = /"(https?:\/\/[^"]+)"/.exec(text)?.[1];
   const bare = /https?:\/\/.+/.exec(text)?.[0].split(/,\s*(?=https?:\/\/)/)[0]?.replace(/["')\s]+$/, '');
@@ -417,11 +430,17 @@ function parseImage(value: string | null): string {
   return url.replace(/ /g, '%20');
 }
 
-// Food.com stores times as ISO-8601 durations: "PT1H30M", "PT45M".
-function parseMinutes(value: ApiRecipe['total_time']): number {
-  if (typeof value === 'number') return Math.round(value);
+// Food.com stores times as ISO-8601 durations: "PT1H30M", "PT45M". Also accepts minutes and "1 h 30 min".
+function parseMinutes(value: ApiRecipe['total_time'] | undefined): number {
+  if (typeof value === 'number') return Number.isFinite(value) && value > 0 ? Math.round(value) : 0;
   if (!value) return 0;
+  value = value.trim();
   if (/^\d+$/.test(value)) return Number(value);
+  if (!/^P/i.test(value)) {
+    const h = /(\d+)\s*h/i.exec(value)?.[1];
+    const m = /(\d+)\s*min/i.exec(value)?.[1];
+    return Number(h ?? 0) * 60 + Number(m ?? 0);
+  }
   const hours = /(\d+)H/.exec(value)?.[1];
   const mins = /(\d+)M/.exec(value)?.[1];
   const days = /(\d+)D/.exec(value)?.[1];
@@ -436,20 +455,30 @@ const TINTS = [
   'linear-gradient(160deg, #33280f 0%, #c9a227 100%)',
 ];
 
+/** Numbers may come as JSON numbers or (DECIMAL/text columns) as strings. */
+function num(value: unknown): number | undefined {
+  const n = typeof value === 'string' && value.trim() ? Number(value) : value;
+  return typeof n === 'number' && Number.isFinite(n) ? n : undefined;
+}
+
 export function toRecipe(raw: ApiRecipe): Recipe {
   const names = parseList(raw.ingredient_parts);
+  const quantities = parseList(raw.ingredient_quantities);
+  // Food.com quantities only line up with ingredients when both lists have the same length.
+  const aligned = quantities.length === names.length;
   const seen = new Set<string>();
   const ingredients: RecipeIngredient[] = [];
-  for (const name of names) {
+  for (const [index, name] of names.entries()) {
     const lower = name.toLowerCase();
     const staple = STAPLES.test(lower);
     const id = (!staple && matchIngredient(lower)) || `x:${lower}`;
     if (seen.has(id)) continue;
     seen.add(id);
-    ingredients.push({ id, amount: '', name, staple: staple || undefined });
+    const amount = aligned ? (quantities[index] ?? '').trim() : '';
+    ingredients.push({ id, amount: amount === 'NA' ? '' : amount, name, staple: staple || undefined });
   }
 
-  const minutes = parseMinutes(raw.total_time);
+  const minutes = parseMinutes(raw.total_time) || parseMinutes(raw.cook_time) + parseMinutes(raw.prep_time);
   const listed = ingredients
     .filter((item) => !item.staple)
     .slice(0, 4)
@@ -461,9 +490,10 @@ export function toRecipe(raw: ApiRecipe): Recipe {
   const steps: RecipeStep[] = instructions.length
     ? instructions.map((text) => ({ text, timer: stepTimer(text) }))
     : [{ text: `Przygotuj składniki: ${names.join(', ')}.` }];
+  const calories = num(raw.calories);
   const nutrition =
-    typeof raw.calories === 'number'
-      ? { calories: raw.calories, protein: raw.protein ?? 0, fat: raw.fat ?? 0, carbs: raw.carbs ?? 0 }
+    calories !== undefined
+      ? { calories, protein: num(raw.protein) ?? 0, fat: num(raw.fat) ?? 0, carbs: num(raw.carbs), sugar: num(raw.sugar) }
       : undefined;
 
   return {

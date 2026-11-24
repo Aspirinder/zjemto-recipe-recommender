@@ -50,7 +50,8 @@ export type Recipe = {
   /** Full description (API recipes); `tagline` is the short version for the card. */
   description?: string;
   /** Per serving, from the API. */
-  nutrition?: { calories: number; protein: number; fat: number; carbs: number };
+  /** API v7 sends carbs, v8 sends sugar instead — only what the backend gave is shown. */
+  nutrition?: { calories: number; protein: number; fat: number; carbs?: number; sugar?: number };
 };
 
 export type Screen = 'deck' | 'catalog' | 'fridge' | 'likes' | 'profile';

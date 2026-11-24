@@ -1,15 +1,7 @@
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent, type TransitionEvent as ReactTransitionEvent } from 'react';
 import type { Recipe } from '../types.ts';
-import {
-  countMatches,
-  ingredientById,
-  ingredientName,
-  plural,
-  recipeKicker,
-  splitIngredients,
-  unlockSuggestions,
-  visibleDeck,
-} from '../logic.ts';
+import { countMatches, ingredientById, ingredientName, pantryProducts, plural, recipeKicker, splitIngredients, unlockSuggestions, visibleDeck } from '../logic.ts';
+import { ingredientPl } from '../ingredientsPl.ts';
 import { useApp } from '../state.tsx';
 import { Details } from './Details.tsx';
 import { IconHeart, IconInfo, IconNope, IconUndo } from './icons.tsx';
@@ -236,10 +228,12 @@ export function Deck() {
                 <p>Zaznacz produkty — pokażemy przepisy, które z nich ugotujesz.</p>
               ) : (
                 <div className="mini-chips">
-                  {app.pantry.slice(0, 8).map((group) => (
-                    <span key={group.id}>{group.name}</span>
-                  ))}
-                  {app.pantry.length > 8 && <span>+{app.pantry.length - 8}</span>}
+                  {pantryProducts(app.pantry)
+                    .slice(0, 8)
+                    .map((members) => (
+                      <span key={members[0]!.id}>{ingredientPl(members[0]!.name)}</span>
+                    ))}
+                  {pantryProducts(app.pantry).length > 8 && <span>+{pantryProducts(app.pantry).length - 8}</span>}
                 </div>
               )
             ) : app.fridge.length === 0 ? (

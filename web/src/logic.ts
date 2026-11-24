@@ -1,4 +1,5 @@
 import { ingredients, recipes } from './data.ts';
+import { ingredientPl } from './ingredientsPl.ts';
 import type { Diet, Meal, Recipe, RecipeIngredient } from './types.ts';
 
 const MEAT = new Set(['bacon', 'chicken', 'salmon']);
@@ -38,15 +39,47 @@ export function ingredientById(id: string) {
 }
 
 export function ingredientName(item: RecipeIngredient) {
-  return ingredientById(item.id)?.name ?? item.name ?? item.id;
+  // Recipe ingredients from Food.com are English; use the Polish name when the dictionary has this exact one.
+  return ingredientById(item.id)?.name ?? (item.name ? ingredientPl(item.name) : item.id);
+}
+
+// Words that don't change what the product is: "fresh basil" is basil, "large eggs" are eggs.
+const DESCRIPTORS = new Set([
+  'fresh', 'large', 'small', 'medium', 'chopped', 'minced', 'diced', 'sliced', 'boneless', 'skinless',
+  'whole', 'raw', 'ripe', 'finely', 'grated', 'shredded', 'peeled', 'organic', 'extra', 'jumbo',
+]);
+
+function singular(word: string) {
+  if (/(oes|ches|shes|sses)$/.test(word)) return word.slice(0, -2);
+  if (/ies$/.test(word)) return `${word.slice(0, -3)}y`;
+  if (/[^s]s$/.test(word)) return word.slice(0, -1);
+  return word;
+}
+
+/**
+ * "Fresh Basil Leaves (optional)" and "basil leaf" -> "basil leaf".
+ * `strict` keeps descriptive words: then only spelling variants match ("sun-dried tomatoes" / "sun dried tomato").
+ */
+export function productKey(name: string, strict = false) {
+  return name
+    .toLowerCase()
+    .replace(/\([^)]*\)/g, ' ')
+    .replace(/-/g, ' ')
+    .split(/[^a-z]+/)
+    .filter((word) => word && (strict || !DESCRIPTORS.has(word)))
+    .map(singular)
+    .join(' ');
 }
 
 export function splitIngredients(recipe: Recipe, fridge: readonly string[]) {
   const owned = new Set(fridge);
+  // Products outside the local catalog are `x:<name>`; compare them by name, ignoring "fresh", plurals etc.
+  const ownedNames = new Set(fridge.filter((id) => id.startsWith('x:')).map((id) => productKey(id.slice(2))));
   const have: RecipeIngredient[] = [];
   const missing: RecipeIngredient[] = [];
   for (const item of recipe.ingredients) {
-    if (item.staple || owned.has(item.id)) have.push(item);
+    const byName = item.id.startsWith('x:') && ownedNames.size > 0 && ownedNames.has(productKey(item.id.slice(2)));
+    if (item.staple || owned.has(item.id) || byName) have.push(item);
     else missing.push(item);
   }
   return { have, missing, total: recipe.ingredients.length };
@@ -180,4 +213,14 @@ export function assertRecipes() {
 /** Identifies a fridge search (selected groups + max_missing), to tell whether shown results are outdated. */
 export function fridgeKey(pantry: readonly { id: number }[], maxMissing: number) {
   return `${pantry.map((group) => group.id).sort((a, b) => a - b).join(',')}|${maxMissing}`;
+}
+
+/** Selected groups merged into products: "walnut" + "walnuts" is one product (shown once, removed together). */
+export function pantryProducts<T extends { id: number; name: string }>(pantry: readonly T[]): T[][] {
+  const byKey = new Map<string, T[]>();
+  for (const group of pantry) {
+    const key = productKey(group.name, true) || group.name;
+    byKey.set(key, [...(byKey.get(key) ?? []), group]);
+  }
+  return [...byKey.values()];
 }

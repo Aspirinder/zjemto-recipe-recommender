@@ -60,9 +60,16 @@ export function Details({ recipe, fridge, onClose, onLike, onPass }: DetailsProp
               <span>
                 <b>{Math.round(recipe.nutrition.fat)} g</b> tłuszczu
               </span>
-              <span>
-                <b>{Math.round(recipe.nutrition.carbs)} g</b> węglowodanów
-              </span>
+              {recipe.nutrition.carbs !== undefined && (
+                <span>
+                  <b>{Math.round(recipe.nutrition.carbs)} g</b> węglowodanów
+                </span>
+              )}
+              {recipe.nutrition.sugar !== undefined && (
+                <span>
+                  <b>{Math.round(recipe.nutrition.sugar)} g</b> cukru
+                </span>
+              )}
             </p>
           )}
           <p className="tease">

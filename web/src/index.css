@@ -1209,6 +1209,8 @@ main {
 }
 
 .fridge-results-wrap { scroll-margin-top: 16px; padding-bottom: 24px; }
+.fridge-more { display: block; width: 100%; margin-top: 12px; }
+.fridge-more:disabled { opacity: 0.6; cursor: default; }
 .fridge-message {
   display: flex;
   flex-wrap: wrap;
