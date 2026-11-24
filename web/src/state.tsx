@@ -14,6 +14,7 @@ import { fridgeKey } from './logic.ts';
 import {
   ApiError,
   apiIdOf,
+  cleanAmount,
   deleteLikedRecipe,
   getAllergies,
   getFeed,
@@ -116,7 +117,11 @@ function asSaved(value: unknown): Record<string, Recipe> {
     const recipe = item as Partial<Recipe>;
     if (recipe.id !== id || typeof recipe.title !== 'string') continue;
     if (!Array.isArray(recipe.ingredients) || !Array.isArray(recipe.steps)) continue;
-    out[id] = recipe as Recipe;
+    // Recipes saved before quantities were cleaned may still say "null".
+    out[id] = {
+      ...(recipe as Recipe),
+      ingredients: (recipe as Recipe).ingredients.map((item) => ({ ...item, amount: cleanAmount(item.amount) })),
+    };
   }
   return out;
 }

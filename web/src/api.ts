@@ -11,7 +11,7 @@ const TIMEOUT_MS = 60_000;
 const FEED_TIMEOUT_MS = 90_000;
 
 /** Lists come as JSON arrays (API v7) or as R/CSV text: c("a", "b") / "a", "b" (older versions). */
-type ApiList = string[] | string | null;
+type ApiList = (string | null)[] | string | null;
 
 export type ApiRecipe = {
   recipe_id: number;
@@ -355,9 +355,18 @@ function matchIngredient(name: string): string | null {
 
 // Food.com keeps lists in R syntax: c("chicken", "garlic"). API.py only strips the quotes and splits on ", ",
 // so the first item arrives as "c(chicken" and the last one as "garlic)".
-function parseList(value: ApiList | undefined): string[] {
+const EMPTY_ITEM = /^(na|null|none|nan|undefined|character\(0\)?)$/i;
+
+/** Quantities in the database may be null / "NA" — show nothing instead. */
+export function cleanAmount(value: unknown): string {
+  if (value === null || value === undefined) return '';
+  const text = String(value).replace(/\s+/g, ' ').trim();
+  return EMPTY_ITEM.test(text) ? '' : text;
+}
+
+function parseList(value: ApiList | undefined, keepEmpty = false): string[] {
   if (!value) return [];
-  let list: string[];
+  let list: (string | null)[];
   if (Array.isArray(value)) {
     list = value;
   } else {
@@ -369,12 +378,14 @@ function parseList(value: ApiList | undefined): string[] {
   }
   return list
     .map((item, index, all) => {
+      if (item === null || item === undefined) return '';
       let name = String(item).replace(/"/g, '').replace(/\s+/g, ' ').trim();
       if (index === 0) name = name.replace(/^c\(\s*/, '');
       if (index === all.length - 1) name = name.replace(/\s*\)$/, '');
-      return decodeEntities(name.trim());
+      return cleanAmount(decodeEntities(name.trim()));
     })
-    .filter((item) => item && item !== 'NA' && item !== 'character(0' && item !== 'character(0)');
+    // Quantities keep empty slots so they stay aligned with the ingredient names.
+    .filter((item) => keepEmpty || item);
 }
 
 // "Bake for 30-35 minutes", "simmer 1 hour", "cook 10 mins" -> a timer for the cooking view.
@@ -462,20 +473,21 @@ function num(value: unknown): number | undefined {
 }
 
 export function toRecipe(raw: ApiRecipe): Recipe {
-  const names = parseList(raw.ingredient_parts);
-  const quantities = parseList(raw.ingredient_quantities);
+  const names = parseList(raw.ingredient_parts, true);
+  const quantities = parseList(raw.ingredient_quantities, true);
   // Food.com quantities only line up with ingredients when both lists have the same length.
   const aligned = quantities.length === names.length;
   const seen = new Set<string>();
   const ingredients: RecipeIngredient[] = [];
   for (const [index, name] of names.entries()) {
+    if (!name) continue;
     const lower = name.toLowerCase();
     const staple = STAPLES.test(lower);
     const id = (!staple && matchIngredient(lower)) || `x:${lower}`;
     if (seen.has(id)) continue;
     seen.add(id);
-    const amount = aligned ? (quantities[index] ?? '').trim() : '';
-    ingredients.push({ id, amount: amount === 'NA' ? '' : amount, name, staple: staple || undefined });
+    const amount = aligned ? cleanAmount(quantities[index]) : '';
+    ingredients.push({ id, amount, name, staple: staple || undefined });
   }
 
   const minutes = parseMinutes(raw.total_time) || parseMinutes(raw.cook_time) + parseMinutes(raw.prep_time);
