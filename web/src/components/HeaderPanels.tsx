@@ -26,6 +26,8 @@ function useDismiss(onClose: () => void) {
 
 export function ProfileSheet({ onClose }: { onClose: () => void }) {
   const app = useApp();
+  // Signed in, several groups can map onto one catalog product — count what the user actually selected.
+  const fridgeCount = app.userId ? app.pantry.length : app.fridge.length;
   const closeRef = useDismiss(onClose);
   const name = app.profileName.trim();
 
@@ -64,8 +66,8 @@ export function ProfileSheet({ onClose }: { onClose: () => void }) {
               <span>{plural(app.liked.length, 'polubiony przepis', 'polubione przepisy', 'polubionych przepisów')}</span>
             </li>
             <li>
-              <strong>{app.fridge.length}</strong>
-              <span>{plural(app.fridge.length, 'produkt w lodówce', 'produkty w lodówce', 'produktów w lodówce')}</span>
+              <strong>{fridgeCount}</strong>
+              <span>{plural(fridgeCount, 'produkt w lodówce', 'produkty w lodówce', 'produktów w lodówce')}</span>
             </li>
           </ul>
           {app.email && <p className="profile-email">{app.email}</p>}

@@ -1,8 +1,15 @@
 import { categories, ingredients, sampleFridge } from '../data.ts';
 import { ingredientById, splitIngredients } from '../logic.ts';
 import { useApp } from '../state.tsx';
+import { ServerFridge } from './ServerFridge.tsx';
 
+/** Signed in: the backend's ingredient catalog and /api/recipes/fridge. Demo: the small local catalog. */
 export function Fridge() {
+  const { userId } = useApp();
+  return userId ? <ServerFridge /> : <LocalFridge />;
+}
+
+function LocalFridge() {
   const { fridge, strict, toggleFridge, setFridge, clearFridge, toggleStrict, pool } = useApp();
   const owned = new Set(fridge);
   const near = pool

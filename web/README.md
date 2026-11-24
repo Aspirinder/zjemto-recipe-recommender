@@ -1,6 +1,6 @@
 # ZjemTo — aplikacja webowa
 
-Interfejs do przeglądania przepisów gestem swipe (React + TypeScript + Vite), połączony z ZjemTo API (`API.py`, wersja 7.0; działa też z 6.0).
+Interfejs do przeglądania przepisów gestem swipe (React + TypeScript + Vite), połączony z ZjemTo API (`API.py`, wersja 8.0; bez „Lodówki” działa też z 7.0 i 6.0).
 Autorka: Sofiya Krasouskaya (30999).
 
 **Wersja online:** https://mulatkasofi.github.io/zjemto/ (GitHub Pages; działa, gdy API na Azure jest włączone).
@@ -37,6 +37,8 @@ Backend ma włączony CORS dla wszystkich adresów, więc przeglądarka łączy 
 | Zmiana alergii w profilu — wysyłana cała lista, potem talia jest pobierana od nowa | `PUT /api/users/{user_id}/allergies` |
 | „Polubione” z serwera (te same na każdym urządzeniu) — przy logowaniu i przy wejściu w zakładkę | `GET /api/users/{user_id}/liked-recipes` |
 | Usunięcie z polubionych i „cofnij” po lajku | `DELETE /api/users/{user_id}/liked-recipes/{recipe_id}` |
+| „Lodówka” (zalogowani): lista ~1050 produktów pobierana raz, wyszukiwanie po nazwie (angielskiej lub polskiej z lokalnego katalogu) | `GET /api/ingredients/groups` |
+| „Pokaż przepisy” z zaznaczonych produktów; „Może brakować: Nic / Do 1 / Do 2” = `max_missing`; w trakcie (do ~5 s) animacja garnka i szkielety kart | `POST /api/recipes/fridge/{user_id}` |
 | Kroki z `instructions` w trybie gotowania; minutnik z tekstu kroku („Bake 30-35 minutes” → 30:00); opis, kategoria, kcal i makro w szczegółach | pola przepisu z `/feed` i `/liked-recipes` |
 
 Alergie to tagi z backendu: `gluten`, `dairy`, `eggs`, `nuts`, `seafood`.

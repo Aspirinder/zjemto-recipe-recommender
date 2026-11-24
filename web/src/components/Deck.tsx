@@ -231,7 +231,18 @@ export function Deck() {
                 Zmień
               </button>
             </div>
-            {app.fridge.length === 0 ? (
+            {app.userId ? (
+              app.pantry.length === 0 ? (
+                <p>Zaznacz produkty — pokażemy przepisy, które z nich ugotujesz.</p>
+              ) : (
+                <div className="mini-chips">
+                  {app.pantry.slice(0, 8).map((group) => (
+                    <span key={group.id}>{group.name}</span>
+                  ))}
+                  {app.pantry.length > 8 && <span>+{app.pantry.length - 8}</span>}
+                </div>
+              )
+            ) : app.fridge.length === 0 ? (
               <p>Zaznacz produkty — na kartach pojawi się, czego brakuje.</p>
             ) : (
               <>

@@ -65,7 +65,7 @@ function Shell() {
             <span className="tab-icon">
               <Icon />
               {id === 'likes' && app.liked.length > 0 && <em>{app.liked.length}</em>}
-              {id === 'fridge' && app.fridge.length > 0 && <i />}
+              {id === 'fridge' && (app.userId ? app.pantry.length : app.fridge.length) > 0 && <i />}
             </span>
             {label}
           </button>

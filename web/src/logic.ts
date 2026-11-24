@@ -176,3 +176,8 @@ export function assertRecipes() {
     }
   }
 }
+
+/** Identifies a fridge search (selected groups + max_missing), to tell whether shown results are outdated. */
+export function fridgeKey(pantry: readonly { id: number }[], maxMissing: number) {
+  return `${pantry.map((group) => group.id).sort((a, b) => a - b).join(',')}|${maxMissing}`;
+}
