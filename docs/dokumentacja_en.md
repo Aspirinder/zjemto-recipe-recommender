@@ -66,10 +66,10 @@ flowchart TD
 The weight of a feature depends on its occurrence in a given recipe and its frequency throughout the catalogue. For the smoothed form of IDF:
 
 $$
-\operatorname{tfidf}(t,d)=\operatorname{tf}(t,d)\left(\ln\frac{1+N}{1+\operatorname{df}(t)}+1\right)
+\mathrm{tfidf}(t,d)=\mathrm{tf}(t,d)\left(\ln\frac{1+N}{1+\mathrm{df}(t)}+1\right)
 $$
 
-Where $t$ is a textual feature, $d$ is a recipe, $N$ is the number of recipes, and $\operatorname{df}(t)$ is the number of recipes containing the feature. The weights are normalised so that non-zero vectors have an L2 norm of 1. Features characteristic of a dish are more significant than words occurring in most recipes.
+Where $t$ is a textual feature, $d$ is a recipe, $N$ is the number of recipes, and $\mathrm{df}(t)$ is the number of recipes containing the feature. The weights are normalised so that non-zero vectors have an L2 norm of 1. Features characteristic of a dish are more significant than words occurring in most recipes.
 
 ### User profile and ranking
 
