@@ -66,7 +66,7 @@ Recommendations are returned in JSON format and displayed through the web applic
 
 ## Documentation
 
-Full documentation in Polish: `docs/dokumentacja.md`. Technical abstract: `docs/abstract_en.md`.
+Full documentation in Polish: `docs/dokumentacja.md`. Technical abstract: `docs/dokumentacja_en.md`.
 
 - [Backend API and System Architecture](ZjemTo-API/README.md)
 - [Data Processing](data-in-DB/README.md)
