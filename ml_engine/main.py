@@ -8,6 +8,7 @@ from sklearn.preprocessing import normalize
 import logging
 import time
 from pathlib import Path
+from typing import Literal
 
 ml_state = {}
 
@@ -73,11 +74,15 @@ async def lifespan(app: FastAPI):
 app = FastAPI(title="ZjemTo ML Engine", lifespan=lifespan)
 
 
+
 class RecommendRequest(BaseModel):
     user_vector: dict[str, float]
     swiped_ids: list[int] = []
     excluded_recipe_ids: list[int] = []
     limit: int = 10
+
+    status: Literal["feed", "fridge"] = "feed"
+    whitelist_recipe_ids: list[int] | None = None
 
 class RecommendedRecipe(BaseModel):
     recipe_id: int
@@ -90,8 +95,15 @@ class RecommendResponse(BaseModel):
 
 
 @app.post("/api/recommend", response_model=RecommendResponse)
-async def recommend(req: RecommendRequest):
-    if not req.user_vector:
+def recommend(req: RecommendRequest):
+
+    if req.status == "fridge" and req.whitelist_recipe_ids is None:
+        raise HTTPException(
+            status_code=400,
+            detail="whitelist_recipe_ids is required in fridge mode"
+        )
+
+    if not req.user_vector or req.limit <= 0:
         return RecommendResponse(
             recommended_recipe_ids=[],
             recommended_recipes=[]
@@ -101,21 +113,38 @@ async def recommend(req: RecommendRequest):
     n_recipes = ml_state["n_recipes"]
     expected_dim = ml_state["n_features"]
 
+    # Tworzenie wektora użytkownika
     user_vec = np.zeros(expected_dim, dtype=np.float32)
 
     for k, v in req.user_vector.items():
-        idx = int(k)
-        if 0 <= idx < expected_dim:
-            user_vec[idx] = float(v)
-        else:
+
+        try:
+            idx = int(k)
+            value = float(v)
+        except (ValueError, TypeError):
             raise HTTPException(
                 status_code=400,
-                detail=f"Index {idx} is out of bounds for matrix dimension ({expected_dim})",
+                detail=f"Invalid feature: {k}={v}"
             )
 
+        if not 0 <= idx < expected_dim:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Invalid feature index: {idx}"
+            )
+
+        if not np.isfinite(value):
+            raise HTTPException(
+                status_code=400,
+                detail=f"Invalid feature value: {value}"
+            )
+
+        user_vec[idx] = value
+
+    # Normalizacja wektora użytkownika
     user_norm = np.linalg.norm(user_vec)
 
-    if user_norm == 0:
+    if user_norm == 0 or not np.isfinite(user_norm):
         return RecommendResponse(
             recommended_recipe_ids=[],
             recommended_recipes=[]
@@ -123,45 +152,81 @@ async def recommend(req: RecommendRequest):
 
     user_vec /= user_norm
 
+    # Identyfikatory wykluczonych przepisów
     banned_ids = set(req.swiped_ids) | set(req.excluded_recipe_ids)
-    n_candidates = min(n_recipes, req.limit + len(banned_ids) + 50)
 
-    scores = np.asarray(
-        X_tfidf @ user_vec
-    ).ravel()
+    # Wybór przepisów w zależności od trybu
+    if req.status == "fridge":
 
-    partition_idx = n_recipes - n_candidates
+        candidate_ids = np.array(
+            sorted(
+                recipe_id
+                for recipe_id in set(req.whitelist_recipe_ids)
+                if 0 <= recipe_id < n_recipes
+                and recipe_id not in banned_ids
+            ),
+            dtype=np.int64
+        )
+
+        # Obliczanie podobieństwa tylko dla dozwolonych przepisów
+        scores = np.asarray(
+            X_tfidf[candidate_ids] @ user_vec
+        ).ravel()
+
+    else:
+
+        # Obliczanie podobieństwa dla całego katalogu
+        scores = np.asarray(
+            X_tfidf @ user_vec
+        ).ravel()
+
+        candidate_ids = np.arange(n_recipes, dtype=np.int64)
+
+        # Usuwanie wykluczonych przepisów
+        valid_mask = np.ones(n_recipes, dtype=bool)
+
+        for recipe_id in banned_ids:
+            if 0 <= recipe_id < n_recipes:
+                valid_mask[recipe_id] = False
+
+        candidate_ids = candidate_ids[valid_mask]
+        scores = scores[valid_mask]
+
+    # Brak dostępnych przepisów
+    if len(candidate_ids) == 0:
+        return RecommendResponse(
+            recommended_recipe_ids=[],
+            recommended_recipes=[]
+        )
+
+    # Wybór najlepszych kandydatów
+    k = min(req.limit, len(candidate_ids))
+
+    partition_idx = len(scores) - k
 
     top_indices = np.argpartition(
         scores,
         partition_idx
     )[partition_idx:]
 
+    # Sortowanie według podobieństwa kosinusowego
     top_indices = top_indices[
         np.argsort(scores[top_indices])[::-1]
     ]
 
+    # Przygotowanie odpowiedzi
     recommended_recipes = []
 
     for idx in top_indices:
-        recipe_id = int(idx)
-
-        if recipe_id in banned_ids:
-            continue
-
-        similarity = float(
-            np.clip(scores[idx], -1.0, 1.0)
-        )
 
         recommended_recipes.append(
             RecommendedRecipe(
-                recipe_id=recipe_id,
-                cosine_similarity=similarity
+                recipe_id=int(candidate_ids[idx]),
+                cosine_similarity=float(
+                    np.clip(scores[idx], -1.0, 1.0)
+                )
             )
         )
-
-        if len(recommended_recipes) >= req.limit:
-            break
 
     return RecommendResponse(
         recommended_recipe_ids=[
@@ -170,7 +235,6 @@ async def recommend(req: RecommendRequest):
         ],
         recommended_recipes=recommended_recipes
     )
-
 
 @app.middleware("http")
 async def log_recommend_response(request: Request, call_next):
