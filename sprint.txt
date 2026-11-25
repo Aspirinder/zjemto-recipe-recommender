@@ -77,3 +77,28 @@ oraz uzupełnię dokumentację techniczną i opis metodologii ewaluacji systemu 
 Blokuje nas: nic
 
 Zobowiązanie zespołu na następne zajęcia: Wdrożenie i przetestowanie mechanizmu dopasowywania przepisów do zawartości lodówki użytkownika, uzupełnienie dokumentacji projektu oraz poprawa błędów wykrytych podczas testów integracyjnych przed code freeze 26.11.
+
+
+
+=== Sprint 19.11 ===
+
+Anton Talmachou
+
+Zrobiłem: Zaimplementowałem kompletny mechanizm Smart Fridge, umożliwiający dopasowywanie przepisów do produktów dostępnych w lodówce użytkownika.
+Przeprowadziłem normalizację składników, redukując 1056 grup do 574 standardowych grup produktów. 
+Przygotowałem słowniki aliasów oraz parser obsługujący alternatywne, złożone i opcjonalne składniki.
+
+Przeprowadziłem fine-tuning modelu MiniLM do klasyfikacji nazw składników w ramach 452 klas. Ulepszyłem proces treningu, zwiększając 
+Accuracy z 90,85% do 95,79%, a Macro F1 z 37,24% do 53,11%. Połączyłem klasyfikator z mechanizmem normalizacji danych, 
+przetwarzając 522 207 przepisów i generując 4 878 297 rekordów wymagań składnikowych.
+
+Zoptymalizowałem strukturę bazy PostgreSQL, wykorzystując widoki zmaterializowane oraz indeksy złożone, 
+eliminując konieczność wielokrotnego przetwarzania danych JSONB podczas zapytań. W przeprowadzonym teście zapytanie 
+dopasowujące przepisy do 17 produktów, z uwzględnieniem alergii użytkownika, trwało około 0,83 s.
+
+Zintegrowałem Smart Fridge z głównym API oraz silnikiem ML, umożliwiając wyszukiwanie przepisów z maksymalnie dwoma 
+brakującymi wymaganiami składnikowymi i ich sortowanie według indywidualnych preferencji użytkownika. 
+Przeprowadziłem refaktoryzację skryptów przetwarzania danych, treningu i predykcji modelu, uporządkowałem strukturę repozytorium 
+oraz uzupełniłem dokumentację techniczną API, przetwarzania danych i dokumentację końcową projektu w języku polskim i angielskim.
+
+Blokuje nas: nic
