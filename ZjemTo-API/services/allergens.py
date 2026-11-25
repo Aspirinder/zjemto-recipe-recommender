@@ -2,6 +2,7 @@
 import os
 import json
 import redis
+import time
 
 
 # Redis Cloud connection settings
@@ -44,9 +45,16 @@ def get_excluded_recipe_ids(cursor, allergies: list[str]) -> list[int]:
 
     if REDIS_AVAILABLE:
         try:
+            redis_start = time.perf_counter()
+
             cached_data = redis_client.get(cache_key)
+
+            print(f"[REDIS] GET: {time.perf_counter() - redis_start:.3f}s "f"| HIT={cached_data is not None}",flush=True)
             if cached_data:
-                return json.loads(cached_data)
+                parse_start = time.perf_counter()
+                result = json.loads(cached_data)
+                print(f"[REDIS] JSON decode: {time.perf_counter() - parse_start:.3f}s "f"| IDs={len(result)}",flush=True)
+                return result
         except Exception:
             pass
 

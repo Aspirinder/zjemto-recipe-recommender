@@ -1,0 +1,2081 @@
+alias,base_group_id,base_group_name,source
+acorn squash,783,acorn squash,old_group
+adobo sauce,992,adobo sauce,old_group
+agave nectar,2,agave nectar,old_group
+agave syrup,2,agave nectar,old_group
+alfredo sauce,4,alfredo sauce,old_group
+all-bran cereal,763,all-bran cereal,old_group
+allspice,6,allspice,old_group
+ground allspice,6,allspice,old_group
+almond,7,almond,old_group
+sliced almonds,7,almond,old_group
+slivered almonds,7,almond,old_group
+almond butter,8,almond butter,old_group
+almond extract,9,almond extract,old_group
+almond flavoring,9,almond extract,old_group
+almond flour,10,almond flour,old_group
+almond meal,10,almond flour,old_group
+almond milk,11,almond milk,old_group
+almond paste,929,almond paste,old_group
+amaretto,513,amaretto,old_group
+amaretto liqueur,513,amaretto,old_group
+anchovy fillets,925,anchovy fillets,old_group
+anchovy paste,908,anchovy paste,old_group
+anise extract,988,anise extract,old_group
+anise seed,832,anise seed,old_group
+apple,14,apple,old_group
+granny smith apple,14,apple,old_group
+apple butter,15,apple butter,old_group
+apple cider,514,apple cider,old_group
+apple cider vinegar,16,apple cider vinegar,old_group
+apple jelly,855,apple jelly,old_group
+apple juice,17,apple juice,old_group
+apple pie filling,837,apple pie filling,old_group
+apple pie spice,931,apple pie spice,old_group
+applesauce,18,applesauce,old_group
+apricot nectar,915,apricot nectar,old_group
+apricot preserves,515,apricot preserves,old_group
+apricot jam,515,apricot preserves,old_group
+arrowroot,993,arrowroot,old_group
+artichoke hearts,856,artichoke hearts,old_group
+marinated artichoke hearts,856,artichoke hearts,old_group
+arugula,19,arugula,old_group
+asafoetida,994,asafoetida,old_group
+asparagus,20,asparagus,old_group
+avocado,21,avocado,old_group
+baby spinach,22,baby spinach,old_group
+bacon,23,bacon,old_group
+bacon bits,23,bacon,old_group
+bacon fat,851,bacon fat,old_group
+baked beans,839,baked beans,old_group
+baking powder,25,baking powder,old_group
+baking soda,26,baking soda,old_group
+balsamic vinegar,27,balsamic vinegar,old_group
+white balsamic vinegar,27,balsamic vinegar,old_group
+banana,28,banana,old_group
+banana liqueur,930,banana liqueur,old_group
+barbecue sauce,29,barbecue sauce,old_group
+barley,30,barley,old_group
+pearl barley,30,barley,old_group
+basil,31,basil,old_group
+dried basil,31,basil,old_group
+fresh basil,31,basil,old_group
+bay leaf,33,bay leaf,old_group
+bay leaves,33,bay leaf,old_group
+bean sprouts,518,bean sprouts,old_group
+beef,35,beef,old_group
+beef brisket,35,beef,old_group
+beef roast,35,beef,old_group
+beef stew meat,35,beef,old_group
+chuck roast,35,beef,old_group
+flank steak,35,beef,old_group
+ground beef,35,beef,old_group
+ground chuck,35,beef,old_group
+ground round beef,35,beef,old_group
+ground sirloin,35,beef,old_group
+round steak,35,beef,old_group
+beef bouillon,519,beef bouillon,old_group
+beef broth,36,beef broth,old_group
+beef consomme,36,beef broth,old_group
+beef stock,36,beef broth,old_group
+beef gravy,927,beef gravy,old_group
+beer,38,beer,old_group
+dark beer,38,beer,old_group
+guinness stout,38,beer,old_group
+bell pepper,39,bell pepper,old_group
+green bell pepper,39,bell pepper,old_group
+orange bell peppers,39,bell pepper,old_group
+red bell pepper,39,bell pepper,old_group
+yellow bell peppers,39,bell pepper,old_group
+berries,984,berries,old_group
+biscuit mix,756,biscuit / baking mix,old_group
+baking mix,756,biscuit / baking mix,old_group
+bisquick,756,biscuit / baking mix,old_group
+biscuits,981,biscuits,old_group
+black beans,41,black beans,old_group
+black-eyed peas,997,black-eyed peas,old_group
+blackberry,44,blackberry,old_group
+blue curacao,858,blue curacao,old_group
+blueberry,46,blueberry,old_group
+blueberry pie filling,859,blueberry pie filling,old_group
+bourbon,48,bourbon,old_group
+bran flakes,860,bran flakes,old_group
+brandy,49,brandy,old_group
+cognac,49,brandy,old_group
+bread,50,bread,old_group
+baguette,50,bread,old_group
+french bread,50,bread,old_group
+hamburger buns,50,bread,old_group
+italian bread,50,bread,old_group
+rye bread,50,bread,old_group
+sourdough bread,50,bread,old_group
+toast,50,bread,old_group
+white bread,50,bread,old_group
+whole wheat bread,50,bread,old_group
+bread crumbs,51,bread crumbs,old_group
+breadcrumbs,51,bread crumbs,old_group
+dry breadcrumbs,51,bread crumbs,old_group
+fresh breadcrumbs,51,bread crumbs,old_group
+italian breadcrumbs,51,bread crumbs,old_group
+panko breadcrumbs,51,bread crumbs,old_group
+seasoned breadcrumbs,51,bread crumbs,old_group
+breadstick dough,985,breadstick dough,old_group
+broccoli,55,broccoli,old_group
+broccoli florets,55,broccoli,old_group
+frozen broccoli,55,broccoli,old_group
+brown gravy mix,999,brown gravy mix,old_group
+brown sugar,58,brown sugar,old_group
+dark brown sugar,58,brown sugar,old_group
+brownie mix,943,brownie mix,old_group
+brussels sprouts,779,brussels sprouts,old_group
+buckwheat flour,861,buckwheat flour,old_group
+bulgur,59,bulgur,old_group
+butter,60,butter,old_group
+clarified butter,60,butter,old_group
+light butter,60,butter,old_group
+butter flavor extract,983,butter flavor extract,old_group
+buttermilk,61,buttermilk,old_group
+fat-free buttermilk,61,buttermilk,old_group
+butternut squash,62,butternut squash,old_group
+butterscotch chips,521,butterscotch chips,old_group
+cabbage,63,cabbage,old_group
+green cabbage,63,cabbage,old_group
+red cabbage,63,cabbage,old_group
+cajun seasoning,64,cajun seasoning,old_group
+creole seasoning,64,cajun seasoning,old_group
+cake mix,522,cake mix,old_group
+chocolate cake mix,522,cake mix,old_group
+devil's food cake mix,522,cake mix,old_group
+german chocolate cake mix,522,cake mix,old_group
+spice cake mix,522,cake mix,old_group
+white cake mix,522,cake mix,old_group
+yellow cake mix,522,cake mix,old_group
+canned tomatoes,67,canned tomatoes,old_group
+crushed tomatoes,67,canned tomatoes,old_group
+diced tomatoes,67,canned tomatoes,old_group
+stewed tomatoes,67,canned tomatoes,old_group
+whole peeled tomatoes,67,canned tomatoes,old_group
+caper,523,caper,old_group
+caramel candies,799,caramel candies,old_group
+caramel ice cream topping,642,caramel ice cream topping,old_group
+caraway seed,70,caraway seed,old_group
+cardamom,71,cardamom,old_group
+cardamom pods,71,cardamom,old_group
+cardamom seed,71,cardamom,old_group
+ground cardamom,71,cardamom,old_group
+carrot,73,carrot,old_group
+cashews,74,cashews,old_group
+catfish,972,catfish,old_group
+cauliflower,76,cauliflower,old_group
+cauliflower florets,76,cauliflower,old_group
+celeriac,79,celeriac,old_group
+celery,80,celery,old_group
+celery ribs,80,celery,old_group
+celery salt,82,celery salt,old_group
+celery seed,83,celery seed,old_group
+chambord raspberry liqueur,1003,chambord raspberry liqueur,old_group
+champagne,862,champagne,old_group
+champagne vinegar,84,champagne vinegar,old_group
+cheddar cheese soup,643,cheddar cheese soup,old_group
+cheese,524,cheese,old_group
+american cheese,524,cheese,old_group
+blue cheese,524,cheese,old_group
+brie cheese,524,cheese,old_group
+cheddar cheese,524,cheese,old_group
+colby cheese,524,cheese,old_group
+fat-free cheddar cheese,524,cheese,old_group
+fat-free mozzarella cheese,524,cheese,old_group
+feta cheese,524,cheese,old_group
+goat cheese,524,cheese,old_group
+gorgonzola cheese,524,cheese,old_group
+gouda cheese,524,cheese,old_group
+gruyere cheese,524,cheese,old_group
+low-fat cheddar cheese,524,cheese,old_group
+low-fat mozzarella cheese,524,cheese,old_group
+mexican cheese blend,524,cheese,old_group
+mild cheddar cheese,524,cheese,old_group
+monterey jack cheese,524,cheese,old_group
+mozzarella cheese,524,cheese,old_group
+parmesan cheese,524,cheese,old_group
+parmigiano-reggiano cheese,524,cheese,old_group
+part-skim mozzarella cheese,524,cheese,old_group
+pepper jack cheese,524,cheese,old_group
+provolone cheese,524,cheese,old_group
+romano cheese,524,cheese,old_group
+sharp cheddar cheese,524,cheese,old_group
+swiss cheese,524,cheese,old_group
+velveeta cheese,524,cheese,old_group
+cheese tortellini,949,cheese tortellini,old_group
+cherry pie filling,525,cherry pie filling,old_group
+chia seeds,86,chia seeds,old_group
+chicken,87,chicken,old_group
+boneless chicken thighs,87,chicken,old_group
+chicken breast,87,chicken,old_group
+chicken breast fillets,87,chicken,old_group
+chicken breast halves,87,chicken,old_group
+chicken drumsticks,87,chicken,old_group
+chicken legs,87,chicken,old_group
+chicken thigh,87,chicken,old_group
+chicken thighs,87,chicken,old_group
+chicken wings,87,chicken,old_group
+ground chicken,87,chicken,old_group
+skinless chicken thighs,87,chicken,old_group
+chicken base,1004,chicken bouillon / base,old_group
+chicken bouillon,1004,chicken bouillon / base,old_group
+chicken broth,91,chicken broth,old_group
+chicken stock,91,chicken broth,old_group
+fat-free chicken broth,91,chicken broth,old_group
+chicken liver,956,chicken liver,old_group
+chickpeas,97,chickpeas,old_group
+chili beans,863,chili beans,old_group
+chili garlic paste,698,chili garlic paste,old_group
+chili garlic sauce,698,chili garlic paste,old_group
+chili oil,1005,chili oil,old_group
+chili paste,700,chili paste,old_group
+chili pepper,98,chili pepper,old_group
+chipotle chilies,98,chili pepper,old_group
+chipotle peppers,98,chili pepper,old_group
+green chili peppers,98,chili pepper,old_group
+green chilies,98,chili pepper,old_group
+habanero peppers,98,chili pepper,old_group
+jalapeno pepper,98,chili pepper,old_group
+jalapeno peppers,98,chili pepper,old_group
+poblano peppers,98,chili pepper,old_group
+red chili peppers,98,chili pepper,old_group
+serrano peppers,98,chili pepper,old_group
+chili sauce,100,chili sauce,old_group
+chili seasoning mix,918,chili seasoning mix,old_group
+chipotle chiles in adobo,926,chipotle chiles in adobo,old_group
+chives,527,chives,old_group
+dried chives,527,chives,old_group
+chocolate,1006,chocolate,old_group
+baking chocolate,1006,chocolate,old_group
+bittersweet chocolate,1006,chocolate,old_group
+dark chocolate,1006,chocolate,old_group
+milk chocolate,1006,chocolate,old_group
+semisweet chocolate,1006,chocolate,old_group
+unsweetened chocolate,1006,chocolate,old_group
+white chocolate,1006,chocolate,old_group
+chocolate chips,103,chocolate chips,old_group
+bittersweet chocolate chips,103,chocolate chips,old_group
+dark chocolate chips,103,chocolate chips,old_group
+milk chocolate chips,103,chocolate chips,old_group
+semi-sweet chocolate chips,103,chocolate chips,old_group
+unsweetened chocolate chips,103,chocolate chips,old_group
+white chocolate chips,103,chocolate chips,old_group
+chocolate ice cream,104,chocolate ice cream,old_group
+chocolate syrup,528,chocolate syrup,old_group
+chocolate wafer crumbs,959,chocolate wafer crumbs,old_group
+chow mein noodles,810,chow mein noodles,old_group
+cilantro,105,cilantro,old_group
+dried cilantro,105,cilantro,old_group
+cinnamon,106,cinnamon,old_group
+cinnamon stick,106,cinnamon,old_group
+cinnamon baking chips,986,cinnamon baking chips,old_group
+cinnamon sugar,840,cinnamon sugar,old_group
+clam juice,645,clam juice,old_group
+clams,107,clams,old_group
+clove,108,clove,old_group
+ground clove,108,clove,old_group
+ground cloves,108,clove,old_group
+whole cloves,108,clove,old_group
+club soda,619,club soda,old_group
+coca-cola,864,coca-cola,old_group
+cocoa powder,111,cocoa powder,old_group
+cocoa,111,cocoa powder,old_group
+dark cocoa powder,111,cocoa powder,old_group
+dutch-process cocoa powder,111,cocoa powder,old_group
+unsweetened cocoa,111,cocoa powder,old_group
+unsweetened cocoa powder,111,cocoa powder,old_group
+coconut,112,coconut,old_group
+desiccated coconut,112,coconut,old_group
+flaked coconut,112,coconut,old_group
+shredded coconut,112,coconut,old_group
+sweetened coconut,112,coconut,old_group
+unsweetened coconut,112,coconut,old_group
+coconut cream,620,coconut cream,old_group
+coconut extract,621,coconut extract,old_group
+coconut flour,865,coconut flour,old_group
+coconut milk,113,coconut milk,old_group
+unsweetened coconut milk,113,coconut milk,old_group
+coconut oil,114,coconut oil,old_group
+coconut rum,924,coconut rum,old_group
+cod,115,cod,old_group
+coffee,866,coffee,old_group
+coleslaw mix,867,coleslaw mix,old_group
+condensed french onion soup,701,condensed french onion soup,old_group
+condensed golden mushroom soup,1009,condensed golden mushroom soup,old_group
+condensed milk,117,condensed milk,old_group
+sweetened condensed milk,117,condensed milk,old_group
+confectioners' sugar,118,confectioners' sugar,old_group
+cooked chicken,689,cooked chicken,old_group
+cooked ham,690,cooked ham,old_group
+cooked rice,119,cooked rice,old_group
+cooked shrimp,120,cooked shrimp,old_group
+oil,307,cooking oil,old_group
+canola oil,307,cooking oil,old_group
+cooking oil,307,cooking oil,old_group
+corn oil,307,cooking oil,old_group
+grapeseed oil,307,cooking oil,old_group
+olive oil,307,cooking oil,old_group
+safflower oil,307,cooking oil,old_group
+salad oil,307,cooking oil,old_group
+sunflower oil,307,cooking oil,old_group
+vegetable oil,307,cooking oil,old_group
+cooking spray,122,cooking spray,old_group
+butter-flavored cooking spray,122,cooking spray,old_group
+nonstick cooking spray,122,cooking spray,old_group
+olive oil cooking spray,122,cooking spray,old_group
+cooking wine,123,cooking wine,old_group
+cool whip,124,cool whip,old_group
+whipped topping,124,cool whip,old_group
+coriander,125,coriander,old_group
+coriander seed,125,coriander,old_group
+ground coriander,125,coriander,old_group
+corn,127,corn,old_group
+canned corn,127,corn,old_group
+corn kernels,127,corn,old_group
+corn on the cob,127,corn,old_group
+fresh corn,127,corn,old_group
+frozen corn,127,corn,old_group
+corn flakes,622,corn flakes,old_group
+corn flour,128,corn flour,old_group
+corn muffin mix,820,corn muffin mix,old_group
+jiffy corn muffin mix,820,corn muffin mix,old_group
+corn syrup,130,corn syrup,old_group
+dark corn syrup,130,corn syrup,old_group
+light corn syrup,130,corn syrup,old_group
+white corn syrup,130,corn syrup,old_group
+corn tortillas,131,corn tortillas,old_group
+cornflour,531,cornflour,old_group
+cornmeal,132,cornmeal,old_group
+white cornmeal,132,cornmeal,old_group
+yellow cornmeal,132,cornmeal,old_group
+cornstarch,133,cornstarch,old_group
+cottage cheese,134,cottage cheese,old_group
+fat-free cottage cheese,134,cottage cheese,old_group
+couscous,135,couscous,old_group
+crab meat,136,crab meat,old_group
+crabmeat,136,crab meat,old_group
+cracker crumbs,774,cracker crumbs,old_group
+cranberry,533,cranberry,old_group
+cranberry juice,534,cranberry juice,old_group
+cranberry juice cocktail,534,cranberry juice,old_group
+cranberry sauce,623,cranberry sauce,old_group
+jellied cranberry sauce,623,cranberry sauce,old_group
+cream,137,cream,old_group
+double cream,137,cream,old_group
+heavy cream,137,cream,old_group
+heavy whipping cream,137,cream,old_group
+light cream,137,cream,old_group
+thickened cream,137,cream,old_group
+whipping cream,137,cream,old_group
+cream cheese,138,cream cheese,old_group
+fat-free cream cheese,138,cream cheese,old_group
+low-fat cream cheese,138,cream cheese,old_group
+whipped cream cheese,138,cream cheese,old_group
+cream of broccoli soup,139,cream of broccoli soup,old_group
+cream of celery soup,140,cream of celery soup,old_group
+cream of chicken soup,141,cream of chicken soup,old_group
+cream of coconut,833,cream of coconut,old_group
+cream of mushroom soup,142,cream of mushroom soup,old_group
+cream of tartar,143,cream of tartar,old_group
+creamed corn,535,creamed corn,old_group
+creme de cacao,912,creme de cacao,old_group
+white creme de cacao,912,creme de cacao,old_group
+creme fraiche,536,creme fraiche,old_group
+crescent rolls,538,crescent rolls,old_group
+cucumber,146,cucumber,old_group
+cumin,147,cumin,old_group
+cumin seed,147,cumin,old_group
+ground cumin,147,cumin,old_group
+currant,624,currant,old_group
+curry leaves,1011,curry leaves,old_group
+curry powder,149,curry powder,old_group
+custard powder,952,custard powder,old_group
+dates,155,dates,old_group
+diced potatoes with onion,902,diced potatoes with onion,old_group
+dill,157,dill,old_group
+dill weed,157,dill,old_group
+dried dill,157,dill,old_group
+dill seed,870,dill seed,old_group
+dried apricots,159,dried apricots,old_group
+dried beef,871,dried beef,old_group
+dried blueberries,958,dried blueberries,old_group
+dried cherry,625,dried cherry,old_group
+dried cranberries,872,dried cranberries,old_group
+dried cranberry,872,dried cranberries,old_group
+sweetened dried cranberries,872,dried cranberries,old_group
+dried currants,923,dried currants,old_group
+dried fruit,964,dried fruit,old_group
+dried minced onion,767,dried onion,old_group
+onion flakes,767,dried onion,old_group
+dried porcini mushrooms,1018,dried porcini mushrooms,old_group
+dried red chilies,704,dried red chilies,old_group
+dry buttermilk,971,dry buttermilk,old_group
+dry mustard,167,dry mustard,old_group
+ground mustard,167,dry mustard,old_group
+mustard powder,167,dry mustard,old_group
+dry vermouth,170,dry vermouth,old_group
+egg,172,egg,old_group
+egg noodles,173,egg noodles,old_group
+egg substitute,544,egg substitute,old_group
+egg whites,174,egg whites,old_group
+egg yolks,175,egg yolks,old_group
+eggnog,771,eggnog,old_group
+eggplant,176,eggplant,old_group
+evaporated milk,179,evaporated milk,old_group
+evaporated skim milk,179,evaporated milk,old_group
+fennel seed,180,fennel seed,old_group
+ground fennel,180,fennel seed,old_group
+fenugreek seeds,1020,fenugreek seeds,old_group
+fish sauce,183,fish sauce,old_group
+fish stock,1021,fish stock,old_group
+five spice powder,626,five spice powder,old_group
+flax seeds,185,flax seeds,old_group
+flaxseed,185,flax seeds,old_group
+flaxseed meal,653,flaxseed meal,old_group
+flounder,987,flounder,old_group
+food coloring,766,food coloring,old_group
+green food coloring,766,food coloring,old_group
+red food coloring,766,food coloring,old_group
+yellow food coloring,766,food coloring,old_group
+french dressing,928,french dressing,old_group
+french onion soup,710,french onion soup,old_group
+fried onions,654,fried onions,old_group
+frozen hash browns,772,frozen hash browns,old_group
+refrigerated shredded hash browns,772,frozen hash browns,old_group
+frozen lemonade concentrate,932,frozen lemonade concentrate,old_group
+frozen orange juice concentrate,655,frozen orange juice concentrate,old_group
+frozen yogurt,198,frozen yogurt,old_group
+galliano,970,galliano,old_group
+garam masala,199,garam masala,old_group
+garlic,200,garlic,old_group
+garlic paste,201,garlic paste,old_group
+garlic powder,202,garlic powder,old_group
+garlic granules,202,garlic powder,old_group
+garlic salt,203,garlic salt,old_group
+gelatin,204,gelatin,old_group
+plain gelatin,204,gelatin,old_group
+unflavored gelatin,204,gelatin,old_group
+ghee,205,ghee,old_group
+gin,627,gin,old_group
+ginger,206,ginger,old_group
+fresh ginger,206,ginger,old_group
+ginger ale,547,ginger ale,old_group
+ginger paste,656,ginger paste,old_group
+ginger-garlic paste,1023,ginger-garlic paste,old_group
+gluten-free flour,948,gluten-free flour,old_group
+golden syrup,549,golden syrup,old_group
+graham cracker crumbs,209,graham cracker crumbs,old_group
+graham cracker crust,210,graham cracker crust,old_group
+graham crackers,801,graham crackers,old_group
+granola cereal,823,granola cereal,old_group
+grape,211,grape,old_group
+grape jelly,816,grape jelly,old_group
+grape juice,973,grape juice,old_group
+grape-nuts cereal,874,grape-nuts cereal,old_group
+grapefruit juice,850,grapefruit juice,old_group
+green bean,551,green bean,old_group
+green curry paste,712,green curry paste,old_group
+green enchilada sauce,1025,green enchilada sauce,old_group
+enchilada sauce,1025,green enchilada sauce,old_group
+green onion,220,green onion,old_group
+grenadine,553,grenadine,old_group
+chili powder,99,ground chili pepper / chili powder,old_group
+ancho chili powder,99,ground chili pepper / chili powder,old_group
+cayenne pepper,99,ground chili pepper / chili powder,old_group
+chipotle powder,99,ground chili pepper / chili powder,old_group
+ground red pepper,99,ground chili pepper / chili powder,old_group
+red chili powder,99,ground chili pepper / chili powder,old_group
+ground ginger,229,ground ginger,old_group
+ground lamb,628,ground lamb,old_group
+ground veal,875,ground veal,old_group
+guacamole,659,guacamole,old_group
+half-and-half,236,half-and-half,old_group
+fat-free half-and-half,236,half-and-half,old_group
+ham,237,ham,old_group
+ham steak,237,ham,old_group
+smoked ham,237,ham,old_group
+ham hock,238,ham hock,old_group
+hard-boiled egg,558,hard-boiled egg,old_group
+hazelnuts,240,hazelnuts,old_group
+herbes de provence,660,herbes de provence,old_group
+hoisin sauce,243,hoisin sauce,old_group
+honey,244,honey,old_group
+honey mustard,245,honey mustard,old_group
+horseradish,559,horseradish,old_group
+prepared horseradish,559,horseradish,old_group
+hot dogs,818,hot dogs,old_group
+hot sauce,246,hot sauce,old_group
+frank's redhot sauce,246,hot sauce,old_group
+hot pepper sauce,246,hot sauce,old_group
+sriracha sauce,246,hot sauce,old_group
+tabasco sauce,246,hot sauce,old_group
+ice,247,ice,old_group
+ice cube,247,ice,old_group
+ice cubes,247,ice,old_group
+instant coffee,561,instant coffee,old_group
+instant espresso powder,662,instant espresso powder,old_group
+instant mashed potatoes,962,instant mashed potatoes,old_group
+instant potato flakes,805,instant potato flakes,old_group
+irish cream,877,irish cream,old_group
+baileys irish cream,877,irish cream,old_group
+italian dressing,563,italian dressing,old_group
+fat-free italian dressing,563,italian dressing,old_group
+light italian dressing,563,italian dressing,old_group
+low-fat italian dressing,563,italian dressing,old_group
+italian dressing mix,718,italian dressing mix,old_group
+italian seasoning,252,italian seasoning,old_group
+jam,967,jam,old_group
+jelly,990,jelly,old_group
+kahlua,564,kahlua,old_group
+coffee liqueur,564,kahlua,old_group
+kale,256,kale,old_group
+ketchup,257,ketchup,old_group
+kidney beans,259,kidney beans,old_group
+dark red kidney beans,259,kidney beans,old_group
+kidney bean,259,kidney beans,old_group
+red kidney beans,259,kidney beans,old_group
+lard,260,lard,old_group
+leek,263,leek,old_group
+lemon,264,lemon,old_group
+lemon curd,880,lemon curd,old_group
+lemon extract,265,lemon extract,old_group
+lemon gelatin,917,lemon gelatin,old_group
+lemon juice,266,lemon juice,old_group
+lemon pepper,565,lemon pepper,old_group
+lemon zest,267,lemon zest,old_group
+grated lemon zest,267,lemon zest,old_group
+lemon-lime soda,909,lemon-lime soda,old_group
+lemonade,919,lemonade,old_group
+lemongrass,1029,lemongrass,old_group
+lentils,268,lentils,old_group
+red lentils,268,lentils,old_group
+lettuce,269,lettuce,old_group
+green leaf lettuce,269,lettuce,old_group
+iceberg lettuce,269,lettuce,old_group
+red leaf lettuce,269,lettuce,old_group
+romaine lettuce,269,lettuce,old_group
+lime,273,lime,old_group
+lime juice,274,lime juice,old_group
+key lime juice,274,lime juice,old_group
+lime zest,275,lime zest,old_group
+grated lime zest,275,lime zest,old_group
+liquid smoke,277,liquid smoke,old_group
+m&m's chocolate candies,846,m&m's chocolate candies,old_group
+macadamia nuts,881,macadamia nuts,old_group
+mace,631,mace,old_group
+madeira wine,1031,madeira wine,old_group
+malt vinegar,280,malt vinegar,old_group
+mango chutney,905,mango chutney,old_group
+maple extract,813,maple extract,old_group
+maple flavoring,813,maple extract,old_group
+maple syrup,281,maple syrup,old_group
+pure maple syrup,281,maple syrup,old_group
+maraschino cherry,664,maraschino cherry,old_group
+margarine,282,margarine,old_group
+light margarine,282,margarine,old_group
+salted margarine,282,margarine,old_group
+unsalted margarine,282,margarine,old_group
+marjoram,568,marjoram,old_group
+marsala wine,665,marsala wine,old_group
+marshmallow,569,marshmallow,old_group
+marshmallow creme,666,marshmallow creme,old_group
+mascarpone,284,mascarpone,old_group
+mashed potato,570,mashed potato,old_group
+prepared mashed potatoes,570,mashed potato,old_group
+matzo meal,802,matzo meal,old_group
+mayonnaise,285,mayonnaise,old_group
+reduced-fat mayonnaise,285,mayonnaise,old_group
+midori melon liqueur,921,midori melon liqueur,old_group
+milk,287,milk,old_group
+low-fat milk,287,milk,old_group
+nonfat milk,287,milk,old_group
+skim milk,287,milk,old_group
+mincemeat,965,mincemeat,old_group
+mint,290,mint,old_group
+dried mint,290,mint,old_group
+mint extract,954,mint extract,old_group
+peppermint extract,954,mint extract,old_group
+miracle whip,571,miracle whip,old_group
+mirin,572,mirin,old_group
+miso,1034,miso,old_group
+mixed herbs,1035,mixed herbs,old_group
+dried mixed herbs,1035,mixed herbs,old_group
+mixed salad greens,1036,mixed salad greens,old_group
+mixed spice,667,mixed spice,old_group
+mixed vegetables,574,mixed vegetables,old_group
+molasses,291,molasses,old_group
+dark molasses,291,molasses,old_group
+light molasses,291,molasses,old_group
+monosodium glutamate,1037,monosodium glutamate,old_group
+msg seasoning,1037,monosodium glutamate,old_group
+mushroom,294,mushroom,old_group
+mussels,295,mussels,old_group
+mustard,296,mustard,old_group
+dijon mustard,296,mustard,old_group
+prepared mustard,296,mustard,old_group
+spicy brown mustard,296,mustard,old_group
+whole grain mustard,296,mustard,old_group
+yellow mustard,296,mustard,old_group
+mustard seeds,298,mustard seeds,old_group
+black mustard seeds,298,mustard seeds,old_group
+natural bran,882,natural bran,old_group
+nutella,770,nutella,old_group
+nutmeg,303,nutmeg,old_group
+nutritional yeast,632,nutritional yeast,old_group
+nuts,901,nuts (mixed or unspecified),old_group
+mixed nuts,901,nuts (mixed or unspecified),old_group
+oat bran,575,oat bran,old_group
+oat flour,883,oat flour,old_group
+oat milk,304,oat milk,old_group
+oats,306,oats,old_group
+oatmeal,306,oats,old_group
+old fashioned oats,306,oats,old_group
+quick oats,306,oats,old_group
+quick-cooking oats,306,oats,old_group
+rolled oats,306,oats,old_group
+steel cut oats,306,oats,old_group
+old bay seasoning,308,old bay seasoning,old_group
+olive,310,olive,old_group
+onion,312,onion,old_group
+red onion,312,onion,old_group
+sweet onion,312,onion,old_group
+sweet onions,312,onion,old_group
+onion mushroom soup mix,733,onion mushroom soup mix,old_group
+onion powder,313,onion powder,old_group
+onion salt,577,onion salt,old_group
+onion soup mix,314,onion soup mix,old_group
+orange,315,orange,old_group
+mandarin orange,315,orange,old_group
+orange extract,317,orange extract,old_group
+orange juice,318,orange juice,old_group
+orange juice concentrate,822,orange juice concentrate,old_group
+orange liqueur,1038,orange liqueur,old_group
+cointreau,1038,orange liqueur,old_group
+grand marnier,1038,orange liqueur,old_group
+triple sec,1038,orange liqueur,old_group
+orange marmalade,578,orange marmalade,old_group
+orange zest,319,orange zest,old_group
+oregano,320,oregano,old_group
+dried oregano,320,oregano,old_group
+fresh oregano,320,oregano,old_group
+mexican oregano,320,oregano,old_group
+oreo cookies,824,oreo cookies,old_group
+oyster sauce,322,oyster sauce,old_group
+pancake mix,782,pancake mix,old_group
+paprika,324,paprika,old_group
+hungarian paprika,324,paprika,old_group
+smoked paprika,324,paprika,old_group
+sweet paprika,324,paprika,old_group
+parsley,326,parsley,old_group
+dried parsley,326,parsley,old_group
+flat-leaf parsley,326,parsley,old_group
+parsley flakes,326,parsley,old_group
+pasta,327,pasta,old_group
+angel hair pasta,327,pasta,old_group
+elbow macaroni,327,pasta,old_group
+farfalle pasta,327,pasta,old_group
+fettuccine,327,pasta,old_group
+lasagna noodles,327,pasta,old_group
+linguine,327,pasta,old_group
+macaroni,327,pasta,old_group
+orzo,327,pasta,old_group
+penne,327,pasta,old_group
+rigatoni,327,pasta,old_group
+spaghetti,327,pasta,old_group
+pasta sauce,884,pasta sauce,old_group
+marinara sauce,884,pasta sauce,old_group
+spaghetti sauce,884,pasta sauce,old_group
+peach,328,peach,old_group
+peach preserves,935,peach preserves,old_group
+peach schnapps,838,peach schnapps,old_group
+peach yogurt,734,peach yogurt,old_group
+low-fat peach yogurt,734,peach yogurt,old_group
+peanut,329,peanut,old_group
+roasted peanuts,329,peanut,old_group
+salted peanuts,329,peanut,old_group
+unsalted peanuts,329,peanut,old_group
+peanut butter,330,peanut butter,old_group
+peanut butter chips,670,peanut butter chips,old_group
+peanut oil,331,peanut oil,old_group
+pear,332,pear,old_group
+peas,333,peas,old_group
+frozen peas,333,peas,old_group
+green peas,333,peas,old_group
+pecans,334,pecans,old_group
+pecan,334,pecans,old_group
+pectin,335,pectin,old_group
+liquid pectin,335,pectin,old_group
+pepper,336,pepper (peppercorn),old_group
+black pepper,336,pepper (peppercorn),old_group
+black peppercorns,336,pepper (peppercorn),old_group
+peppercorn,336,pepper (peppercorn),old_group
+white pepper,336,pepper (peppercorn),old_group
+white peppercorns,336,pepper (peppercorn),old_group
+whole peppercorns,336,pepper (peppercorn),old_group
+pepperoni,671,pepperoni,old_group
+persimmon pulp,991,persimmon pulp,old_group
+pesto,633,pesto,old_group
+phyllo dough,910,phyllo dough,old_group
+pickling spices,1041,pickling spices,old_group
+pie crust,806,pie crust,old_group
+unbaked pie shell,806,pie crust,old_group
+pie filling,585,pie filling,old_group
+pimiento,691,pimiento,old_group
+pine nuts,338,pine nuts,old_group
+pine nut,338,pine nuts,old_group
+pineapple,339,pineapple,old_group
+crushed pineapple,339,pineapple,old_group
+pineapple chunks,339,pineapple,old_group
+pineapple slices,339,pineapple,old_group
+unsweetened pineapple chunks,339,pineapple,old_group
+unsweetened pineapple slices,339,pineapple,old_group
+pineapple juice,340,pineapple juice,old_group
+unsweetened pineapple juice,340,pineapple juice,old_group
+pineapple preserves,978,pineapple preserves,old_group
+pinto beans,341,pinto beans,old_group
+pistachios,342,pistachios,old_group
+pizza dough,1042,pizza dough,old_group
+pizza sauce,343,pizza sauce,old_group
+yogurt,618,plain yogurt,old_group
+greek yogurt,618,plain yogurt,old_group
+low-fat yogurt,618,plain yogurt,old_group
+nonfat yogurt,618,plain yogurt,old_group
+plain greek yogurt,618,plain yogurt,old_group
+plain yogurt,618,plain yogurt,old_group
+plum,347,plum,old_group
+pomegranate juice,831,pomegranate juice,old_group
+popped popcorn,760,popped popcorn,old_group
+poppy seed,349,poppy seed,old_group
+pork,350,pork,old_group
+boneless pork chops,350,pork,old_group
+boneless pork loin,350,pork,old_group
+boneless pork roast,350,pork,old_group
+country-style pork ribs,350,pork,old_group
+ground pork,350,pork,old_group
+pork chops,350,pork,old_group
+pork loin,350,pork,old_group
+pork roast,350,pork,old_group
+pork shoulder,350,pork,old_group
+pork spare ribs,350,pork,old_group
+pork tenderloin,350,pork,old_group
+pork and beans,757,pork and beans,old_group
+port wine,634,port wine,old_group
+potato,355,potato,old_group
+new potatoes,355,potato,old_group
+red potatoes,355,potato,old_group
+yukon gold potatoes,355,potato,old_group
+potato starch,674,potato starch,old_group
+poultry seasoning,356,poultry seasoning,old_group
+powdered milk,587,powdered milk,old_group
+dry milk powder,587,powdered milk,old_group
+prosciutto,675,prosciutto,old_group
+pudding mix,589,pudding mix,old_group
+instant butterscotch pudding mix,589,pudding mix,old_group
+instant chocolate pudding mix,589,pudding mix,old_group
+instant pistachio pudding mix,589,pudding mix,old_group
+instant vanilla pudding,589,pudding mix,old_group
+sugar-free instant chocolate pudding mix,589,pudding mix,old_group
+sugar-free instant vanilla pudding mix,589,pudding mix,old_group
+puff pastry,676,puff pastry,old_group
+pumpkin,359,pumpkin,old_group
+pumpkin pie spice,360,pumpkin pie spice,old_group
+pumpkin puree,590,pumpkin puree,old_group
+pumpkin seeds,361,pumpkin seeds,old_group
+quick-cooking grits,960,quick-cooking grits,old_group
+quinoa,364,quinoa,old_group
+raisin,365,raisin,old_group
+golden raisin,365,raisin,old_group
+sultanas,365,raisin,old_group
+raisin bran cereal,989,raisin bran cereal,old_group
+ranch dressing,592,ranch dressing,old_group
+ranch dressing mix,635,ranch dressing mix,old_group
+raspberry,366,raspberry,old_group
+frozen raspberries,366,raspberry,old_group
+raspberry gelatin,951,raspberry gelatin,old_group
+raspberry jam,677,raspberry jam,old_group
+raspberry preserves,677,raspberry jam,old_group
+raspberry vinegar,845,raspberry vinegar,old_group
+red cinnamon candies,969,red cinnamon candies,old_group
+red currant jelly,914,red currant jelly,old_group
+red curry paste,679,red curry paste,old_group
+red pepper,372,red pepper,old_group
+red pepper flakes,373,red pepper flakes,old_group
+crushed red pepper flakes,373,red pepper flakes,old_group
+red wine,375,red wine,old_group
+burgundy wine,375,red wine,old_group
+dry red wine,375,red wine,old_group
+refried beans,377,refried beans,old_group
+refrigerated biscuits,780,refrigerated biscuits,old_group
+refrigerated buttermilk biscuits,773,refrigerated buttermilk biscuits,old_group
+rhubarb,789,rhubarb,old_group
+rice,378,rice,old_group
+arborio rice,378,rice,old_group
+basmati rice,378,rice,old_group
+brown rice,378,rice,old_group
+instant brown rice,378,rice,old_group
+instant rice,378,rice,old_group
+jasmine rice,378,rice,old_group
+long grain brown rice,378,rice,old_group
+long grain rice,378,rice,old_group
+long grain white rice,378,rice,old_group
+medium grain rice,378,rice,old_group
+short grain brown rice,378,rice,old_group
+short grain rice,378,rice,old_group
+uncooked brown rice,378,rice,old_group
+uncooked rice,378,rice,old_group
+white rice,378,rice,old_group
+wild rice,378,rice,old_group
+rice flour,379,rice flour,old_group
+brown rice flour,379,rice flour,old_group
+rice krispies,595,rice krispies,old_group
+crispy rice cereal,595,rice krispies,old_group
+rice noodles,380,rice noodles,old_group
+rice vinegar,381,rice vinegar,old_group
+rice wine vinegar,381,rice vinegar,old_group
+seasoned rice vinegar,381,rice vinegar,old_group
+ricotta cheese,384,ricotta cheese,old_group
+low-fat ricotta cheese,384,ricotta cheese,old_group
+roasted garlic,385,roasted garlic,old_group
+roasted red peppers,739,roasted red peppers,old_group
+rose water,680,rose water,old_group
+rosemary,389,rosemary,old_group
+dried rosemary,389,rosemary,old_group
+fresh rosemary,389,rosemary,old_group
+rotel tomatoes,819,rotel tomatoes,old_group
+diced tomatoes with green chilies,819,rotel tomatoes,old_group
+rum,390,rum,old_group
+dark rum,390,rum,old_group
+white rum,390,rum,old_group
+rum extract,681,rum extract,old_group
+rye flour,682,rye flour,old_group
+saffron,596,saffron,old_group
+sage,391,sage,old_group
+dried sage,391,sage,old_group
+sake,636,sake,old_group
+rice wine,636,sake,old_group
+salmon,393,salmon,old_group
+salmon fillet,393,salmon,old_group
+salsa,394,salsa,old_group
+chunky salsa,394,salsa,old_group
+green salsa,394,salsa,old_group
+picante sauce,394,salsa,old_group
+salt,395,salt,old_group
+coarse salt,395,salt,old_group
+kosher salt,395,salt,old_group
+pickling salt,395,salt,old_group
+sea salt,395,salt,old_group
+saltine crackers,798,saltine crackers,old_group
+sauerkraut,637,sauerkraut,old_group
+sausage,397,sausage,old_group
+breakfast sausage,397,sausage,old_group
+chorizo,397,sausage,old_group
+hot italian sausage,397,sausage,old_group
+italian sausage,397,sausage,old_group
+kielbasa,397,sausage,old_group
+mild italian sausage,397,sausage,old_group
+pork sausage,397,sausage,old_group
+smoked sausage,397,sausage,old_group
+sweet italian sausage,397,sausage,old_group
+savory herb,1047,savory herb,old_group
+sea scallops,841,sea scallops,old_group
+seasoned stuffing mix,946,seasoned stuffing mix,old_group
+seasoning salt,398,seasoning salt,old_group
+self-rising cornmeal,976,self-rising cornmeal,old_group
+self-rising flour,399,self-rising flour,old_group
+self-raising flour,399,self-rising flour,old_group
+semolina,401,semolina,old_group
+sesame oil,403,sesame oil,old_group
+sesame seeds,404,sesame seeds,old_group
+sesame seed,404,sesame seeds,old_group
+shallot,601,shallot,old_group
+sherry vinegar,406,sherry vinegar,old_group
+sherry wine,407,sherry wine,old_group
+cooking sherry,407,sherry wine,old_group
+dry sherry,407,sherry wine,old_group
+sweet sherry,407,sherry wine,old_group
+shortening,408,shortening,old_group
+butter-flavored shortening,408,shortening,old_group
+vegetable shortening,408,shortening,old_group
+shrimp,410,shrimp,old_group
+large shrimp,410,shrimp,old_group
+raw shrimp,410,shrimp,old_group
+simple syrup,684,simple syrup,old_group
+smoked salmon,1049,smoked salmon,old_group
+snow peas,685,snow peas,old_group
+sour cream,416,sour cream,old_group
+sour milk,768,sour milk,old_group
+sourdough starter,790,sourdough starter,old_group
+southern comfort,888,southern comfort,old_group
+soy flour,889,soy flour,old_group
+soy milk,417,soy milk,old_group
+soymilk,417,soy milk,old_group
+soy sauce,418,soy sauce,old_group
+dark soy sauce,418,soy sauce,old_group
+tamari,418,soy sauce,old_group
+spaghetti squash,975,spaghetti squash,old_group
+spelt flour,937,spelt flour,old_group
+spinach,423,spinach,old_group
+star anise,686,star anise,old_group
+steak sauce,849,steak sauce,old_group
+a.1. original sauce,849,steak sauce,old_group
+heinz 57 steak sauce,849,steak sauce,old_group
+stock,913,stock,old_group
+broth,913,stock,old_group
+strawberry,428,strawberry,old_group
+strawberry gelatin,892,strawberry gelatin,old_group
+strawberry jell-o gelatin dessert,892,strawberry gelatin,old_group
+strawberry jam,761,strawberry jam,old_group
+strawberry preserves,761,strawberry jam,old_group
+strawberry yogurt,745,strawberry yogurt,old_group
+low-fat strawberry yogurt,745,strawberry yogurt,old_group
+sugar,429,sugar,old_group
+caster sugar,429,sugar,old_group
+demerara sugar,429,sugar,old_group
+raw sugar,429,sugar,old_group
+superfine sugar,429,sugar,old_group
+turbinado sugar,429,sugar,old_group
+sugar substitute,894,sugar substitute,old_group
+artificial sweetener,894,sugar substitute,old_group
+splenda brown sugar blend,894,sugar substitute,old_group
+splenda sugar blend for baking,894,sugar substitute,old_group
+splenda sugar substitute,894,sugar substitute,old_group
+stevia,894,sugar substitute,old_group
+sun dried tomatoes,430,sun dried tomatoes,old_group
+sun-dried tomatoes,430,sun dried tomatoes,old_group
+sunflower seeds,433,sunflower seeds,old_group
+sweet chili sauce,748,sweet chili sauce,old_group
+sweet pickle relish,605,sweet pickle relish,old_group
+pickle relish,605,sweet pickle relish,old_group
+sweet potato,435,sweet potato,old_group
+syrup,955,syrup,old_group
+taco sauce,441,taco sauce,old_group
+taco seasoning,442,taco seasoning,old_group
+taco seasoning mix,442,taco seasoning,old_group
+tahini,607,tahini,old_group
+tamarind concentrate,1051,tamarind concentrate,old_group
+tamarind paste,1051,tamarind concentrate,old_group
+tapioca,444,tapioca,old_group
+quick-cooking tapioca,444,tapioca,old_group
+tapioca flour,895,tapioca flour,old_group
+tarragon,445,tarragon,old_group
+dried tarragon,445,tarragon,old_group
+tarragon vinegar,804,tarragon vinegar,old_group
+tater tots,953,tater tots,old_group
+tea,961,tea,old_group
+tempeh,446,tempeh,old_group
+tequila,447,tequila,old_group
+teriyaki sauce,448,teriyaki sauce,old_group
+thousand island dressing,1054,thousand island dressing,old_group
+thyme,449,thyme,old_group
+dried thyme,449,thyme,old_group
+fresh thyme,449,thyme,old_group
+ground thyme,449,thyme,old_group
+tilapia,450,tilapia,old_group
+toffee pieces,769,toffee pieces,old_group
+tofu,451,tofu,old_group
+extra firm tofu,451,tofu,old_group
+firm tofu,451,tofu,old_group
+silken tofu,451,tofu,old_group
+tomato,452,tomato,old_group
+tomato juice,453,tomato juice,old_group
+tomato passata,454,tomato passata,old_group
+tomato puree,454,tomato passata,old_group
+tomato paste,455,tomato paste,old_group
+tomato sauce,457,tomato sauce,old_group
+tomato soup,458,tomato soup,old_group
+tortilla chips,608,tortilla chips,old_group
+tuna,459,tuna,old_group
+turkey,461,turkey,old_group
+ground turkey,461,turkey,old_group
+turkey breast,461,turkey,old_group
+turmeric,463,turmeric,old_group
+fresh turmeric,463,turmeric,old_group
+ground turmeric,463,turmeric,old_group
+unsweetened applesauce,467,unsweetened applesauce,old_group
+v8 vegetable juice,933,v8 vegetable juice,old_group
+vanilla,472,vanilla,old_group
+vanilla bean,472,vanilla,old_group
+vanilla extract,474,vanilla extract,old_group
+vanilla flavoring,474,vanilla extract,old_group
+vanilla ice cream,475,vanilla ice cream,old_group
+vanilla sugar,811,vanilla sugar,old_group
+vanilla wafers,781,vanilla wafers,old_group
+vanilla yogurt,476,vanilla yogurt,old_group
+low-fat vanilla yogurt,476,vanilla yogurt,old_group
+nonfat vanilla yogurt,476,vanilla yogurt,old_group
+vegetable broth,477,vegetable broth,old_group
+vegetable stock,477,vegetable broth,old_group
+vegetable soup,479,vegetable soup,old_group
+vinegar,481,vinegar,old_group
+white vinegar,481,vinegar,old_group
+vital wheat gluten,898,vital wheat gluten,old_group
+vodka,482,vodka,old_group
+walnut,483,walnut,old_group
+walnuts,483,walnut,old_group
+walnut oil,916,walnut oil,old_group
+water,485,water,old_group
+water chestnuts,692,water chestnuts,old_group
+watercress,1055,watercress,old_group
+wheat bran,687,wheat bran,old_group
+flour,186,wheat flour,old_group
+all-purpose flour,186,wheat flour,old_group
+bread flour,186,wheat flour,old_group
+cake flour,186,wheat flour,old_group
+pastry flour,186,wheat flour,old_group
+wheat flour,186,wheat flour,old_group
+white whole wheat flour,186,wheat flour,old_group
+whole wheat flour,186,wheat flour,old_group
+whole wheat pastry flour,186,wheat flour,old_group
+wheat germ,487,wheat germ,old_group
+tortillas,907,wheat tortillas,old_group
+flour tortillas,907,wheat tortillas,old_group
+whole wheat tortillas,907,wheat tortillas,old_group
+whipped cream,488,whipped cream,old_group
+whiskey,899,whiskey,old_group
+white beans,491,white beans,old_group
+butter beans,491,white beans,old_group
+cannellini beans,491,white beans,old_group
+great northern beans,491,white beans,old_group
+navy beans,491,white beans,old_group
+white wine,498,white wine,old_group
+dry white wine,498,white wine,old_group
+wine vinegar,614,wine vinegar,old_group
+red wine vinegar,614,wine vinegar,old_group
+white wine vinegar,614,wine vinegar,old_group
+wonton wrappers,640,wonton wrappers,old_group
+egg roll wrappers,640,wonton wrappers,old_group
+worcestershire sauce,506,worcestershire sauce,old_group
+xanthan gum,615,xanthan gum,old_group
+yeast,507,yeast,old_group
+active dry yeast,507,yeast,old_group
+bread machine yeast,507,yeast,old_group
+instant yeast,507,yeast,old_group
+yellow squash,940,yellow squash,old_group
+zucchini,511,zucchini,old_group
+acorn squash,783,acorn squash,base_group
+adobo sauce,992,adobo sauce,base_group
+agave nectar,2,agave nectar,base_group
+alfredo sauce,4,alfredo sauce,base_group
+all-bran cereal,763,all-bran cereal,base_group
+allspice,6,allspice,base_group
+almond,7,almond,base_group
+almond butter,8,almond butter,base_group
+almond extract,9,almond extract,base_group
+almond flour,10,almond flour,base_group
+almond milk,11,almond milk,base_group
+almond paste,929,almond paste,base_group
+amaretto,513,amaretto,base_group
+anchovy fillets,925,anchovy fillets,base_group
+anchovy paste,908,anchovy paste,base_group
+anise extract,988,anise extract,base_group
+anise seed,832,anise seed,base_group
+apple,14,apple,base_group
+apple butter,15,apple butter,base_group
+apple cider,514,apple cider,base_group
+apple cider vinegar,16,apple cider vinegar,base_group
+apple jelly,855,apple jelly,base_group
+apple juice,17,apple juice,base_group
+apple pie filling,837,apple pie filling,base_group
+apple pie spice,931,apple pie spice,base_group
+applesauce,18,applesauce,base_group
+apricot nectar,915,apricot nectar,base_group
+apricot preserves,515,apricot preserves,base_group
+arrowroot,993,arrowroot,base_group
+artichoke hearts,856,artichoke hearts,base_group
+arugula,19,arugula,base_group
+asafoetida,994,asafoetida,base_group
+asparagus,20,asparagus,base_group
+avocado,21,avocado,base_group
+baby spinach,22,baby spinach,base_group
+bacon,23,bacon,base_group
+bacon fat,851,bacon fat,base_group
+baked beans,839,baked beans,base_group
+baking powder,25,baking powder,base_group
+baking soda,26,baking soda,base_group
+balsamic vinegar,27,balsamic vinegar,base_group
+banana,28,banana,base_group
+banana liqueur,930,banana liqueur,base_group
+barbecue sauce,29,barbecue sauce,base_group
+barley,30,barley,base_group
+basil,31,basil,base_group
+bay leaf,33,bay leaf,base_group
+bean sprouts,518,bean sprouts,base_group
+beef,35,beef,base_group
+beef bouillon,519,beef bouillon,base_group
+beef broth,36,beef broth,base_group
+beef gravy,927,beef gravy,base_group
+beer,38,beer,base_group
+bell pepper,39,bell pepper,base_group
+berries,984,berries,base_group
+biscuit / baking mix,756,biscuit / baking mix,base_group
+biscuits,981,biscuits,base_group
+black beans,41,black beans,base_group
+black-eyed peas,997,black-eyed peas,base_group
+blackberry,44,blackberry,base_group
+blue curacao,858,blue curacao,base_group
+blueberry,46,blueberry,base_group
+blueberry pie filling,859,blueberry pie filling,base_group
+bourbon,48,bourbon,base_group
+bran flakes,860,bran flakes,base_group
+brandy,49,brandy,base_group
+bread,50,bread,base_group
+bread crumbs,51,bread crumbs,base_group
+breadstick dough,985,breadstick dough,base_group
+broccoli,55,broccoli,base_group
+brown gravy mix,999,brown gravy mix,base_group
+brown sugar,58,brown sugar,base_group
+brownie mix,943,brownie mix,base_group
+brussels sprouts,779,brussels sprouts,base_group
+buckwheat flour,861,buckwheat flour,base_group
+bulgur,59,bulgur,base_group
+butter,60,butter,base_group
+butter flavor extract,983,butter flavor extract,base_group
+buttermilk,61,buttermilk,base_group
+butternut squash,62,butternut squash,base_group
+butterscotch chips,521,butterscotch chips,base_group
+cabbage,63,cabbage,base_group
+cajun seasoning,64,cajun seasoning,base_group
+cake mix,522,cake mix,base_group
+canned tomatoes,67,canned tomatoes,base_group
+caper,523,caper,base_group
+caramel candies,799,caramel candies,base_group
+caramel ice cream topping,642,caramel ice cream topping,base_group
+caraway seed,70,caraway seed,base_group
+cardamom,71,cardamom,base_group
+carrot,73,carrot,base_group
+cashews,74,cashews,base_group
+catfish,972,catfish,base_group
+cauliflower,76,cauliflower,base_group
+celeriac,79,celeriac,base_group
+celery,80,celery,base_group
+celery salt,82,celery salt,base_group
+celery seed,83,celery seed,base_group
+chambord raspberry liqueur,1003,chambord raspberry liqueur,base_group
+champagne,862,champagne,base_group
+champagne vinegar,84,champagne vinegar,base_group
+cheddar cheese soup,643,cheddar cheese soup,base_group
+cheese,524,cheese,base_group
+cheese tortellini,949,cheese tortellini,base_group
+cherry pie filling,525,cherry pie filling,base_group
+chia seeds,86,chia seeds,base_group
+chicken,87,chicken,base_group
+chicken bouillon / base,1004,chicken bouillon / base,base_group
+chicken broth,91,chicken broth,base_group
+chicken liver,956,chicken liver,base_group
+chickpeas,97,chickpeas,base_group
+chili beans,863,chili beans,base_group
+chili garlic paste,698,chili garlic paste,base_group
+chili oil,1005,chili oil,base_group
+chili paste,700,chili paste,base_group
+chili pepper,98,chili pepper,base_group
+chili sauce,100,chili sauce,base_group
+chili seasoning mix,918,chili seasoning mix,base_group
+chipotle chiles in adobo,926,chipotle chiles in adobo,base_group
+chives,527,chives,base_group
+chocolate,1006,chocolate,base_group
+chocolate chips,103,chocolate chips,base_group
+chocolate ice cream,104,chocolate ice cream,base_group
+chocolate syrup,528,chocolate syrup,base_group
+chocolate wafer crumbs,959,chocolate wafer crumbs,base_group
+chow mein noodles,810,chow mein noodles,base_group
+cilantro,105,cilantro,base_group
+cinnamon,106,cinnamon,base_group
+cinnamon baking chips,986,cinnamon baking chips,base_group
+cinnamon sugar,840,cinnamon sugar,base_group
+clam juice,645,clam juice,base_group
+clams,107,clams,base_group
+clove,108,clove,base_group
+club soda,619,club soda,base_group
+coca-cola,864,coca-cola,base_group
+cocoa powder,111,cocoa powder,base_group
+coconut,112,coconut,base_group
+coconut cream,620,coconut cream,base_group
+coconut extract,621,coconut extract,base_group
+coconut flour,865,coconut flour,base_group
+coconut milk,113,coconut milk,base_group
+coconut oil,114,coconut oil,base_group
+coconut rum,924,coconut rum,base_group
+cod,115,cod,base_group
+coffee,866,coffee,base_group
+coleslaw mix,867,coleslaw mix,base_group
+condensed french onion soup,701,condensed french onion soup,base_group
+condensed golden mushroom soup,1009,condensed golden mushroom soup,base_group
+condensed milk,117,condensed milk,base_group
+confectioners' sugar,118,confectioners' sugar,base_group
+cooked chicken,689,cooked chicken,base_group
+cooked ham,690,cooked ham,base_group
+cooked rice,119,cooked rice,base_group
+cooked shrimp,120,cooked shrimp,base_group
+cooking oil,307,cooking oil,base_group
+cooking spray,122,cooking spray,base_group
+cooking wine,123,cooking wine,base_group
+cool whip,124,cool whip,base_group
+coriander,125,coriander,base_group
+corn,127,corn,base_group
+corn flakes,622,corn flakes,base_group
+corn flour,128,corn flour,base_group
+corn muffin mix,820,corn muffin mix,base_group
+corn syrup,130,corn syrup,base_group
+corn tortillas,131,corn tortillas,base_group
+cornflour,531,cornflour,base_group
+cornmeal,132,cornmeal,base_group
+cornstarch,133,cornstarch,base_group
+cottage cheese,134,cottage cheese,base_group
+couscous,135,couscous,base_group
+crab meat,136,crab meat,base_group
+cracker crumbs,774,cracker crumbs,base_group
+cranberry,533,cranberry,base_group
+cranberry juice,534,cranberry juice,base_group
+cranberry sauce,623,cranberry sauce,base_group
+cream,137,cream,base_group
+cream cheese,138,cream cheese,base_group
+cream of broccoli soup,139,cream of broccoli soup,base_group
+cream of celery soup,140,cream of celery soup,base_group
+cream of chicken soup,141,cream of chicken soup,base_group
+cream of coconut,833,cream of coconut,base_group
+cream of mushroom soup,142,cream of mushroom soup,base_group
+cream of tartar,143,cream of tartar,base_group
+creamed corn,535,creamed corn,base_group
+creme de cacao,912,creme de cacao,base_group
+creme fraiche,536,creme fraiche,base_group
+crescent rolls,538,crescent rolls,base_group
+cucumber,146,cucumber,base_group
+cumin,147,cumin,base_group
+currant,624,currant,base_group
+curry leaves,1011,curry leaves,base_group
+curry powder,149,curry powder,base_group
+custard powder,952,custard powder,base_group
+dates,155,dates,base_group
+diced potatoes with onion,902,diced potatoes with onion,base_group
+dill,157,dill,base_group
+dill seed,870,dill seed,base_group
+dried apricots,159,dried apricots,base_group
+dried beef,871,dried beef,base_group
+dried blueberries,958,dried blueberries,base_group
+dried cherry,625,dried cherry,base_group
+dried cranberries,872,dried cranberries,base_group
+dried currants,923,dried currants,base_group
+dried fruit,964,dried fruit,base_group
+dried onion,767,dried onion,base_group
+dried porcini mushrooms,1018,dried porcini mushrooms,base_group
+dried red chilies,704,dried red chilies,base_group
+dry buttermilk,971,dry buttermilk,base_group
+dry mustard,167,dry mustard,base_group
+dry vermouth,170,dry vermouth,base_group
+egg,172,egg,base_group
+egg noodles,173,egg noodles,base_group
+egg substitute,544,egg substitute,base_group
+egg whites,174,egg whites,base_group
+egg yolks,175,egg yolks,base_group
+eggnog,771,eggnog,base_group
+eggplant,176,eggplant,base_group
+evaporated milk,179,evaporated milk,base_group
+fennel seed,180,fennel seed,base_group
+fenugreek seeds,1020,fenugreek seeds,base_group
+fish sauce,183,fish sauce,base_group
+fish stock,1021,fish stock,base_group
+five spice powder,626,five spice powder,base_group
+flax seeds,185,flax seeds,base_group
+flaxseed meal,653,flaxseed meal,base_group
+flounder,987,flounder,base_group
+food coloring,766,food coloring,base_group
+french dressing,928,french dressing,base_group
+french onion soup,710,french onion soup,base_group
+fried onions,654,fried onions,base_group
+frozen hash browns,772,frozen hash browns,base_group
+frozen lemonade concentrate,932,frozen lemonade concentrate,base_group
+frozen orange juice concentrate,655,frozen orange juice concentrate,base_group
+frozen yogurt,198,frozen yogurt,base_group
+galliano,970,galliano,base_group
+garam masala,199,garam masala,base_group
+garlic,200,garlic,base_group
+garlic paste,201,garlic paste,base_group
+garlic powder,202,garlic powder,base_group
+garlic salt,203,garlic salt,base_group
+gelatin,204,gelatin,base_group
+ghee,205,ghee,base_group
+gin,627,gin,base_group
+ginger,206,ginger,base_group
+ginger ale,547,ginger ale,base_group
+ginger paste,656,ginger paste,base_group
+ginger-garlic paste,1023,ginger-garlic paste,base_group
+gluten-free flour,948,gluten-free flour,base_group
+golden syrup,549,golden syrup,base_group
+graham cracker crumbs,209,graham cracker crumbs,base_group
+graham cracker crust,210,graham cracker crust,base_group
+graham crackers,801,graham crackers,base_group
+granola cereal,823,granola cereal,base_group
+grape,211,grape,base_group
+grape jelly,816,grape jelly,base_group
+grape juice,973,grape juice,base_group
+grape-nuts cereal,874,grape-nuts cereal,base_group
+grapefruit juice,850,grapefruit juice,base_group
+green bean,551,green bean,base_group
+green curry paste,712,green curry paste,base_group
+green enchilada sauce,1025,green enchilada sauce,base_group
+green onion,220,green onion,base_group
+grenadine,553,grenadine,base_group
+ground chili pepper / chili powder,99,ground chili pepper / chili powder,base_group
+ground ginger,229,ground ginger,base_group
+ground lamb,628,ground lamb,base_group
+ground veal,875,ground veal,base_group
+guacamole,659,guacamole,base_group
+half-and-half,236,half-and-half,base_group
+ham,237,ham,base_group
+ham hock,238,ham hock,base_group
+hard-boiled egg,558,hard-boiled egg,base_group
+hazelnuts,240,hazelnuts,base_group
+herbes de provence,660,herbes de provence,base_group
+hoisin sauce,243,hoisin sauce,base_group
+honey,244,honey,base_group
+honey mustard,245,honey mustard,base_group
+horseradish,559,horseradish,base_group
+hot dogs,818,hot dogs,base_group
+hot sauce,246,hot sauce,base_group
+ice,247,ice,base_group
+instant coffee,561,instant coffee,base_group
+instant espresso powder,662,instant espresso powder,base_group
+instant mashed potatoes,962,instant mashed potatoes,base_group
+instant potato flakes,805,instant potato flakes,base_group
+irish cream,877,irish cream,base_group
+italian dressing,563,italian dressing,base_group
+italian dressing mix,718,italian dressing mix,base_group
+italian seasoning,252,italian seasoning,base_group
+jam,967,jam,base_group
+jelly,990,jelly,base_group
+kahlua,564,kahlua,base_group
+kale,256,kale,base_group
+ketchup,257,ketchup,base_group
+kidney beans,259,kidney beans,base_group
+lard,260,lard,base_group
+leek,263,leek,base_group
+lemon,264,lemon,base_group
+lemon curd,880,lemon curd,base_group
+lemon extract,265,lemon extract,base_group
+lemon gelatin,917,lemon gelatin,base_group
+lemon juice,266,lemon juice,base_group
+lemon pepper,565,lemon pepper,base_group
+lemon zest,267,lemon zest,base_group
+lemon-lime soda,909,lemon-lime soda,base_group
+lemonade,919,lemonade,base_group
+lemongrass,1029,lemongrass,base_group
+lentils,268,lentils,base_group
+lettuce,269,lettuce,base_group
+lime,273,lime,base_group
+lime juice,274,lime juice,base_group
+lime zest,275,lime zest,base_group
+liquid smoke,277,liquid smoke,base_group
+m&m's chocolate candies,846,m&m's chocolate candies,base_group
+macadamia nuts,881,macadamia nuts,base_group
+mace,631,mace,base_group
+madeira wine,1031,madeira wine,base_group
+malt vinegar,280,malt vinegar,base_group
+mango chutney,905,mango chutney,base_group
+maple extract,813,maple extract,base_group
+maple syrup,281,maple syrup,base_group
+maraschino cherry,664,maraschino cherry,base_group
+margarine,282,margarine,base_group
+marjoram,568,marjoram,base_group
+marsala wine,665,marsala wine,base_group
+marshmallow,569,marshmallow,base_group
+marshmallow creme,666,marshmallow creme,base_group
+mascarpone,284,mascarpone,base_group
+mashed potato,570,mashed potato,base_group
+matzo meal,802,matzo meal,base_group
+mayonnaise,285,mayonnaise,base_group
+midori melon liqueur,921,midori melon liqueur,base_group
+milk,287,milk,base_group
+mincemeat,965,mincemeat,base_group
+mint,290,mint,base_group
+mint extract,954,mint extract,base_group
+miracle whip,571,miracle whip,base_group
+mirin,572,mirin,base_group
+miso,1034,miso,base_group
+mixed herbs,1035,mixed herbs,base_group
+mixed salad greens,1036,mixed salad greens,base_group
+mixed spice,667,mixed spice,base_group
+mixed vegetables,574,mixed vegetables,base_group
+molasses,291,molasses,base_group
+monosodium glutamate,1037,monosodium glutamate,base_group
+mushroom,294,mushroom,base_group
+mussels,295,mussels,base_group
+mustard,296,mustard,base_group
+mustard seeds,298,mustard seeds,base_group
+natural bran,882,natural bran,base_group
+nutella,770,nutella,base_group
+nutmeg,303,nutmeg,base_group
+nutritional yeast,632,nutritional yeast,base_group
+nuts (mixed or unspecified),901,nuts (mixed or unspecified),base_group
+oat bran,575,oat bran,base_group
+oat flour,883,oat flour,base_group
+oat milk,304,oat milk,base_group
+oats,306,oats,base_group
+old bay seasoning,308,old bay seasoning,base_group
+olive,310,olive,base_group
+onion,312,onion,base_group
+onion mushroom soup mix,733,onion mushroom soup mix,base_group
+onion powder,313,onion powder,base_group
+onion salt,577,onion salt,base_group
+onion soup mix,314,onion soup mix,base_group
+orange,315,orange,base_group
+orange extract,317,orange extract,base_group
+orange juice,318,orange juice,base_group
+orange juice concentrate,822,orange juice concentrate,base_group
+orange liqueur,1038,orange liqueur,base_group
+orange marmalade,578,orange marmalade,base_group
+orange zest,319,orange zest,base_group
+oregano,320,oregano,base_group
+oreo cookies,824,oreo cookies,base_group
+oyster sauce,322,oyster sauce,base_group
+pancake mix,782,pancake mix,base_group
+paprika,324,paprika,base_group
+parsley,326,parsley,base_group
+pasta,327,pasta,base_group
+pasta sauce,884,pasta sauce,base_group
+peach,328,peach,base_group
+peach preserves,935,peach preserves,base_group
+peach schnapps,838,peach schnapps,base_group
+peach yogurt,734,peach yogurt,base_group
+peanut,329,peanut,base_group
+peanut butter,330,peanut butter,base_group
+peanut butter chips,670,peanut butter chips,base_group
+peanut oil,331,peanut oil,base_group
+pear,332,pear,base_group
+peas,333,peas,base_group
+pecans,334,pecans,base_group
+pectin,335,pectin,base_group
+pepper (peppercorn),336,pepper (peppercorn),base_group
+pepperoni,671,pepperoni,base_group
+persimmon pulp,991,persimmon pulp,base_group
+pesto,633,pesto,base_group
+phyllo dough,910,phyllo dough,base_group
+pickling spices,1041,pickling spices,base_group
+pie crust,806,pie crust,base_group
+pie filling,585,pie filling,base_group
+pimiento,691,pimiento,base_group
+pine nuts,338,pine nuts,base_group
+pineapple,339,pineapple,base_group
+pineapple juice,340,pineapple juice,base_group
+pineapple preserves,978,pineapple preserves,base_group
+pinto beans,341,pinto beans,base_group
+pistachios,342,pistachios,base_group
+pizza dough,1042,pizza dough,base_group
+pizza sauce,343,pizza sauce,base_group
+plain yogurt,618,plain yogurt,base_group
+plum,347,plum,base_group
+pomegranate juice,831,pomegranate juice,base_group
+popped popcorn,760,popped popcorn,base_group
+poppy seed,349,poppy seed,base_group
+pork,350,pork,base_group
+pork and beans,757,pork and beans,base_group
+port wine,634,port wine,base_group
+potato,355,potato,base_group
+potato starch,674,potato starch,base_group
+poultry seasoning,356,poultry seasoning,base_group
+powdered milk,587,powdered milk,base_group
+prosciutto,675,prosciutto,base_group
+pudding mix,589,pudding mix,base_group
+puff pastry,676,puff pastry,base_group
+pumpkin,359,pumpkin,base_group
+pumpkin pie spice,360,pumpkin pie spice,base_group
+pumpkin puree,590,pumpkin puree,base_group
+pumpkin seeds,361,pumpkin seeds,base_group
+quick-cooking grits,960,quick-cooking grits,base_group
+quinoa,364,quinoa,base_group
+raisin,365,raisin,base_group
+raisin bran cereal,989,raisin bran cereal,base_group
+ranch dressing,592,ranch dressing,base_group
+ranch dressing mix,635,ranch dressing mix,base_group
+raspberry,366,raspberry,base_group
+raspberry gelatin,951,raspberry gelatin,base_group
+raspberry jam,677,raspberry jam,base_group
+raspberry vinegar,845,raspberry vinegar,base_group
+red cinnamon candies,969,red cinnamon candies,base_group
+red currant jelly,914,red currant jelly,base_group
+red curry paste,679,red curry paste,base_group
+red pepper,372,red pepper,base_group
+red pepper flakes,373,red pepper flakes,base_group
+red wine,375,red wine,base_group
+refried beans,377,refried beans,base_group
+refrigerated biscuits,780,refrigerated biscuits,base_group
+refrigerated buttermilk biscuits,773,refrigerated buttermilk biscuits,base_group
+rhubarb,789,rhubarb,base_group
+rice,378,rice,base_group
+rice flour,379,rice flour,base_group
+rice krispies,595,rice krispies,base_group
+rice noodles,380,rice noodles,base_group
+rice vinegar,381,rice vinegar,base_group
+ricotta cheese,384,ricotta cheese,base_group
+roasted garlic,385,roasted garlic,base_group
+roasted red peppers,739,roasted red peppers,base_group
+rose water,680,rose water,base_group
+rosemary,389,rosemary,base_group
+rotel tomatoes,819,rotel tomatoes,base_group
+rum,390,rum,base_group
+rum extract,681,rum extract,base_group
+rye flour,682,rye flour,base_group
+saffron,596,saffron,base_group
+sage,391,sage,base_group
+sake,636,sake,base_group
+salmon,393,salmon,base_group
+salsa,394,salsa,base_group
+salt,395,salt,base_group
+saltine crackers,798,saltine crackers,base_group
+sauerkraut,637,sauerkraut,base_group
+sausage,397,sausage,base_group
+savory herb,1047,savory herb,base_group
+sea scallops,841,sea scallops,base_group
+seasoned stuffing mix,946,seasoned stuffing mix,base_group
+seasoning salt,398,seasoning salt,base_group
+self-rising cornmeal,976,self-rising cornmeal,base_group
+self-rising flour,399,self-rising flour,base_group
+semolina,401,semolina,base_group
+sesame oil,403,sesame oil,base_group
+sesame seeds,404,sesame seeds,base_group
+shallot,601,shallot,base_group
+sherry vinegar,406,sherry vinegar,base_group
+sherry wine,407,sherry wine,base_group
+shortening,408,shortening,base_group
+shrimp,410,shrimp,base_group
+simple syrup,684,simple syrup,base_group
+smoked salmon,1049,smoked salmon,base_group
+snow peas,685,snow peas,base_group
+sour cream,416,sour cream,base_group
+sour milk,768,sour milk,base_group
+sourdough starter,790,sourdough starter,base_group
+southern comfort,888,southern comfort,base_group
+soy flour,889,soy flour,base_group
+soy milk,417,soy milk,base_group
+soy sauce,418,soy sauce,base_group
+spaghetti squash,975,spaghetti squash,base_group
+spelt flour,937,spelt flour,base_group
+spinach,423,spinach,base_group
+star anise,686,star anise,base_group
+steak sauce,849,steak sauce,base_group
+stock,913,stock,base_group
+strawberry,428,strawberry,base_group
+strawberry gelatin,892,strawberry gelatin,base_group
+strawberry jam,761,strawberry jam,base_group
+strawberry yogurt,745,strawberry yogurt,base_group
+sugar,429,sugar,base_group
+sugar substitute,894,sugar substitute,base_group
+sun dried tomatoes,430,sun dried tomatoes,base_group
+sunflower seeds,433,sunflower seeds,base_group
+sweet chili sauce,748,sweet chili sauce,base_group
+sweet pickle relish,605,sweet pickle relish,base_group
+sweet potato,435,sweet potato,base_group
+syrup,955,syrup,base_group
+taco sauce,441,taco sauce,base_group
+taco seasoning,442,taco seasoning,base_group
+tahini,607,tahini,base_group
+tamarind concentrate,1051,tamarind concentrate,base_group
+tapioca,444,tapioca,base_group
+tapioca flour,895,tapioca flour,base_group
+tarragon,445,tarragon,base_group
+tarragon vinegar,804,tarragon vinegar,base_group
+tater tots,953,tater tots,base_group
+tea,961,tea,base_group
+tempeh,446,tempeh,base_group
+tequila,447,tequila,base_group
+teriyaki sauce,448,teriyaki sauce,base_group
+thousand island dressing,1054,thousand island dressing,base_group
+thyme,449,thyme,base_group
+tilapia,450,tilapia,base_group
+toffee pieces,769,toffee pieces,base_group
+tofu,451,tofu,base_group
+tomato,452,tomato,base_group
+tomato juice,453,tomato juice,base_group
+tomato passata,454,tomato passata,base_group
+tomato paste,455,tomato paste,base_group
+tomato sauce,457,tomato sauce,base_group
+tomato soup,458,tomato soup,base_group
+tortilla chips,608,tortilla chips,base_group
+tuna,459,tuna,base_group
+turkey,461,turkey,base_group
+turmeric,463,turmeric,base_group
+unsweetened applesauce,467,unsweetened applesauce,base_group
+v8 vegetable juice,933,v8 vegetable juice,base_group
+vanilla,472,vanilla,base_group
+vanilla extract,474,vanilla extract,base_group
+vanilla ice cream,475,vanilla ice cream,base_group
+vanilla sugar,811,vanilla sugar,base_group
+vanilla wafers,781,vanilla wafers,base_group
+vanilla yogurt,476,vanilla yogurt,base_group
+vegetable broth,477,vegetable broth,base_group
+vegetable soup,479,vegetable soup,base_group
+vinegar,481,vinegar,base_group
+vital wheat gluten,898,vital wheat gluten,base_group
+vodka,482,vodka,base_group
+walnut,483,walnut,base_group
+walnut oil,916,walnut oil,base_group
+water,485,water,base_group
+water chestnuts,692,water chestnuts,base_group
+watercress,1055,watercress,base_group
+wheat bran,687,wheat bran,base_group
+wheat flour,186,wheat flour,base_group
+wheat germ,487,wheat germ,base_group
+wheat tortillas,907,wheat tortillas,base_group
+whipped cream,488,whipped cream,base_group
+whiskey,899,whiskey,base_group
+white beans,491,white beans,base_group
+white wine,498,white wine,base_group
+wine vinegar,614,wine vinegar,base_group
+wonton wrappers,640,wonton wrappers,base_group
+worcestershire sauce,506,worcestershire sauce,base_group
+xanthan gum,615,xanthan gum,base_group
+yeast,507,yeast,base_group
+yellow squash,940,yellow squash,base_group
+zucchini,511,zucchini,base_group
+chicken tenders,87,chicken,manual_v3
+chicken tenderloins,87,chicken,manual_v3
+chicken fillets,87,chicken,manual_v3
+chicken breast tenderloins,87,chicken,manual_v3
+chicken breast half,87,chicken,manual_v3
+chicken breast halves,87,chicken,manual_v3
+chicken pieces,87,chicken,manual_v3
+whole chicken,87,chicken,manual_v3
+chicken quarters,87,chicken,manual_v3
+chicken leg quarters,87,chicken,manual_v3
+chicken cutlets,87,chicken,manual_v3
+chicken breast strips,87,chicken,manual_v3
+chicken meat,87,chicken,manual_v3
+chicken drumstick,87,chicken,manual_v3
+all purpose white flour,186,wheat flour,manual_v3
+plain flour,186,wheat flour,manual_v3
+white flour,186,wheat flour,manual_v3
+unbleached flour,186,wheat flour,manual_v3
+unbleached all purpose flour,186,wheat flour,manual_v3
+all purpose wheat flour,186,wheat flour,manual_v3
+white all purpose flour,186,wheat flour,manual_v3
+wholemeal flour,186,wheat flour,manual_v3
+wholemeal wheat flour,186,wheat flour,manual_v3
+strong bread flour,186,wheat flour,manual_v3
+green pea,333,peas,manual_v3
+green peas,333,peas,manual_v3
+garden peas,333,peas,manual_v3
+sweet peas,333,peas,manual_v3
+petit pois,333,peas,manual_v3
+english peas,333,peas,manual_v3
+rotini,327,pasta,manual_v3
+rotini pasta,327,pasta,manual_v3
+ziti,327,pasta,manual_v3
+ziti pasta,327,pasta,manual_v3
+fusilli,327,pasta,manual_v3
+fusilli pasta,327,pasta,manual_v3
+shell pasta,327,pasta,manual_v3
+pasta shells,327,pasta,manual_v3
+small shell pasta,327,pasta,manual_v3
+jumbo pasta shells,327,pasta,manual_v3
+medium shell pasta,327,pasta,manual_v3
+penne pasta,327,pasta,manual_v3
+spaghetti pasta,327,pasta,manual_v3
+farfalle,327,pasta,manual_v3
+bow tie pasta,327,pasta,manual_v3
+bowtie pasta,327,pasta,manual_v3
+rigatoni pasta,327,pasta,manual_v3
+orzo pasta,327,pasta,manual_v3
+linguine pasta,327,pasta,manual_v3
+fettuccine pasta,327,pasta,manual_v3
+vermicelli pasta,327,pasta,manual_v3
+lasagna sheets,327,pasta,manual_v3
+lasagna noodles,327,pasta,manual_v3
+no boil lasagna noodles,327,pasta,manual_v3
+macaroni noodles,327,pasta,manual_v3
+gorgonzola,524,cheese,manual_v3
+asiago cheese,524,cheese,manual_v3
+asiago,524,cheese,manual_v3
+colby monterey jack cheese,524,cheese,manual_v3
+colby jack cheese,524,cheese,manual_v3
+mexican blend cheese,524,cheese,manual_v3
+mexican cheese,524,cheese,manual_v3
+cheddar,524,cheese,manual_v3
+mozzarella,524,cheese,manual_v3
+parmesan,524,cheese,manual_v3
+feta,524,cheese,manual_v3
+gouda,524,cheese,manual_v3
+brie,524,cheese,manual_v3
+gruyere,524,cheese,manual_v3
+provolone,524,cheese,manual_v3
+monterey jack,524,cheese,manual_v3
+colby jack,524,cheese,manual_v3
+swiss cheese,524,cheese,manual_v3
+sharp cheddar,524,cheese,manual_v3
+mild cheddar,524,cheese,manual_v3
+romano,524,cheese,manual_v3
+pecorino romano,524,cheese,manual_v3
+pecorino cheese,524,cheese,manual_v3
+ricotta,384,ricotta cheese,manual_v3
+whole milk ricotta cheese,384,ricotta cheese,manual_v3
+part skim ricotta cheese,384,ricotta cheese,manual_v3
+whole kernel corn,127,corn,manual_v3
+sweet corn,127,corn,manual_v3
+sweetcorn,127,corn,manual_v3
+kernel corn,127,corn,manual_v3
+corn niblets,127,corn,manual_v3
+black ground pepper,336,pepper (peppercorn),manual_v3
+ground black pepper,336,pepper (peppercorn),manual_v3
+ground white pepper,336,pepper (peppercorn),manual_v3
+freshly ground pepper,336,pepper (peppercorn),manual_v3
+cracked black pepper,336,pepper (peppercorn),manual_v3
+black peppercorn,336,pepper (peppercorn),manual_v3
+white peppercorn,336,pepper (peppercorn),manual_v3
+dry crushed red pepper,373,red pepper flakes,manual_v3
+crushed red pepper,373,red pepper flakes,manual_v3
+crushed dried red pepper,373,red pepper flakes,manual_v3
+chili flakes,373,red pepper flakes,manual_v3
+chilli flakes,373,red pepper flakes,manual_v3
+red chili flakes,373,red pepper flakes,manual_v3
+red chilli flakes,373,red pepper flakes,manual_v3
+hot pepper flakes,373,red pepper flakes,manual_v3
+ground cayenne pepper,99,ground chili pepper / chili powder,manual_v3
+cayenne powder,99,ground chili pepper / chili powder,manual_v3
+cayenne,99,ground chili pepper / chili powder,manual_v3
+ground red pepper (cayenne),99,ground chili pepper / chili powder,manual_v3
+ground chilli powder,99,ground chili pepper / chili powder,manual_v3
+chilli powder,99,ground chili pepper / chili powder,manual_v3
+sweet hungarian paprika,324,paprika,manual_v3
+hungarian paprika,324,paprika,manual_v3
+sweet paprika,324,paprika,manual_v3
+smoked paprika,324,paprika,manual_v3
+hot paprika,324,paprika,manual_v3
+ground paprika,324,paprika,manual_v3
+natural yoghurt,618,plain yogurt,manual_v3
+natural yogurt,618,plain yogurt,manual_v3
+plain yoghurt,618,plain yogurt,manual_v3
+unsweetened yogurt,618,plain yogurt,manual_v3
+unsweetened yoghurt,618,plain yogurt,manual_v3
+greek yogurt,618,plain yogurt,manual_v3
+greek yoghurt,618,plain yogurt,manual_v3
+plain greek yogurt,618,plain yogurt,manual_v3
+espresso,866,coffee,manual_v3
+strong coffee,866,coffee,manual_v3
+brewed coffee,866,coffee,manual_v3
+black coffee,866,coffee,manual_v3
+strong brewed coffee,866,coffee,manual_v3
+ground coffee,866,coffee,manual_v3
+coffee grounds,866,coffee,manual_v3
+single cream,137,cream,manual_v3
+whipping cream,137,cream,manual_v3
+heavy whipping cream,137,cream,manual_v3
+heavy cream,137,cream,manual_v3
+double cream,137,cream,manual_v3
+pouring cream,137,cream,manual_v3
+capers,523,caper,manual_v3
+bread crumb,51,bread crumbs,manual_v3
+fresh white breadcrumbs,51,bread crumbs,manual_v3
+white breadcrumbs,51,bread crumbs,manual_v3
+white bread crumbs,51,bread crumbs,manual_v3
+panko,51,bread crumbs,manual_v3
+panko bread crumbs,51,bread crumbs,manual_v3
+hot dog buns,50,bread,manual_v3
+hot dog bun,50,bread,manual_v3
+pita bread,50,bread,manual_v3
+pita,50,bread,manual_v3
+hamburger bun,50,bread,manual_v3
+sandwich bread,50,bread,manual_v3
+bread slices,50,bread,manual_v3
+bread slice,50,bread,manual_v3
+pineapple tidbits,339,pineapple,manual_v3
+pineapple chunks,339,pineapple,manual_v3
+pineapple pieces,339,pineapple,manual_v3
+pineapple rings,339,pineapple,manual_v3
+pineapple slices,339,pineapple,manual_v3
+beef stew meat,35,beef,manual_v3
+stewing beef,35,beef,manual_v3
+beef cubes,35,beef,manual_v3
+beef strips,35,beef,manual_v3
+beef steak,35,beef,manual_v3
+ginger root,206,ginger,manual_v3
+root ginger,206,ginger,manual_v3
+fresh ginger root,206,ginger,manual_v3
+garlic clove,200,garlic,manual_v3
+garlic cloves,200,garlic,manual_v3
+clove of garlic,200,garlic,manual_v3
+cloves of garlic,200,garlic,manual_v3
+vegetable oil,307,cooking oil,manual_v3
+canola oil,307,cooking oil,manual_v3
+olive oil,307,cooking oil,manual_v3
+extra virgin olive oil,307,cooking oil,manual_v3
+light olive oil,307,cooking oil,manual_v3
+sunflower oil,307,cooking oil,manual_v3
+rapeseed oil,307,cooking oil,manual_v3
+safflower oil,307,cooking oil,manual_v3
+grapeseed oil,307,cooking oil,manual_v3
+vanilla pod,472,vanilla,manual_v3
+vanilla pods,472,vanilla,manual_v3
+vanilla beans,472,vanilla,manual_v3
+mild curry powder,149,curry powder,manual_v3
+hot curry powder,149,curry powder,manual_v3
+medium curry powder,149,curry powder,manual_v3
+petite diced tomatoes,67,canned tomatoes,manual_v3
+italian style diced tomatoes,67,canned tomatoes,manual_v3
+canned diced tomatoes,67,canned tomatoes,manual_v3
+canned crushed tomatoes,67,canned tomatoes,manual_v3
+canned whole tomatoes,67,canned tomatoes,manual_v3
+rotel tomatoes & chilies,819,rotel tomatoes,manual_v3
+rotel tomatoes and chilies,819,rotel tomatoes,manual_v3
+rotel tomatoes and green chilies,819,rotel tomatoes,manual_v3
+scallion,220,green onion,manual_v3
+scallions,220,green onion,manual_v3
+spring onion,220,green onion,manual_v3
+spring onions,220,green onion,manual_v3
+green beans,551,green bean,manual_v3
+string beans,551,green bean,manual_v3
+string bean,551,green bean,manual_v3
+snap beans,551,green bean,manual_v3
+bean sprout,518,bean sprouts,manual_v3
+lemon slice,264,lemon,manual_v3
+lemon slices,264,lemon,manual_v3
+"lemon, juice and zest of",264,lemon,manual_v3
+"lemon, juice of",264,lemon,manual_v3
+"lemon, juiced",264,lemon,manual_v3
+lime slice,273,lime,manual_v3
+lime slices,273,lime,manual_v3
+"lime, juice and zest of",273,lime,manual_v3
+"lime, juice of",273,lime,manual_v3
+"lime, juiced",273,lime,manual_v3
+"limes, juiced",273,lime,manual_v3
+orange slice,315,orange,manual_v3
+orange slices,315,orange,manual_v3
+"orange, juice and zest of",315,orange,manual_v3
+"orange, juice of",315,orange,manual_v3
+"orange, juiced",315,orange,manual_v3
+lemon peel,267,lemon zest,manual_v3
+lemon rind,267,lemon zest,manual_v3
+grated lemon rind,267,lemon zest,manual_v3
+grated lemon peel,267,lemon zest,manual_v3
+lime peel,275,lime zest,manual_v3
+lime rind,275,lime zest,manual_v3
+grated lime rind,275,lime zest,manual_v3
+grated lime peel,275,lime zest,manual_v3
+orange peel,319,orange zest,manual_v3
+orange rind,319,orange zest,manual_v3
+grated orange rind,319,orange zest,manual_v3
+grated orange peel,319,orange zest,manual_v3
+soda water,619,club soda,manual_v3
+carbonated water,619,club soda,manual_v3
+filtered water,485,water,manual_v3
+cold water,485,water,manual_v3
+warm water,485,water,manual_v3
+hot water,485,water,manual_v3
+boiling water,485,water,manual_v3
+tap water,485,water,manual_v3
+ice water,485,water,manual_v3
+cola,864,coca-cola,manual_v3
+coke,864,coca-cola,manual_v3
+cashew nuts,74,cashews,manual_v3
+cashew nut,74,cashews,manual_v3
+cashew,74,cashews,manual_v3
+pecan,334,pecans,manual_v3
+pecan nuts,334,pecans,manual_v3
+pecan halves,334,pecans,manual_v3
+hazelnut,240,hazelnuts,manual_v3
+filberts,240,hazelnuts,manual_v3
+filbert,240,hazelnuts,manual_v3
+walnut halves,483,walnut,manual_v3
+walnut pieces,483,walnut,manual_v3
+dried yeast,507,yeast,manual_v3
+dry yeast,507,yeast,manual_v3
+cinnamon stick,106,cinnamon,manual_v3
+cinnamon sticks,106,cinnamon,manual_v3
+ground cinnamon,106,cinnamon,manual_v3
+allspice berries,6,allspice,manual_v3
+ground allspice,6,allspice,manual_v3
+chicken bouillon powder,1004,chicken bouillon / base,manual_v3
+chicken bouillon granules,1004,chicken bouillon / base,manual_v3
+chicken stock cube,1004,chicken bouillon / base,manual_v3
+chicken stock cubes,1004,chicken bouillon / base,manual_v3
+chicken bouillon cube,1004,chicken bouillon / base,manual_v3
+chicken bouillon cubes,1004,chicken bouillon / base,manual_v3
+instant chicken bouillon granules,1004,chicken bouillon / base,manual_v3
+marsala,665,marsala wine,manual_v3
+yellow mustard seeds,298,mustard seeds,manual_v3
+brown mustard seeds,298,mustard seeds,manual_v3
+black mustard seeds,298,mustard seeds,manual_v3
+sesame seed oil,403,sesame oil,manual_v3
+deli ham,237,ham,manual_v3
+sliced deli ham,237,ham,manual_v3
+golden brown sugar,58,brown sugar,manual_v3
+light brown sugar,58,brown sugar,manual_v3
+seedless raisin,365,raisin,manual_v3
+seedless raisins,365,raisin,manual_v3
+dark raisin,365,raisin,manual_v3
+dark raisins,365,raisin,manual_v3
+golden raisins,365,raisin,manual_v3
+sultana,365,raisin,manual_v3
+sultanas,365,raisin,manual_v3
+mixed italian herbs,1035,mixed herbs,manual_v3
+mixed greens,1036,mixed salad greens,manual_v3
+mushroom stems and pieces,294,mushroom,manual_v3
+mushroom pieces,294,mushroom,manual_v3
+mushroom caps,294,mushroom,manual_v3
+nutritional yeast flakes,632,nutritional yeast,manual_v3
+pimento,691,pimiento,manual_v3
+pimentos,691,pimiento,manual_v3
+pimientos,691,pimiento,manual_v3
+sugar syrup,684,simple syrup,manual_v3
+corn tortilla,131,corn tortillas,manual_v3
+flour tortilla,907,wheat tortillas,manual_v3
+wheat tortilla,907,wheat tortillas,manual_v3
+condensed cream of chicken soup,141,cream of chicken soup,manual_v3
+condensed cream of celery soup,140,cream of celery soup,manual_v3
+condensed cream of mushroom soup,142,cream of mushroom soup,manual_v3
+condensed cheddar cheese soup,643,cheddar cheese soup,manual_v3
+condensed beef broth,36,beef broth,manual_v3
+sweetened condensed milk,117,condensed milk,manual_v3
+fresh cranberry,533,cranberry,manual_v3
+fresh cranberries,533,cranberry,manual_v3
+cooked long grain rice,119,cooked rice,manual_v3
+cooked brown rice,119,cooked rice,manual_v3
+"brown rice, cooked",119,cooked rice,manual_v3
+cooked white rice,119,cooked rice,manual_v3
+cooked wild rice,119,cooked rice,manual_v3
+cooked basmati rice,119,cooked rice,manual_v3
+cooked jasmine rice,119,cooked rice,manual_v3
+irish whiskey,899,whiskey,manual_v3
+scotch whisky,899,whiskey,manual_v3
+whisky,899,whiskey,manual_v3
+cooked bacon,23,bacon,manual_v3
+bacon strips,23,bacon,manual_v3
+bacon rashers,23,bacon,manual_v3
+bacon slices,23,bacon,manual_v3
+kosher salt,395,salt,manual_v3
+sea salt,395,salt,manual_v3
+table salt,395,salt,manual_v3
+fine sea salt,395,salt,manual_v3
+coarse salt,395,salt,manual_v3
+red peppers,372,red pepper,manual_v3
+bottled minced garlic,200,garlic,manual_v3
+instant minced garlic,200,garlic,manual_v3
+cut green beans,551,green bean,manual_v3
+thin spaghetti,327,pasta,manual_v3
+spaghetti noodles,327,pasta,manual_v3
+whole wheat spaghetti,327,pasta,manual_v3
+whole wheat penne,327,pasta,manual_v3
+dry penne pasta,327,pasta,manual_v3
+uncooked lasagna noodles,327,pasta,manual_v3
+manicotti,327,pasta,manual_v3
+vermicelli,327,pasta,manual_v3
+black olives,310,olive,manual_v3
+green olives,310,olive,manual_v3
+kalamata olives,310,olive,manual_v3
+red seedless grapes,211,grape,manual_v3
+green seedless grapes,211,grape,manual_v3
+seedless grapes,211,grape,manual_v3
+white grapes,211,grape,manual_v3
+red grapes,211,grape,manual_v3
+green grapes,211,grape,manual_v3
+louisiana hot sauce,246,hot sauce,manual_v3
+thai fish sauce,183,fish sauce,manual_v3
+asian fish sauce,183,fish sauce,manual_v3
+oriental sesame oil,403,sesame oil,manual_v3
+toasted sesame oil,403,sesame oil,manual_v3
+mild salsa,394,salsa,manual_v3
+hot salsa,394,salsa,manual_v3
+medium salsa,394,salsa,manual_v3
+thick & chunky salsa,394,salsa,manual_v3
+jalapeno,98,chili pepper,manual_v3
+jalapenos,98,chili pepper,manual_v3
+green chili,98,chili pepper,manual_v3
+green chillies,98,chili pepper,manual_v3
+green chiles,98,chili pepper,manual_v3
+red chiles,98,chili pepper,manual_v3
+red chillies,98,chili pepper,manual_v3
+chili pepper flakes,373,red pepper flakes,manual_v3
+creole mustard,296,mustard,manual_v3
+stone ground mustard,296,mustard,manual_v3
+spicy mustard,296,mustard,manual_v3
+madras curry powder,149,curry powder,manual_v3
+cajun spices,64,cajun seasoning,manual_v3
+italian herb seasoning,252,italian seasoning,manual_v3
+dried italian herb seasoning,252,italian seasoning,manual_v3
+sparkling water,619,club soda,manual_v3
+seltzer water,619,club soda,manual_v3
+unsweetened baking cocoa,111,cocoa powder,manual_v3
+baking cocoa,111,cocoa powder,manual_v3
+inch cinnamon stick,106,cinnamon,manual_v3
+inches cinnamon sticks,106,cinnamon,manual_v3
+dried black beans,41,black beans,manual_v3
+dry black beans,41,black beans,manual_v3
+canned black beans,41,black beans,manual_v3
+dried navy beans,491,white beans,manual_v3
+canned white beans,491,white beans,manual_v3
+dried white beans,491,white beans,manual_v3
+dried garbanzo beans,97,chickpeas,manual_v3
+dry chickpeas,97,chickpeas,manual_v3
+garbanzo bean,97,chickpeas,manual_v3
+garbanzo beans,97,chickpeas,manual_v3
+brown lentils,268,lentils,manual_v3
+green lentils,268,lentils,manual_v3
+red lentils,268,lentils,manual_v3
+dry lentils,268,lentils,manual_v3
+dried lentils,268,lentils,manual_v3
+dried black eyed peas,997,black-eyed peas,manual_v3
+portabella mushrooms,294,mushroom,manual_v3
+portobello mushrooms,294,mushroom,manual_v3
+cremini mushrooms,294,mushroom,manual_v3
+shiitake mushrooms,294,mushroom,manual_v3
+lemon juice (fresh is best),266,lemon juice,manual_v3
+english cucumber,146,cucumber,manual_v3
+romaine lettuce leaves,269,lettuce,manual_v3
+coriander seeds,125,coriander,manual_v3
+coriander seed,125,coriander,manual_v3
+fresh coriander leaves,105,cilantro,manual_v3
+coriander leaves,105,cilantro,manual_v3
+"ginger ale, chilled",547,ginger ale,manual_v3
+beef mince,35,beef,manual_v3
+beef chuck roast,35,beef,manual_v3
+beef short ribs,35,beef,manual_v3
+mild chili powder,99,ground chili pepper / chili powder,manual_v3
+blackstrap molasses,291,molasses,manual_v3
+golden caster sugar,429,sugar,manual_v3
+icing sugar,118,confectioners' sugar,manual_v3
+powdered sugar,118,confectioners' sugar,manual_v3
+rock salt,395,salt,manual_v3
+canning salt,395,salt,manual_v3
+flaked sea salt,395,salt,manual_v3
+cracked black peppercorns,336,pepper (peppercorn),manual_v3
+chicken stock powder,1004,chicken bouillon / base,manual_v3
+instant chicken bouillon,1004,chicken bouillon / base,manual_v3
+canned chicken broth,91,chicken broth,manual_v3
+beef base,519,beef bouillon,manual_v3
+chardonnay wine,498,white wine,manual_v3
+chardonnay,498,white wine,manual_v3
+ruby port,634,port wine,manual_v3
+shredded coconut,112,coconut,manual_v3
+coconut flakes,112,coconut,manual_v3
+cranberries (fresh or frozen),533,cranberry,manual_v3
+"vanilla bean, split lengthwise",472,vanilla,manual_v3
+"flour, all purpose",186,wheat flour,manual_v3
+"flour, all-purpose",186,wheat flour,manual_v3
+blanched almond,7,almond,manual_v3
+blanched almonds,7,almond,manual_v3
+tasty cheese,524,cheese,manual_v3
+pecorino romano cheese,524,cheese,manual_v3
+"blue cheese, crumbles",524,cheese,manual_v3
+35% cream,137,cream,manual_v3
+italian style diced tomatoes,67,canned tomatoes,manual_v3
+refrigerated pie crusts,806,pie crust,manual_v3
+refrigerated pizza dough,1042,pizza dough,manual_v3
+gelatin powder,204,gelatin,manual_v3
+"eggs, large",172,egg,manual_v3
+"eggs, hard boiled",558,hard-boiled egg,manual_v3
+hard boiled eggs,558,hard-boiled egg,manual_v3
+prawns,410,shrimp,manual_v3
+prawn,410,shrimp,manual_v3
+rocket,19,arugula,manual_v3
+"lemons, juice and zest of",264,lemon,manual_v3
+"oranges, juice of",315,orange,manual_v3
+"egg noodles, cooked",173,egg noodles,manual_v3
+white miso,1034,miso,manual_v3
+red miso,1034,miso,manual_v3
+uncooked couscous,135,couscous,manual_v3
+semolina flour,401,semolina,manual_v3
+corn starch,133,cornstarch,manual_v3
+chipotle chile in adobo,926,chipotle chiles in adobo,manual_v3
+plain greek yoghurt,618,plain yogurt,manual_v3
+almond essence,9,almond extract,manual_v3
+"olive oil, extra virgin",307,cooking oil,manual_v3

@@ -1,5 +1,6 @@
 
 import random
+import time
 
 from fastapi import APIRouter, HTTPException
 from psycopg2.extras import RealDictCursor
@@ -117,11 +118,16 @@ def build_recipe_feed(user_id: str):
 
             swiped_ids = [row["recipe_id"] for row in cursor.fetchall()]
 
+            start = time.perf_counter()
             # Filter allergies
             excluded_recipe_ids = get_excluded_recipe_ids(cursor, allergies)
+            print(f"[FEED] Allergens: {time.perf_counter() - start:.3f}s",flush=True)
 
+
+            start = time.perf_counter()
             # Get recommendations from ML Engine
             recommended_ids = get_top_recipes(user_vector=user_vector, swiped_ids=swiped_ids, excluded_recipe_ids=excluded_recipe_ids, limit=10)
+            print(f"[FEED] ML Engine: {time.perf_counter() - start:.3f}s", flush=True)
 
             if not recommended_ids:
                 return {

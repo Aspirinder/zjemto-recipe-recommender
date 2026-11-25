@@ -1,0 +1,620 @@
+{
+  "mapping_counts": {
+    "rows": 809940,
+    "compound": 39777,
+    "unmapped": 693291,
+    "ambiguous": 27
+  },
+  "classes": 452,
+  "sizes": {
+    "train": 57500,
+    "validation": 7226,
+    "test": 7226
+  },
+  "excluded_classes": [
+    {
+      "base_group_id": 11,
+      "name": "almond milk",
+      "examples": 4
+    },
+    {
+      "base_group_id": 84,
+      "name": "champagne vinegar",
+      "examples": 2
+    },
+    {
+      "base_group_id": 123,
+      "name": "cooking wine",
+      "examples": 2
+    },
+    {
+      "base_group_id": 128,
+      "name": "corn flour",
+      "examples": 2
+    },
+    {
+      "base_group_id": 139,
+      "name": "cream of broccoli soup",
+      "examples": 1
+    },
+    {
+      "base_group_id": 140,
+      "name": "cream of celery soup",
+      "examples": 1
+    },
+    {
+      "base_group_id": 170,
+      "name": "dry vermouth",
+      "examples": 4
+    },
+    {
+      "base_group_id": 198,
+      "name": "frozen yogurt",
+      "examples": 2
+    },
+    {
+      "base_group_id": 280,
+      "name": "malt vinegar",
+      "examples": 4
+    },
+    {
+      "base_group_id": 304,
+      "name": "oat milk",
+      "examples": 2
+    },
+    {
+      "base_group_id": 322,
+      "name": "oyster sauce",
+      "examples": 4
+    },
+    {
+      "base_group_id": 401,
+      "name": "semolina",
+      "examples": 4
+    },
+    {
+      "base_group_id": 406,
+      "name": "sherry vinegar",
+      "examples": 3
+    },
+    {
+      "base_group_id": 479,
+      "name": "vegetable soup",
+      "examples": 1
+    },
+    {
+      "base_group_id": 544,
+      "name": "egg substitute",
+      "examples": 4
+    },
+    {
+      "base_group_id": 571,
+      "name": "miracle whip",
+      "examples": 4
+    },
+    {
+      "base_group_id": 572,
+      "name": "mirin",
+      "examples": 4
+    },
+    {
+      "base_group_id": 575,
+      "name": "oat bran",
+      "examples": 3
+    },
+    {
+      "base_group_id": 577,
+      "name": "onion salt",
+      "examples": 3
+    },
+    {
+      "base_group_id": 585,
+      "name": "pie filling",
+      "examples": 2
+    },
+    {
+      "base_group_id": 615,
+      "name": "xanthan gum",
+      "examples": 2
+    },
+    {
+      "base_group_id": 621,
+      "name": "coconut extract",
+      "examples": 2
+    },
+    {
+      "base_group_id": 627,
+      "name": "gin",
+      "examples": 4
+    },
+    {
+      "base_group_id": 634,
+      "name": "port wine",
+      "examples": 3
+    },
+    {
+      "base_group_id": 643,
+      "name": "cheddar cheese soup",
+      "examples": 2
+    },
+    {
+      "base_group_id": 653,
+      "name": "flaxseed meal",
+      "examples": 3
+    },
+    {
+      "base_group_id": 662,
+      "name": "instant espresso powder",
+      "examples": 3
+    },
+    {
+      "base_group_id": 665,
+      "name": "marsala wine",
+      "examples": 3
+    },
+    {
+      "base_group_id": 667,
+      "name": "mixed spice",
+      "examples": 3
+    },
+    {
+      "base_group_id": 680,
+      "name": "rose water",
+      "examples": 4
+    },
+    {
+      "base_group_id": 681,
+      "name": "rum extract",
+      "examples": 3
+    },
+    {
+      "base_group_id": 682,
+      "name": "rye flour",
+      "examples": 4
+    },
+    {
+      "base_group_id": 684,
+      "name": "simple syrup",
+      "examples": 3
+    },
+    {
+      "base_group_id": 687,
+      "name": "wheat bran",
+      "examples": 3
+    },
+    {
+      "base_group_id": 701,
+      "name": "condensed french onion soup",
+      "examples": 1
+    },
+    {
+      "base_group_id": 710,
+      "name": "french onion soup",
+      "examples": 3
+    },
+    {
+      "base_group_id": 712,
+      "name": "green curry paste",
+      "examples": 3
+    },
+    {
+      "base_group_id": 733,
+      "name": "onion mushroom soup mix",
+      "examples": 1
+    },
+    {
+      "base_group_id": 768,
+      "name": "sour milk",
+      "examples": 1
+    },
+    {
+      "base_group_id": 780,
+      "name": "refrigerated biscuits",
+      "examples": 4
+    },
+    {
+      "base_group_id": 782,
+      "name": "pancake mix",
+      "examples": 1
+    },
+    {
+      "base_group_id": 802,
+      "name": "matzo meal",
+      "examples": 4
+    },
+    {
+      "base_group_id": 804,
+      "name": "tarragon vinegar",
+      "examples": 3
+    },
+    {
+      "base_group_id": 805,
+      "name": "instant potato flakes",
+      "examples": 2
+    },
+    {
+      "base_group_id": 816,
+      "name": "grape jelly",
+      "examples": 2
+    },
+    {
+      "base_group_id": 822,
+      "name": "orange juice concentrate",
+      "examples": 3
+    },
+    {
+      "base_group_id": 831,
+      "name": "pomegranate juice",
+      "examples": 2
+    },
+    {
+      "base_group_id": 833,
+      "name": "cream of coconut",
+      "examples": 1
+    },
+    {
+      "base_group_id": 838,
+      "name": "peach schnapps",
+      "examples": 3
+    },
+    {
+      "base_group_id": 839,
+      "name": "baked beans",
+      "examples": 3
+    },
+    {
+      "base_group_id": 845,
+      "name": "raspberry vinegar",
+      "examples": 3
+    },
+    {
+      "base_group_id": 846,
+      "name": "m&m's chocolate candies",
+      "examples": 3
+    },
+    {
+      "base_group_id": 850,
+      "name": "grapefruit juice",
+      "examples": 3
+    },
+    {
+      "base_group_id": 855,
+      "name": "apple jelly",
+      "examples": 3
+    },
+    {
+      "base_group_id": 858,
+      "name": "blue curacao",
+      "examples": 3
+    },
+    {
+      "base_group_id": 859,
+      "name": "blueberry pie filling",
+      "examples": 2
+    },
+    {
+      "base_group_id": 861,
+      "name": "buckwheat flour",
+      "examples": 2
+    },
+    {
+      "base_group_id": 862,
+      "name": "champagne",
+      "examples": 4
+    },
+    {
+      "base_group_id": 864,
+      "name": "coca-cola",
+      "examples": 4
+    },
+    {
+      "base_group_id": 865,
+      "name": "coconut flour",
+      "examples": 4
+    },
+    {
+      "base_group_id": 874,
+      "name": "grape-nuts cereal",
+      "examples": 3
+    },
+    {
+      "base_group_id": 875,
+      "name": "ground veal",
+      "examples": 3
+    },
+    {
+      "base_group_id": 880,
+      "name": "lemon curd",
+      "examples": 4
+    },
+    {
+      "base_group_id": 882,
+      "name": "natural bran",
+      "examples": 2
+    },
+    {
+      "base_group_id": 883,
+      "name": "oat flour",
+      "examples": 2
+    },
+    {
+      "base_group_id": 888,
+      "name": "southern comfort",
+      "examples": 3
+    },
+    {
+      "base_group_id": 889,
+      "name": "soy flour",
+      "examples": 1
+    },
+    {
+      "base_group_id": 895,
+      "name": "tapioca flour",
+      "examples": 3
+    },
+    {
+      "base_group_id": 898,
+      "name": "vital wheat gluten",
+      "examples": 3
+    },
+    {
+      "base_group_id": 902,
+      "name": "diced potatoes with onion",
+      "examples": 1
+    },
+    {
+      "base_group_id": 908,
+      "name": "anchovy paste",
+      "examples": 4
+    },
+    {
+      "base_group_id": 913,
+      "name": "stock",
+      "examples": 4
+    },
+    {
+      "base_group_id": 914,
+      "name": "red currant jelly",
+      "examples": 4
+    },
+    {
+      "base_group_id": 915,
+      "name": "apricot nectar",
+      "examples": 1
+    },
+    {
+      "base_group_id": 916,
+      "name": "walnut oil",
+      "examples": 3
+    },
+    {
+      "base_group_id": 918,
+      "name": "chili seasoning mix",
+      "examples": 3
+    },
+    {
+      "base_group_id": 921,
+      "name": "midori melon liqueur",
+      "examples": 4
+    },
+    {
+      "base_group_id": 924,
+      "name": "coconut rum",
+      "examples": 3
+    },
+    {
+      "base_group_id": 928,
+      "name": "french dressing",
+      "examples": 3
+    },
+    {
+      "base_group_id": 930,
+      "name": "banana liqueur",
+      "examples": 2
+    },
+    {
+      "base_group_id": 931,
+      "name": "apple pie spice",
+      "examples": 2
+    },
+    {
+      "base_group_id": 932,
+      "name": "frozen lemonade concentrate",
+      "examples": 3
+    },
+    {
+      "base_group_id": 933,
+      "name": "v8 vegetable juice",
+      "examples": 1
+    },
+    {
+      "base_group_id": 935,
+      "name": "peach preserves",
+      "examples": 3
+    },
+    {
+      "base_group_id": 937,
+      "name": "spelt flour",
+      "examples": 2
+    },
+    {
+      "base_group_id": 948,
+      "name": "gluten-free flour",
+      "examples": 2
+    },
+    {
+      "base_group_id": 949,
+      "name": "cheese tortellini",
+      "examples": 4
+    },
+    {
+      "base_group_id": 952,
+      "name": "custard powder",
+      "examples": 2
+    },
+    {
+      "base_group_id": 955,
+      "name": "syrup",
+      "examples": 4
+    },
+    {
+      "base_group_id": 959,
+      "name": "chocolate wafer crumbs",
+      "examples": 4
+    },
+    {
+      "base_group_id": 960,
+      "name": "quick-cooking grits",
+      "examples": 1
+    },
+    {
+      "base_group_id": 962,
+      "name": "instant mashed potatoes",
+      "examples": 4
+    },
+    {
+      "base_group_id": 967,
+      "name": "jam",
+      "examples": 4
+    },
+    {
+      "base_group_id": 969,
+      "name": "red cinnamon candies",
+      "examples": 3
+    },
+    {
+      "base_group_id": 970,
+      "name": "galliano",
+      "examples": 1
+    },
+    {
+      "base_group_id": 971,
+      "name": "dry buttermilk",
+      "examples": 3
+    },
+    {
+      "base_group_id": 973,
+      "name": "grape juice",
+      "examples": 2
+    },
+    {
+      "base_group_id": 976,
+      "name": "self-rising cornmeal",
+      "examples": 1
+    },
+    {
+      "base_group_id": 978,
+      "name": "pineapple preserves",
+      "examples": 4
+    },
+    {
+      "base_group_id": 983,
+      "name": "butter flavor extract",
+      "examples": 3
+    },
+    {
+      "base_group_id": 985,
+      "name": "breadstick dough",
+      "examples": 3
+    },
+    {
+      "base_group_id": 986,
+      "name": "cinnamon baking chips",
+      "examples": 3
+    },
+    {
+      "base_group_id": 988,
+      "name": "anise extract",
+      "examples": 3
+    },
+    {
+      "base_group_id": 990,
+      "name": "jelly",
+      "examples": 3
+    },
+    {
+      "base_group_id": 991,
+      "name": "persimmon pulp",
+      "examples": 1
+    },
+    {
+      "base_group_id": 992,
+      "name": "adobo sauce",
+      "examples": 3
+    },
+    {
+      "base_group_id": 993,
+      "name": "arrowroot",
+      "examples": 2
+    },
+    {
+      "base_group_id": 994,
+      "name": "asafoetida",
+      "examples": 1
+    },
+    {
+      "base_group_id": 999,
+      "name": "brown gravy mix",
+      "examples": 2
+    },
+    {
+      "base_group_id": 1003,
+      "name": "chambord raspberry liqueur",
+      "examples": 2
+    },
+    {
+      "base_group_id": 1009,
+      "name": "condensed golden mushroom soup",
+      "examples": 1
+    },
+    {
+      "base_group_id": 1020,
+      "name": "fenugreek seeds",
+      "examples": 4
+    },
+    {
+      "base_group_id": 1021,
+      "name": "fish stock",
+      "examples": 3
+    },
+    {
+      "base_group_id": 1023,
+      "name": "ginger-garlic paste",
+      "examples": 4
+    },
+    {
+      "base_group_id": 1031,
+      "name": "madeira wine",
+      "examples": 3
+    },
+    {
+      "base_group_id": 1034,
+      "name": "miso",
+      "examples": 3
+    },
+    {
+      "base_group_id": 1041,
+      "name": "pickling spices",
+      "examples": 3
+    },
+    {
+      "base_group_id": 1047,
+      "name": "savory herb",
+      "examples": 2
+    },
+    {
+      "base_group_id": 1051,
+      "name": "tamarind concentrate",
+      "examples": 3
+    },
+    {
+      "base_group_id": 1054,
+      "name": "thousand island dressing",
+      "examples": 4
+    }
+  ],
+  "classes_without_examples": [
+    236,
+    757
+  ]
+}
