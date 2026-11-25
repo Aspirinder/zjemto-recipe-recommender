@@ -101,4 +101,15 @@ brakującymi wymaganiami składnikowymi i ich sortowanie według indywidualnych 
 Przeprowadziłem refaktoryzację skryptów przetwarzania danych, treningu i predykcji modelu, uporządkowałem strukturę repozytorium 
 oraz uzupełniłem dokumentację techniczną API, przetwarzania danych i dokumentację końcową projektu w języku polskim i angielskim.
 
+Yahor Koval
+
+Zrobiłem: Rozbudowałem API silnika rekomendacyjnego o obsługę dwóch trybów działania: feed oraz fridge. 
+Zaimplementowałem mechanizm rekomendowania przepisów na podstawie listy dozwolonych identyfikatorów przekazywanych przez główne API. 
+Zoptymalizowałem obliczanie podobieństwa kosinusowego w trybie lodówki, ograniczając operacje macierzowe wyłącznie do dostępnych przepisów.
+
+Zaktualizowałem macierz TF-IDF wykorzystywaną przez silnik rekomendacyjny. Wdrożyłem końcową wersję ML Engine na platformie Azure oraz przeanalizowałem logi działania aplikacji. 
+Dodatkowo przeanalizowałem możliwości dalszego rozwoju systemu rekomendacyjnego z wykorzystaniem sieci neuronowej.
+
+Zakończyłem wszystkie zaplanowane prace nad silnikiem rekomendacyjnym. Wszystkie funkcjonalności przewidziane w ramach projektu zostały zaimplementowane.
+
 Blokuje nas: nic
