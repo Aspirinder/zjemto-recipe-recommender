@@ -68,11 +68,37 @@ type Store = {
   demo: boolean;
   /** Liked recipes that came from the API — kept so "Polubione" survives a reload. */
   saved: Record<string, Recipe>;
+  /** Bumped when the backend's group ids change — an older saved pantry is replaced by the default one. */
+  pantryVersion: number;
 };
+
+/** Ingredient-groups database the default pantry was written for (rebuilt 25.11, 574 groups). */
+const PANTRY_VERSION = 2;
+
+/** What a new fridge starts with: basics most kitchens have (ids from /api/ingredients/groups). */
+const DEFAULT_PANTRY: IngredientGroup[] = [
+  { id: 327, name: 'pasta' },
+  { id: 378, name: 'rice' },
+  { id: 23, name: 'bacon' },
+  { id: 87, name: 'chicken' },
+  { id: 55, name: 'broccoli' },
+  { id: 861, name: 'buckwheat flour' },
+  { id: 452, name: 'tomato' },
+  { id: 395, name: 'salt' },
+  { id: 336, name: 'pepper (peppercorn)' },
+  { id: 312, name: 'onion' },
+  { id: 200, name: 'garlic' },
+  { id: 307, name: 'cooking oil' },
+  { id: 60, name: 'butter' },
+  { id: 485, name: 'water' },
+  { id: 172, name: 'egg' },
+  { id: 186, name: 'wheat flour' },
+  { id: 287, name: 'milk' },
+];
 
 const emptyStore: Store = {
   fridge: [],
-  pantry: [],
+  pantry: DEFAULT_PANTRY,
   maxMissing: 1,
   liked: [],
   passed: [],
@@ -87,6 +113,7 @@ const emptyStore: Store = {
   ownerId: null,
   demo: false,
   saved: {},
+  pantryVersion: PANTRY_VERSION,
 };
 
 function asStrings(value: unknown) {
@@ -158,7 +185,9 @@ function loadStore(): Store {
     const userId = asId(data.userId);
     return {
       fridge: asStrings(data.fridge),
-      pantry: asPantry(data.pantry),
+      // Pantries saved for the old database point at ids that now mean other products.
+      pantry: data.pantryVersion === PANTRY_VERSION ? asPantry(data.pantry) : DEFAULT_PANTRY,
+      pantryVersion: PANTRY_VERSION,
       maxMissing: asMaxMissing(data.maxMissing),
       liked: asStrings(data.liked),
       passed: asStrings(data.passed),
@@ -227,8 +256,8 @@ type AppContextValue = {
   /** Several groups = spelling variants of one product ("walnut" / "walnuts"): selected or removed together. */
   togglePantry: (groups: IngredientGroup | IngredientGroup[]) => void;
   clearPantry: () => void;
-  /** Drops selected groups the backend no longer knows. */
-  prunePantry: (validIds: ReadonlySet<number>) => void;
+  /** Drops selected groups the backend no longer knows (id gone, or the id now names another product). */
+  prunePantry: (known: ReadonlyMap<number, string>) => void;
   setMaxMissing: (value: number) => void;
   fridgeSearch: FridgeSearch;
   /** Without `limit`: a new search (first page). With it: the same fridge, a longer list. */
@@ -573,7 +602,7 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
           ownerId: userId,
           demo: false,
           allergies,
-          ...(sameOwner ? {} : { liked: [], passed: [], history: [], saved: {}, hintSeen: false, pantry: [] }),
+          ...(sameOwner ? {} : { liked: [], passed: [], history: [], saved: {}, hintSeen: false, pantry: DEFAULT_PANTRY }),
         };
       });
       setScreen('deck');
@@ -718,11 +747,10 @@ export function AppStateProvider({ children }: { children: ReactNode }) {
     setStore((current) => ({ ...current, pantry: [] }));
   }, []);
 
-  const prunePantry = useCallback((validIds: ReadonlySet<number>) => {
+  const prunePantry = useCallback((known: ReadonlyMap<number, string>) => {
+    const valid = (group: IngredientGroup) => known.get(group.id)?.toLowerCase() === group.name.toLowerCase();
     setStore((current) =>
-      current.pantry.every((group) => validIds.has(group.id))
-        ? current
-        : { ...current, pantry: current.pantry.filter((group) => validIds.has(group.id)) },
+      current.pantry.every(valid) ? current : { ...current, pantry: current.pantry.filter(valid) },
     );
   }, []);
 

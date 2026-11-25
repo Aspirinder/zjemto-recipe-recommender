@@ -90,7 +90,7 @@ export function ServerFridge() {
   // Saved ids the backend no longer has (database rebuilt) would make the whole request fail with 422.
   const { prunePantry } = app;
   useEffect(() => {
-    if (groups) prunePantry(new Set(groups.flatMap((option) => option.members.map((group) => group.id))));
+    if (groups) prunePantry(new Map(groups.flatMap((option) => option.members.map((group) => [group.id, group.name] as const))));
   }, [groups, prunePantry]);
 
   const selected = useMemo(() => new Set(pantry.map((group) => group.id)), [pantry]);

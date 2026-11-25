@@ -2,6 +2,14 @@
 // Keyed by the English name, not group_id, so the list survives a database rebuild; a name missing here
 // is simply shown in English. Brand names are kept as they are.
 export const INGREDIENTS_PL: Record<string, string> = {
+  // Names from the rebuilt database (25.11).
+  'biscuit / baking mix': 'mieszanka do wypieków',
+  'chicken bouillon / base': 'bulion drobiowy',
+  'dried onion': 'suszona cebula',
+  'ground chili pepper / chili powder': 'chili w proszku',
+  'nuts (mixed or unspecified)': 'orzechy',
+  'pepper (peppercorn)': 'pieprz',
+  'wheat tortillas': 'tortille pszenne',
   'a.1. original sauce': 'sos A.1',
   'acorn squash': 'dynia żołędziowa',
   'active dry yeast': 'drożdże suszone aktywne',
