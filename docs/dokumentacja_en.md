@@ -183,4 +183,4 @@ JSON results can be checked at `http://localhost:8000/docs` by calling the regis
 
 ## 11. AI tools
 
-We used ChatGPT as a tool to assist with programming, error analysis, Python code refactoring, and the design and optimisation of SQL queries. The tool supported the development of the solution.
+We used ChatGPT as a tool to support programming, error analysis, Python code refactoring, and the design and optimization of SQL queries. The tool also assisted with dataset analysis and processing, ingredient normalization, training data preparation, and fine-tuning the MiniLM model based on the BERT architecture.
