@@ -66,10 +66,10 @@ flowchart TD
 Waga cechy zależy od jej występowania w danym przepisie i częstości w całym katalogu. Dla wygładzonej postaci IDF:
 
 $$
-\operatorname{tfidf}(t,d)=\operatorname{tf}(t,d)\left(\ln\frac{1+N}{1+\operatorname{df}(t)}+1\right)
+\mathrm{tfidf}(t,d)=\mathrm{tf}(t,d)\left(\ln\frac{1+N}{1+\mathrm{df}(t)}+1\right)
 $$
 
-Gdzie $t$ to cecha tekstowa, $d$ — przepis, $N$ — liczba przepisów, a $\operatorname{df}(t)$ — liczba przepisów zawierających cechę. Wagi są normalizowane do normy L2 równej 1 dla niezerowych wektorów. Cechy charakterystyczne dla dania mają większe znaczenie niż słowa występujące w większości przepisów.
+Gdzie $t$ to cecha tekstowa, $d$ — przepis, $N$ — liczba przepisów, a $\mathrm{df}(t)$ — liczba przepisów zawierających cechę. Wagi są normalizowane do normy L2 równej 1 dla niezerowych wektorów. Cechy charakterystyczne dla dania mają większe znaczenie niż słowa występujące w większości przepisów.
 
 ### Profil użytkownika i ranking
 
